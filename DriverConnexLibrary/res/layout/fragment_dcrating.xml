@@ -1,0 +1,227 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/main_background"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context="${packageName}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/scoreLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.4" >
+
+        <ImageView
+            android:id="@+id/backgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:padding="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/score_ring" />
+
+        <ImageView
+            android:id="@+id/scoreDot"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/score_dot" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ratingTextView"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal" >
+
+                <TextView
+                    android:id="@+id/unitTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_horizontal"
+                    android:hint="DC Rating"
+                    android:textColor="@color/tran_grey"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/ratingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:text="-"
+                android:textColor="?attr/main_interface"
+                android:textSize="60sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/communityLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6" 
+        android:weightSum="3">
+
+        <LinearLayout
+            android:id="@+id/badgeLayout1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" 
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.15"
+                android:gravity="center_horizontal" >
+
+                <ImageView
+                    android:id="@+id/expenseImage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_background" />
+
+                <ImageView
+                    android:id="@+id/badgeImage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+               		android:layout_centerHorizontal="true"
+              		android:layout_centerVertical="true"
+                    android:padding="20dp"
+                    android:src="@drawable/icon_mask" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/badgeTitle1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.85"
+                android:gravity="center"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                android:text="Nothing Tracked"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        
+        <LinearLayout
+        android:id="@+id/badgeLayout2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal" 
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.15"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:id="@+id/expenseImage2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_background" />
+
+            <ImageView
+                android:id="@+id/badgeImage2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="20dp"
+                android:src="@drawable/icon_mask" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/badgeTitle2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.85"
+            android:gravity="center"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="Low Avg. Speed"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/badgeLayout3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:weightSum="2" 
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.15"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:id="@+id/expenseImage3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_background" />
+
+            <ImageView
+                android:id="@+id/badgeImage3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="20dp"
+                android:src="@drawable/icon_mask" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/badgeTitle3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.85"
+            android:gravity="center"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="Short Journeys"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>    
+    </LinearLayout>
+
+</LinearLayout>

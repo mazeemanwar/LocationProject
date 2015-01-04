@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="15dp"
+       android:layout_marginTop="10dp"
+       android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/pictureLayout"
+                android:layout_width="100dp"
+                android:layout_height="100dp" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:baselineAlignBottom="false"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/overlay_circle" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp" >
+
+                    <com.driverconnex.ui.RoundedImageView
+                        android:id="@+id/listPicture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:baselineAlignBottom="false"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/vehicle_default" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@+id/pictureLayout" >
+
+                <TextView
+                    android:id="@+id/subTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/mainTitle"
+                    android:layout_below="@+id/mainTitle"
+                    android:text="Status"
+                    android:textColor="@color/header_foreground"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/mainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Greg Raine"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+</RelativeLayout>
+
+</RelativeLayout>

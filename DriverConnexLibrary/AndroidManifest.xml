@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.driverconnex.app"
+    android:versionCode="1"
+    android:versionName="1.0" >
+  
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+    
+    <!-- Copy everything below to your own project's manifest file in order for the library to work correctly  -->
+    
+    <!-- 
+    NOTE: Code below has to be commented in the library manifest, because they have to be defined in your own project's manifest file
+    otherwise it will complain about duplicating permissions. From other hand if you keep the permissions here and delete them in your 
+    project's manifest file, your app will crash. So copy the permissions into your project's manifest file and remove comments.-->
+    
+    <!-- Permissions -->
+    <!--  <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" android:required="false" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" android:required="false"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CALL_PHONE" android:required="false"/> 
+    <uses-permission android:name="android.permission.BLUETOOTH" android:required="false" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>-->
+    
+    <!-- Needed to get activity for the DCBehaviourPoint -->
+	<!-- <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>-->
+    
+    <!--
+     The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+    -->
+    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+
+    <!-- These permissions are needed for the Parse notification system -->
+	<!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+	<permission android:protectionLevel="signature"
+    android:name="com.driverconnex.app.permission.C2D_MESSAGE" />
+	<uses-permission android:name="com.driverconnex.app.permission.C2D_MESSAGE" />-->
+    
+    <!-- hardware features -->
+    <!--<uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature 
+        android:name="android.hardware.telephony"  
+        android:required="false" />-->
+    
+    <application
+        android:name="com.driverconnex.app.DriverConnexApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/CustomActionBarTheme"
+        android:largeHeap="true"
+        android:hardwareAccelerated="true"  >
+        <!-- the original one
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA27SJSRvitlYHO3No4yP1YP8OEHAARBto" />
+         -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBl0Fv5PWJcP7Jldzp5BybnjGUsT8xxp80" />
+                <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        
+         <receiver android:name="com.driverconnex.app.BluetoothReceiver" >
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+		
+        <service android:name="com.parse.PushService" />
+		<receiver android:name="com.parse.ParseBroadcastReceiver">
+  			<intent-filter>
+    			<action android:name="android.intent.action.BOOT_COMPLETED" />
+    			<action android:name="android.intent.action.USER_PRESENT" />
+  			</intent-filter>
+		</receiver>
+		<!-- parse push braodcaster added in logical app  -->
+		<receiver android:name="com.parse.ParsePushBroadcastReceiver"
+    android:exported="false">
+  <intent-filter>
+    <action android:name="com.parse.push.intent.RECEIVE" />
+    <action android:name="com.parse.push.intent.DELETE" />
+    <action android:name="com.parse.push.intent.OPEN" />
+    </intent-filter>
+</receiver>
+		<receiver android:name="com.parse.GcmBroadcastReceiver"
+    		      android:permission="com.google.android.c2dm.permission.SEND">
+  			<intent-filter>
+    			<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+    			<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+    			<category android:name="com.driverconnex.app" />
+  			</intent-filter>
+		</receiver>
+        
+		<service android:name="com.driverconnex.journeys.ActivityRecognitionIntentService"></service>
+		
+        <!-- Activities -->
+        <!-- Each activity must be registered -->
+        <!-- ======================================================== -->
+		
+		<activity
+            android:name="com.driverconnex.app.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.driverconnex.app.HomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+          
+        <!-- Basic Modules -->
+        <activity
+            android:name="com.driverconnex.basicmodules.InvitesActivity"
+            android:label="@string/title_activity_invites"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+       	<activity
+            android:name="com.driverconnex.basicmodules.MessageViewActivity"
+            android:label="@string/title_activity_message_view"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+       	<activity
+            android:name="com.driverconnex.basicmodules.PolicyViewActivity"
+            android:label="@string/title_activity_policy_view"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+       	<activity
+            android:name="com.driverconnex.basicmodules.NotificationsActivity"
+            android:label="@string/title_activity_message"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.VehicleAlertActivity"
+            android:label="@string/title_activity_message"
+            android:parentActivityName="com.driverconnex.basicmodules.NotificationsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+       <activity
+            android:name="com.driverconnex.basicmodules.BadgeActivity"
+            android:label=""
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.LeaderboardActivity"
+            android:label="@string/title_activity_leaderboard"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.MessageActivity"
+            android:label="@string/title_activity_message"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.TermsActivity"
+            android:label="@string/title_activity_terms"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.PolicyActivity"
+            android:label="@string/title_activity_policy"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.HelpActivity"
+            android:label="@string/title_activity_help"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.MyAccountActivity"
+            android:label="@string/title_activity_my_account"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.MyAccountPhotoActivity"
+            android:label="@string/title_activity_my_account"
+            android:parentActivityName="com.driverconnex.basicmodules.MyAccountActivity"
+            android:screenOrientation="portrait" >
+        </activity>        
+        <activity
+            android:name="com.driverconnex.basicmodules.SettingsActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>   
+       	<activity
+            android:name="com.driverconnex.basicmodules.BluetoothDevicesListActivity"
+            android:label="@string/title_activity_settings_bluetooth_devices"
+            android:parentActivityName="com.driverconnex.SettingsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.ChangePasswordActivity"
+            android:label="@string/title_activity_change_password"
+            android:parentActivityName="com.driverconnex.MyAccountActivity"
+            android:screenOrientation="portrait" >
+        </activity>      
+		<activity
+            android:name="com.driverconnex.basicmodules.PhotoActivity"
+            android:label="@string/title_activity_add_photo"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+		<activity
+            android:name="com.driverconnex.basicmodules.AddPhotoActivity"
+            android:label="@string/title_activity_add_photo"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+		
+		<!-- Savings -->
+        <activity
+            android:name="com.driverconnex.savings.SavingsMonitorActivity"
+            android:label="@string/title_activity_savings_monitor"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.savings.FuelStatisticsActivity"
+            android:label="@string/title_activity_fuel_statistics"
+            android:parentActivityName="com.driverconnex.savings.SavingsMonitorActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.savings.OptionsActivity"
+            android:label="@string/title_activity_options"
+            android:parentActivityName="com.driverconnex.savings.SavingsMonitorActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+		<activity
+            android:name="com.driverconnex.savings.ServiceRepairStatisticsActivity"
+            android:label="@string/title_activity_service_repair"
+            android:parentActivityName="com.driverconnex.savings.SavingsMonitorActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.savings.StandingStatisticsActivity"
+            android:label="@string/title_activity_standing"
+            android:parentActivityName="com.driverconnex.savings.SavingsMonitorActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+		
+        <!-- DriverConnex Activities -->
+       	<activity
+            android:name="com.driverconnex.app.SignInActivity"
+            android:label="@string/title_activity_sign_in"
+            android:parentActivityName="com.driverconnex.app.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.driverconnex.LoginActivity" />
+        </activity>
+        <activity
+            android:name="com.driverconnex.app.RegisterActivity"
+            android:label="@string/title_activity_regsiter"
+            android:parentActivityName="com.driverconnex.app.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.expenses.AddExpenseActivity"
+            android:label="@string/title_activity_add_expense"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.expenses.AddFuelActivity"
+            android:label="@string/title_activity_add_fuel"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.expenses.ReviewExpensesActivity"
+            android:label="@string/title_activity_review"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.expenses.AddExpensePhotoActivity"
+            android:label="@string/title_activity_add_photo"
+            android:parentActivityName="com.sgi.yin.driverconnex.expenses.AddExpenseActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.expenses.CameraActivity"
+            android:label="@string/title_activity_camera" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.expenses.AddTravelSubsistenceActivity"
+            android:label="@string/title_activity_travel_subsistence"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+                <!-- DC Claims Module -->
+        <activity
+            android:name="com.driverconnex.expenses.ClaimsActivity"
+            android:label="@string/title_activity_claims"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <!-- DC Mileage Module -->
+         <activity
+            android:name="com.driverconnex.vehicles.VehiclesListActivity"
+            android:label="@string/title_activity_vehicles_list"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.VehicleChecksListActivity"
+            android:label="@string/vehicle_title_checks"
+            android:parentActivityName="com.driverconnex.vehicles.VehicleDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.VehicleCheckActivity"
+            android:label="@string/title_activity_back"
+            android:parentActivityName="com.driverconnex.vehicles.VehicleChecksListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.AddVehicleActivity"
+            android:label="@string/title_activity_add_vehicle"
+            android:parentActivityName="com.driverconnex.vehicles.VehiclesListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.AddVehicleConfirmActivity"
+            android:label="@string/title_activity_add_vehicle"
+            android:parentActivityName="com.driverconnex.vehicles.AddVehicleActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.AddVehiclePhotoActivity"
+            android:label="@string/title_activity_add_photo"
+            android:parentActivityName="com.driverconnex.vehicles.AddVehicleActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.SingleUpdateActivity"
+            android:label="@string/vehicle_title_mileage"
+            android:parentActivityName="com.driverconnex.vehicles.AddVehicleActivity"
+            android:screenOrientation="portrait" 
+            android:windowSoftInputMode="stateAlwaysVisible">
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.VehicleDetailsActivity"
+            android:label="@string/title_activity_vehicle_details"
+            android:parentActivityName="com.driverconnex.vehicles.VehiclesListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.UpdateDocumentationActivity"
+            android:label="@string/title_activity_documentation_update"
+            android:parentActivityName="com.driverconnex.vehicles.VehicleDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.EconomyActivity"
+            android:label="@string/vehicle_title_economy"
+            android:parentActivityName="com.driverconnex.vehicles.VehicleDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.DCCoverListActivity"
+            android:label="@string/vehicle_title_cover"
+            android:parentActivityName="com.driverconnex.vehicles.VehicleDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.AddNewDCCoverActivity"
+            android:label="@string/title_activity_add_policy"
+            android:parentActivityName="com.driverconnex.vehicles.DCCoverListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.ServiceHistoryListActivity"
+            android:label="@string/vehicle_title_service"
+            android:parentActivityName="com.driverconnex.vehicles.VehicleDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.SelectServiceItemActivity"
+            android:label="@string/title_activity_add_service"
+            android:parentActivityName="com.driverconnex.vehicles.AddDCServiceHistoryActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.AddDCServiceHistoryActivity"
+            android:label="@string/title_activity_add_service"
+            android:parentActivityName="com.driverconnex.vehicles.DCServiceListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.ServiceListActivity"
+            android:label="@string/title_activity_book_service"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        
+        <!-- Parking Module -->
+        <activity
+            android:name="com.driverconnex.parking.AddParkingLocationActivity"
+            android:label="@string/title_activity_add_location_map"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.parking.LocateParkingActivity"
+            android:label="@string/title_activity_location"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.parking.ParkingLocationActivity"
+            android:label="@string/title_activity_location"
+            android:parentActivityName="com.adrianklimczak.driverconnex.parking.ParkingLocationsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name="com.driverconnex.parking.DisplayNotification" >
+            <intent-filter>
+                <action android:name="com.driverconnex.parking.DisplayNotification" />
+                <category android:name="android.intent.category.DEFAULT" /> 
+            </intent-filter>
+        </activity>
+        
+        <!-- DC Incidents Module -->
+		<activity
+            android:name="com.driverconnex.incidents.IncidentActivity"
+            android:label="@string/title_activity_accident_guidance"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.IncidentVideoCaptureActivity"
+            android:label=""
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.IncidentVideoCapturedPreviewActivity"
+            android:label=""
+            android:parentActivityName="com.driverconnex.incidents.IncidentVideoCaptureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.IncidentLocationActivity"
+            android:label="@string/title_activity_location"
+            android:parentActivityName="com.driverconnex.incidents.IncidentsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.ReportActivity"
+            android:label="@string/incidents_report"
+            android:parentActivityName="com.driverconnex.incidents.IncidentsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.IncidentPhotosActivity"
+            android:label="@string/title_activity_add_photo"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.IncidentVideoActivity"
+            android:label="@string/title_activity_add_photo"
+            android:parentActivityName="com.driverconnex.incidents.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.WitnessesListActivity"
+            android:label="@string/incidents_report"
+            android:parentActivityName="com.driverconnex.incidents.ReportActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.AddWitnessActivity"
+            android:label="@string/incidents_report"
+            android:parentActivityName="com.driverconnex.incidents.WitnessesListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.TutorialActivity"
+            android:label="@string/incidents_report"
+            android:parentActivityName="com.driverconnex.incidents.ReportActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.ReportListActivity"
+            android:label="@string/title_activity_incidents"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.incidents.ReviewReportActivity"
+            android:label="@string/title_activity_incidents"
+            android:parentActivityName="com.driverconnex.incidents.ReportListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <!-- DC Journey Module -->
+        <activity
+            android:name="com.driverconnex.journeys.JourneyDetailsActivity"
+            android:label="@string/title_activity_details"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.journeys.BehaviourScoreActivity"
+            android:label="@string/title_activity_journey_score"
+            android:parentActivityName="com.driverconnex.journeys.JourneyDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.journeys.RouteActivity"
+            android:label="@string/title_activity_route"
+            android:parentActivityName="com.driverconnex.journeys.JourneyDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.journeys.AddJourneyActivity"
+            android:label="@string/title_activity_add_journey"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.journeys.TrackJourneyActivity"
+            android:label="@string/title_activity_track"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter >
+                <action android:name="com.driverconnex.TrackActivity.start"/>
+                <action android:name="com.driverconnex.TrackActivity.pause"/>
+            </intent-filter>
+        </activity>  
+        <activity
+            android:name="com.driverconnex.journeys.ReviewJourneysActivity"
+            android:label="@string/title_activity_review_journey"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.journeys.AddLocationActivity"
+            android:label="@string/title_activity_add_location"
+            android:parentActivityName="com.driverconnex.journey.AddJourneyActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.journeys.AddLocationMapActivity"
+            android:label="@string/title_activity_add_location_map"
+            android:parentActivityName="com.driverconnex.journey.AddLocationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <!-- DC Community Module -->
+       	<activity
+            android:name="com.driverconnex.community.FriendsListActivity"
+            android:label="@string/title_activity_friends_list"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.community.InviteFriendsActivity"
+            android:label="@string/title_activity_friends_list"
+            android:parentActivityName="com.driverconnex.FriendsListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.community.UserProfileActivity"
+            android:label="@string/title_activity_friends_list"
+            android:parentActivityName="com.driverconnex.FriendsListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.community.FriendsRequestActivity"
+            android:label="@string/title_activity_friends_requests"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.community.ShareAppActivity"
+            android:label="@string/title_activity_share_app"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- ======================================================== -->
+    </application>
+
+
+</manifest>

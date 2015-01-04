@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/secondary_background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/contentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/menu_divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3"
+                        android:text="@string/vehicle_title_expiry"
+                        android:textColor="?attr/list_heading" />
+
+                    <TextView
+                        android:id="@+id/expiryText"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3"
+                        android:text="@string/vehicle_documentation_title_status"
+                        android:textColor="?attr/list_heading" />
+
+                    <TextView
+                        android:id="@+id/statusText"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/holo_red_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contentContainer"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/menu_divider" />
+
+                <EditText
+                    android:id="@+id/dateEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/signin_edit_text_bg"
+                    android:gravity="center"
+                    android:hint="@string/vehicle_title_update_date"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/edit_cursor" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <include layout="@layout/loading_layer"/>
+
+</RelativeLayout>

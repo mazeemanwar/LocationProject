@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<check name="Monthly Check" months="1" description="10 Safety Checks">
+		<item name="Lights"
+		      text="It is suggested you check the following:
+- All lights and indicators are working correctly 
+- All lenses are clean &amp; undamaged 
+- Stop lights come on correctly when brake pedal is depressed
+- Side lights, fog lights &amp; headlamps function correctly when activated
+- Number plate light functions correctly " />
+		
+		<item name="Washers &amp; Wipers"
+		      text="It is suggested you check the following:
+- Wipers move correctly when activated
+- Wiper blades are in good condition and clear the screen effectively 
+- Washer jets direct spray onto the windscreens correctly
+- Washer fluid is topped up using an appropriate screen wash additive" />
+		
+		<item name="Mirrors &amp; Glass"
+		      text="It is suggested you check the following:
+- All mirrors are undamaged and properly aligned
+- Windscreen glass is free of stone-chips and cracks" />
+		
+		<item name="Seatbelts"
+		      text="It is suggested you check the following:
+-  All seatbelts operate correctly and are free from cuts and damage" />
+		
+		<item name="Brakes"
+		      text="It is suggested you check the following:
+- Foot brake works correctly and does not have excessive travel
+- Parking brake works correctly and does not have excessive travel 
+- Brake fluid level is correct
+- Brake pad thicknesses are satisfactory" />
+		
+		<item name="Battery"
+		      text="It is suggested you check the following:
+- Battery is held securely in place by the correct means
+- Battery is not leaking" />
+		
+		<item name="Bodywork &amp; Doors"
+		      text="It is suggested you check the following:
+- No body panels have any major damage, are loose, or in danger of falling off
+- Doors shut and lock correctly" />
+		
+		<item name="Tyres &amp; Wheels"
+		      text="It is suggested you check the following:
+- All tyres (including spare) have a minimum tread depth of 1.6mm
+- All tyres (including spare) are inflated to the correct tyre pressure
+- All tyres (including spare) have no cuts/damage to sidewalls
+- All wheels have no missing, or insecure, wheel nuts" />
+		
+		<item name="Fluids &amp; Oil"
+		      text="It is suggested you check the following:
+- Brake fluid level correct
+- Engine coolant level is correct (only check when the engine is cold) 
+- Engine oil level correct
+- Power steering fluid level correct
+- Windscreen washer fluid level correct (use an appropriate screen wash additive)" />
+		
+		<item name="Tools &amp; Equiptment"
+		      text="It is suggested you check the following:
+- Vehicle handbook is available and stored within vehicle 
+- Basic toolkit for the vehicle is complete and stored securely within vehicle  
+- Equipment (appropriate for the vehicle) in the case of an emergency tyre problem is complete, functional and stored securely within vehicle 
+- High visibility jacket(s) and a warning triangle are present and stored within vehicle" />
+	</check>
+</config>

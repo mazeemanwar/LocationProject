@@ -1,0 +1,81 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context="${packageName}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/msgContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:layout_marginTop="-50dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <RelativeLayout
+            android:id="@+id/msgTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" >
+
+            <ImageView
+                android:id="@+id/msgIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/envelope" />
+
+            <LinearLayout
+                android:id="@+id/msgTitles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/msgIcon"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/msgMainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Global Message"
+                    android:textColor="?attr/main_interface"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/msgSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome to driverConnex"
+                    android:textColor="?attr/main_interface"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/msgDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/msgTitles"
+                android:layout_below="@+id/msgTitles"
+                android:layout_marginTop="20dp"
+                android:text="2014-12-12 00:00:00 +0000"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <TextView android:id="@+id/msgContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgTop"
+            android:maxLines="7"
+            android:padding="15dp"
+            android:textSize="14sp"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
+
+</LinearLayout>

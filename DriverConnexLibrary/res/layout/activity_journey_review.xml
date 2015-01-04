@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/secondary_background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomActionBar"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/normal_edit_item_bg"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:drawSelectorOnTop="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false" >
+
+    </ListView>
+    
+    <RelativeLayout
+        android:id="@+id/bottomActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/bar_background"
+        android:visibility="invisible" >
+
+        <ImageButton
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="?android:selectableItemBackground"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/bin_white_42x56" />
+
+        <ImageButton
+            android:id="@+id/exportBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="?android:selectableItemBackground"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/export_white_42x56" />
+
+    </RelativeLayout>
+    
+    <include layout="@layout/loading_layer"/>
+
+</RelativeLayout>

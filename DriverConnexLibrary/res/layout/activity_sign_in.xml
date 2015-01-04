@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/secondary_background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <EditText
+        android:id="@+id/firEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_alignParentTop="true"
+        android:singleLine="true"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/signin_edit_text_bg"
+        android:hint="@string/signin_first_hint"
+        android:textCursorDrawable="@drawable/edit_cursor" />
+
+    <EditText
+        android:id="@+id/secEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firEdit"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:background="@drawable/signin_edit_text_bg"
+        android:hint="@string/signin_second_hint"
+        android:textCursorDrawable="@drawable/edit_cursor" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:background="@color/menu_divider" />
+    
+    <include layout="@layout/loading_layer"/>
+
+</RelativeLayout>

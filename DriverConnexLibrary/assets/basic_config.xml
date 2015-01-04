@@ -1,0 +1,41 @@
+<!-- BasicConfig.json file is replaced by this file. 
+	
+	Section:
+		name - is the name of the section that will appear on the left side menu.
+		enabled - indicates if this section is enabled
+		item - individual item for the section
+			name - name of the item, it will appear on the left side menu.
+			enabled - indicates if this item is enabled
+			image - icon of the item, it will appear on the left side menu next to the name.
+			URL - some items can be just a website to open
+			
+	NOTE:
+	You can add as many sections as you want, but keep them inside <menu>. Each section can have as many items as you want, but keep them inside <section>
+	Each item should have assigned activity in ModulesUtilities. Name node is used to identify an item. 
+-->
+
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <menu>
+        <section name="General"
+         		 enabled="true">
+         		 <item name="DriverConnex"
+         		       enabled="true"
+         		       image="web.png"
+         		       URL="http://driverconnex.com/"/>
+         		 <item name="My Account"
+         		       enabled="true"
+         		       image="account_grey_56x56.png"/>
+         		 <item name="Settings"
+         		       enabled="true"
+         		       image="gear_grey_56x56.png"/>
+         		 <item name="Help"
+         		       enabled="true"
+         		       image="help.png"/>
+         		 <item name="Log Out"
+         		       enabled="true"
+         		       image="logout.png"/>
+        </section>
+    </menu>    
+</config>
+

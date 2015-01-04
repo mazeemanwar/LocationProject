@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/secondary_background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<SurfaceView
+    android:id="@+id/surface_camera"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:gravity="center" 
+    android:background="@color/black_transparent">
+
+<TextView
+    android:id="@+id/durationText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="00:00:00"
+    android:textColor="@color/white"
+    android:textSize="16sp" />
+
+</RelativeLayout>
+</RelativeLayout>
+<RelativeLayout
+    android:id="@+id/bottomActionBar"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/black_transparent" >
+
+    <TextView
+        android:id="@+id/cancelText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:adjustViewBounds="true"
+        android:gravity="center"
+        android:padding="13dp"
+        android:scaleType="centerInside"
+        android:text="@string/record_video_cancel"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/play_white" />
+
+</RelativeLayout>
+
+
+</RelativeLayout>

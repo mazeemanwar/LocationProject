@@ -1,0 +1,143 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/secondary_background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="475dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/vehicleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_weight="53.77"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/menu_divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <RelativeLayout
+                    android:id="@+id/pictureLayout"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp" >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:baselineAlignBottom="false"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/overlay_circle" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp" >
+
+                        <com.driverconnex.ui.RoundedImageView
+                            android:id="@+id/photoEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:baselineAlignBottom="false"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/vehicle_default" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pictureLayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp" >
+
+                    <TextView
+                        android:id="@+id/modelTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/TextView01"
+                        android:layout_alignParentLeft="true"
+                        android:text="VAUXHALL INSIGNIA"
+                        android:textColor="?attr/main_interface"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/regNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout1"
+                    android:layout_centerHorizontal="true"
+                    android:text="FH10ABX"
+                    android:textColor="@color/menu_header_foreground"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/alertsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/normal_edit_item_bg"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:id="@+id/alertsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 Vehicle Alerts"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/serviceLayout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_weight="0.33"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/normal_edit_item_bg"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:id="@+id/serviceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vehicle_support"
+                    android:textColor="@color/header_foreground"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,88 @@
+<resources>
+    
+<!-- Each app can have its own custom theme colours by changing these values-->
+    <!-- Default colors of the app !-->
+   <style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="main_background">#32C8CB</item>
+        <item name="main_interface">#32C8CB</item>
+        <item name="secondary_background">#E0E0E0</item>
+        <item name="bar_background">#32C8CB</item>
+        <item name="tab_bar_background">#FFFFFF</item>
+        <item name="list_heading">#007aff</item>
+        <item name="actionbar_subtitle">#FAFAFA</item>
+        <item name="tutorial_font_color">#000000</item>
+        <item name="login_screen_background">#32C8CB</item>
+        <item name="behaviour_score_font_color">#FFFFFF</item>    
+    </style>   
+   
+    <!-- This theme is applied to the application -->
+    <style name="CustomActionBarTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/MyActionBarStyle</item>
+    </style>
+
+    <style name="MyActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">?attr/bar_background</item>
+        <item name="android:displayOptions">showTitle</item>
+        <item name="android:homeAsUpIndicator">@drawable/arrow_back_white</item>
+        <item name="android:subtitleTextStyle">@style/SubtitleTextStyle</item>
+    </style>
+
+    <!-- Label Styles -->
+    <!-- ======================================================== -->
+    <style name="SubtitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+    	<item name="android:textColor">?attr/actionbar_subtitle</item>
+  	</style>
+  	
+    <style name="NormalListTitle">
+        <item name="android:textColor">@color/header_foreground</item>
+    </style>
+    
+    <style name="ExpenseEditLabel">
+        <item name="android:gravity">right</item>
+        <item name="android:textColor">?attr/main_interface</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="ExpenseEditText">
+        <item name="android:background">@null</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:inputType">none</item>
+        <item name="android:textCursorDrawable">@drawable/edit_cursor</item>
+    </style>
+    
+    <style name="RecordValueText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/main_interface</item>
+    </style>
+
+    <style name="RecordTitleText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">?attr/main_interface</item>
+    </style>
+    <!-- ======================================================== -->
+    
+    <!-- Other Styles -->
+    <!-- ======================================================== -->
+    <style name="CustomAlertDialog" parent="@android:style/Theme.Holo.Light.Dialog">    
+    </style>
+    
+    <style name="CustomDatePickerDialog" parent="@android:style/Widget.DeviceDefault.DatePicker">
+        <item name="android:divider">?attr/main_interface</item>
+        <item name="android:textColor">?attr/main_interface</item>
+        <item name="android:selectedDateVerticalBar">?attr/main_interface</item>
+    </style>
+    
+    <style name="LoadSpinner">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:background">@color/tran_grey</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+</resources>

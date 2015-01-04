@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/main_background"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context="${packageName}.${activityClass}" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.76"
+        android:adjustViewBounds="true"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/homeLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:src="@drawable/brand_logo" />
+
+        <TextView
+            android:id="@+id/homeTitle"
+            style="@style/NormalListTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/homeLogo"
+            android:paddingBottom="8dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="30dp"
+            android:text="NOTIFICATIONS" />
+
+        <ListView
+            android:id="@+id/homeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/homeTitle"
+            android:divider="?attr/main_interface"
+            android:dividerHeight="0.8dp"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false" >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.24"
+        android:adjustViewBounds="true"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/menu_divider" />
+
+        <LinearLayout
+            android:id="@+id/tabBar_logical"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+          
+            android:background="?attr/main_interface"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

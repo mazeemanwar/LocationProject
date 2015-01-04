@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/listContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
+		android:paddingLeft="15dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/listMainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Main Title"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/listSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtitle"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>
