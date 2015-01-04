@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+    <menu>
+        <section
+            name="Claims"
+            enabled="true" >
+
+            <item
+                name="Claims"
+                enabled="true"
+                image="money_grey_56x46.png"/>
+        </section>
+    </menu>
+
+</config>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+    <menu>
+
+        <section
+            name="Expenses"
+            enabled="true" >
+
+            <item
+                name="Add Fuel"
+                enabled="true"
+                image="credit_card.png"/>
+
+            <item
+                name="Add Expense"
+                enabled="true"
+                image="add.png"/>
+
+            <item
+                name="Review"
+                enabled="true"
+                image="review.png"/>
+        </section>
+    </menu>
+
+</config>
