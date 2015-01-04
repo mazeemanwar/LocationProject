@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- KPMG App Theme -->
+    <!-- Logical App Theme -->
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="main_background">#FFFFFF</item>
         <item name="main_interface">#640C39</item>
