@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+    <menu>
+
+        <section
+            name="Incidents"
+            enabled="true" >
+
+            <item
+                name="Accidents"
+                enabled="true"
+                image="flag_grey.png"/>
+
+            <item
+                name="Breakdown"
+                enabled="true"
+                image="wrench_grey_56x56.png"/>
+
+            <item
+                name="Incident Reports"
+                enabled="true"
+                image="warning_grey_56x52.png"/>
+        </section>
+    </menu>
+
+</config>
