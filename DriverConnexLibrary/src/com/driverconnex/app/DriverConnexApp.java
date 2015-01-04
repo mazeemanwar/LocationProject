@@ -12,6 +12,7 @@ import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.PushService;
 
 /**
@@ -36,19 +37,21 @@ public class DriverConnexApp extends Application {
 		Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 		// Enable Crash Reporting
 
-//		ParseCrashReporting.enable(this);
+		// ParseCrashReporting.enable(this);
 
 		Parse.initialize(this, AppConfig.getAppID(), AppConfig.getClientKey());
-	
-		
-
+System.out.println(AppConfig.getAppID());
+System.out.println(AppConfig.getClientKey());
 		// Set ACL for security purposes
 		ParseACL defaultACL = new ParseACL();
 		ParseACL.setDefaultACL(defaultACL, true);
 
 		// Set Parse notification system
 
-		PushService.setDefaultPushCallback(this, HomeActivity.class);
+		PushService.setDefaultPushCallback(getApplicationContext(),
+				HomeActivity.class);
+
+		ParseInstallation.getCurrentInstallation().saveInBackground();
 
 		// Create user preferences
 		userPref = new Preferences(this);

@@ -44,7 +44,7 @@ import com.driverconnex.vehicles.VehiclesListActivity;
  * 
  * @author Yin Lee (SGI)
  * @author Adrian Klimczak
- * 
+ * @author Muhammad Azeem Anwar
  */
 
 public class AddJourneyActivity extends Activity {

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.xml.sax.Parser;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -12,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.content.Context;
 
 import com.driverconnex.utilities.XMLUtilities;
+import com.parse.Parse;
 
 /**
  * Reads modules_config.xml file and parsers information to ArrayList of service
@@ -262,10 +264,12 @@ public class XMLModuleConfigParser {
 			// Look for item entry
 			if (nodeName.contentEquals("item")) {
 				Tab tab = new Tab();
+				
 				tab.setName(parser.getAttributeValue(0));
-				tab.setIcon(parser.getAttributeValue(2));
+			
+				tab.setIcon(parser.getAttributeValue(1));
+				tab.setPriority(Integer.parseInt(parser.getAttributeValue(2)));
 
-				tab.setPriority(Integer.parseInt(parser.getAttributeValue(1)));
 
 				tabs.add(tab);
 			} else

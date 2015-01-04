@@ -11,6 +11,7 @@ import com.parse.ParseObject;
 /**
  * Singleton for things related with the vehicle
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  *
  */
 

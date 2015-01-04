@@ -25,9 +25,11 @@ import com.driverconnex.data.Organisation;
 import com.driverconnex.vehicles.AddVehicleActivity;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.PushService;
 
 /**
  * Login activity for the app. When user doesn't have any vehicle it will take
@@ -69,6 +71,9 @@ public class LoginActivity extends Activity {
 		// Checks if user is logged in
 		if (DriverConnexApp.getUserPref().isLogin()) {
 			appLoginProces();
+			PushService.setDefaultPushCallback(this, HomeActivity.class);
+
+			ParseInstallation.getCurrentInstallation().saveInBackground();
 
 		} else {
 			// We are back to Login screen so make these things visible and hide
@@ -218,16 +223,15 @@ public class LoginActivity extends Activity {
 
 			new Handler().postDelayed(runnable, 3000);
 
-
 		}
 		// set organisation details in local preference
 		getOrganisationConfig();
 		// push notification
-//		ParseInstallation installation = ParseInstallation
-//				.getCurrentInstallation();
-//		installation.put("user", ParseUser.getCurrentUser());
-//		PushService.setDefaultPushCallback(this, SignInActivity.class);
-//		installation.saveInBackground();
+		// ParseInstallation installation = ParseInstallation
+		// .getCurrentInstallation();
+		// installation.put("user", ParseUser.getCurrentUser());
+		// PushService.setDefaultPushCallback(this, SignInActivity.class);
+		// installation.saveInBackground();
 	}
 
 	// getting organisation configuration from parse and set to local

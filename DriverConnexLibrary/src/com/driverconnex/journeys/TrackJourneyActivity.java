@@ -44,6 +44,7 @@ import com.parse.ParseUser;
  * Activity for tracking a journey.
  * @author Yin Lee (SGI)
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  *
  */
 
