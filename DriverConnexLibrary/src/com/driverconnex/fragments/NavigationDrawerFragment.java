@@ -36,6 +36,7 @@ import com.driverconnex.data.MenuListItem;
 import com.driverconnex.data.MenuListItems;
 import com.driverconnex.data.XMLBasicConfigParser;
 import com.driverconnex.data.XMLMenuConfigParser;
+import com.driverconnex.data.XMLModuleConfigParser;
 import com.driverconnex.incidents.IncidentActivity;
 import com.driverconnex.singletons.TrackJourneySingleton;
 import com.driverconnex.utilities.ModulesUtilities;
@@ -145,7 +146,7 @@ public class NavigationDrawerFragment extends Fragment {
 
 		// getMenuFromServer() is used in logical(business) app for menu fetch
 		// from server
-		getMenuFromServer();
+
 		// ArrayList<MenuListItems> moduleMenuList = null;
 		menuOptions = new ArrayList<MenuListItem>();
 
@@ -154,9 +155,14 @@ public class NavigationDrawerFragment extends Fragment {
 			// TESTING CODE . THESE WILL NEED TO PURIFY AFTER ON FIRST LAUNCH
 			// Module Menu List
 			// ---------------------------------------
-			// moduleMenuList = XMLModuleConfigParser
-			// .getMenuItemsFromXML(getActivity());
-
+			if (AppConfig.getIsOnlineModuleRequired() != null
+					&& AppConfig.getIsOnlineModuleRequired().equals("yes")) {
+				getMenuFromServer();
+			} else {
+				moduleMenuList = XMLModuleConfigParser
+						.getMenuItemsFromXML(getActivity());
+				disPlayMenu();
+			}
 			// Convert both header and items into MenuItem for menu list
 			// for (int i = 0; i < moduleMenuList.size(); i++) {
 			//
@@ -610,26 +616,33 @@ public class NavigationDrawerFragment extends Fragment {
 				item.setName(basicMenuList.get(i).getName());
 				item.setEnabled(basicMenuList.get(i).isEnabled());
 				menuOptions.add(item);
-				if (AppConfig.getISHOMEPAGEENABLE()) {
-					System.out.println("menuoption size = "
-							+ basicMenuList.get(i).getSubitems().get(0)
-									.getClassName());
-					basicMenuList.get(i).getSubitems().remove(0);
+				// In menu list we have to add blank heading for better
+				// readability.So name is empty NO need to add sub item
+				if (!basicMenuList.get(i).getName().equals("")) {
 
-					basicMenuList.get(i).getSubitems()
-							.add(0, getCustomeHomePage());
+					if (AppConfig.getISHOMEPAGEENABLE()) {
+						System.out.println("menuoption size = "
+								+ basicMenuList.get(i).getSubitems().get(0)
+										.getClassName());
+						basicMenuList.get(i).getSubitems().remove(0);
+
+						basicMenuList.get(i).getSubitems()
+								.add(0, getCustomeHomePage());
+
+					}
+					for (int j = 0; j < basicMenuList.get(i).getSubitems()
+							.size(); j++) {
+
+						Log.d("BASICMENU", basicMenuList.get(i).getSubitems()
+								.get(j).getClassName()
+								+ "index of subitems is  " + j);
+
+						menuOptions.add(basicMenuList.get(i).getSubitems()
+								.get(j));
+
+					}
 
 				}
-				for (int j = 0; j < basicMenuList.get(i).getSubitems().size(); j++) {
-
-					Log.d("BASICMENU", basicMenuList.get(i).getSubitems()
-							.get(j).getClassName()
-							+ "index of subitems is  " + j);
-
-					menuOptions.add(basicMenuList.get(i).getSubitems().get(j));
-
-				}
-
 			}
 			// ---------------------------------------
 

@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.driverconnex.app.R;
 import com.driverconnex.data.Policy;
 
 /**
- * Not yet implemented.
  * 
  * @author Muhammad Azeem Anwar
  * 
@@ -23,6 +23,8 @@ public class PolicyListAdapter extends BaseAdapter {
 
 	private Context context;
 	private ArrayList<Policy> myPolicies;
+	private ArrayList<String> helpList;
+	private boolean fromHelp = false;
 
 	public PolicyListAdapter(Context context, ArrayList<Policy> policies) {
 		super();
@@ -30,14 +32,31 @@ public class PolicyListAdapter extends BaseAdapter {
 		this.myPolicies = policies;
 	}
 
+	public PolicyListAdapter(Context context, ArrayList<String> helpList,
+			boolean fromHelp) {
+		super();
+		this.context = context;
+		this.helpList = helpList;
+		this.fromHelp = fromHelp;
+	}
+
 	@Override
 	public int getCount() {
-		return myPolicies.size();
+		if (fromHelp) {
+			return helpList.size();
+		} else {
+			return myPolicies.size();
+		}
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return myPolicies.get(position);
+		if (fromHelp) {
+			return helpList.get(position);
+
+		} else {
+			return myPolicies.get(position);
+		}
 	}
 
 	@Override
@@ -55,18 +74,20 @@ public class PolicyListAdapter extends BaseAdapter {
 		}
 
 		// TextView title = (TextView) row.findViewById(R.id.listpolicyheading);
-		TextView policyTitle = (TextView) row
-				.findViewById(R.id.listpolicyheading);
+		if (!fromHelp) {
+			TextView policyTitle = (TextView) row
+					.findViewById(R.id.listpolicyheading);
+			ImageView pic = (ImageView) row.findViewById(R.id.picview);
+			pic.setVisibility(View.GONE);
 
-		policyTitle.setText(myPolicies.get(position).getTitle());
-		//
+			policyTitle.setText(myPolicies.get(position).getTitle());
 
-		// View topDivider = (View) row.findViewById(R.id.listTopDivider);
-		// if (position == 0) {
-		// topDivider.setVisibility(View.VISIBLE);
-		// } else {
-		// topDivider.setVisibility(View.INVISIBLE);
-		// }
+		} else {
+			TextView policyTitle = (TextView) row
+					.findViewById(R.id.listpolicyheading);
+
+			policyTitle.setText(helpList.get(position));
+		}
 
 		return row;
 	}

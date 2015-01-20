@@ -1,18 +1,52 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/main_background"
+    android:orientation="vertical"
+    android:weightSum="2"
     tools:context="${packageName}.${activityClass}" >
 
-    <ListView
-        android:id="@+id/list"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="?attr/main_interface"
-        android:dividerHeight="0.8dp"
-        android:footerDividersEnabled="false" >
-    </ListView>
+        android:layout_height="0dp"
+        android:layout_weight="1.76"
+        android:adjustViewBounds="true"
+        android:orientation="vertical" >
 
-     <include layout="@layout/loading_layer"/>
-    
-</RelativeLayout>
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="?attr/main_interface"
+            android:dividerHeight="0.8dp"
+            android:footerDividersEnabled="false" >
+        </ListView>
+    </LinearLayout>
+
+    <include layout="@layout/loading_layer" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.24"
+        android:adjustViewBounds="true"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/menu_divider" />
+
+        <LinearLayout
+            android:id="@+id/vehicle_tabBar"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="?attr/main_interface"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

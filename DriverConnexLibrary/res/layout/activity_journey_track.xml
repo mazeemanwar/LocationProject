@@ -29,7 +29,6 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-           
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
@@ -66,6 +65,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/sharingLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -84,16 +84,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/journey_tracking_share"
                     android:textColor="@color/purple" />
-
             </LinearLayout>
 
             <Switch
                 android:id="@+id/switch1"
                 android:layout_width="105dp"
                 android:layout_height="10dp"
-             
                 android:text="Switch" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -118,7 +115,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/track_record_title_3"
                 android:textColor="@color/purple" />
-
         </LinearLayout>
     </LinearLayout>
 

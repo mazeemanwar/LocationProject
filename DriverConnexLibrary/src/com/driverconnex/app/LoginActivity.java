@@ -61,7 +61,7 @@ public class LoginActivity extends Activity {
 
 		registerBtn.setOnClickListener(onClickListener);
 		loginBtn.setOnClickListener(onClickListener);
-		// String s = AppConfig.get
+
 	}
 
 	@Override
@@ -71,10 +71,6 @@ public class LoginActivity extends Activity {
 		// Checks if user is logged in
 		if (DriverConnexApp.getUserPref().isLogin()) {
 			appLoginProces();
-			PushService.setDefaultPushCallback(this, HomeActivity.class);
-
-			ParseInstallation.getCurrentInstallation().saveInBackground();
-
 		} else {
 			// We are back to Login screen so make these things visible and hide
 			// spinner
@@ -118,8 +114,8 @@ public class LoginActivity extends Activity {
 			if ((isEmailVerified)
 					&& (AppConfig.getIsVerificationRequired().equals("yes"))) {
 				// check if user have organisation and group coming from parse
-				if (((!"".equals(userOrganisation) && userOrganisation != null) && ((!""
-						.equals(userGroup) && userGroup != null)))) {
+				if (((userOrganisation != null && !"".equals(userOrganisation)) && ((userGroup != null && !""
+						.equals(userGroup))))) {
 
 					DriverConnexApp.getUserPref().setLogin(true);
 					DriverConnexApp.getUserPref().updateSharedPreferences();

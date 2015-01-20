@@ -12,12 +12,12 @@ import com.driverconnex.utilities.Utilities;
 
 /**
  * Class for representing a DCJourney
+ * 
  * @author Adrian Klimczak
- *
+ * 
  */
 
-public class DCJourney implements Parcelable 
-{
+public class DCJourney implements Parcelable {
 	private long id;
 	private String description;
 	private String startTime;
@@ -27,34 +27,33 @@ public class DCJourney implements Parcelable
 	private String createDate;
 	private String vehicle;
 	private String behaviourScore;
-	
+
 	private long duration;
 	private double distance;
 	private double expense;
-	
+
 	private float avgSpeed;
 	private float topSpeed;
 	private float emissions = 0;
-	
+
 	private boolean trackedAutomatically;
 	private boolean validBehaviour;
 	private boolean manuallyAdded;
 	private boolean scoreAdded;
 	private boolean claimedFor;
 	private boolean isBusiness;
-	
+
 	private boolean selected = false;
-	
+
 	@Override
 	public int describeContents() {
 		return 0;
 	}
 
 	@Override
-	public void writeToParcel(Parcel dest, int flags) 
-	{
+	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeLong(id);
-		
+
 		dest.writeString(description);
 		dest.writeString(startTime);
 		dest.writeString(endTime);
@@ -63,16 +62,16 @@ public class DCJourney implements Parcelable
 		dest.writeString(createDate);
 		dest.writeString(vehicle);
 		dest.writeString(behaviourScore);
-		
+
 		dest.writeLong(duration);
-		
+
 		dest.writeDouble(distance);
 		dest.writeDouble(expense);
-		
+
 		dest.writeFloat(topSpeed);
 		dest.writeFloat(avgSpeed);
 		dest.writeFloat(emissions);
-		
+
 		dest.writeByte((byte) (trackedAutomatically ? 0x01 : 0x00));
 		dest.writeByte((byte) (validBehaviour ? 0x01 : 0x00));
 		dest.writeByte((byte) (manuallyAdded ? 0x01 : 0x00));
@@ -81,13 +80,11 @@ public class DCJourney implements Parcelable
 		dest.writeByte((byte) (scoreAdded ? 0x01 : 0x00));
 	}
 
-	public static final Parcelable.Creator<DCJourney> CREATOR = new Parcelable.Creator<DCJourney>() 
-	{
-		public DCJourney createFromParcel(Parcel in) 
-		{
+	public static final Parcelable.Creator<DCJourney> CREATOR = new Parcelable.Creator<DCJourney>() {
+		public DCJourney createFromParcel(Parcel in) {
 			DCJourney mJourney = new DCJourney();
 			mJourney.id = in.readLong();
-			
+
 			mJourney.description = in.readString();
 			mJourney.startTime = in.readString();
 			mJourney.endTime = in.readString();
@@ -96,23 +93,23 @@ public class DCJourney implements Parcelable
 			mJourney.createDate = in.readString();
 			mJourney.vehicle = in.readString();
 			mJourney.behaviourScore = in.readString();
-			
+
 			mJourney.duration = in.readLong();
-			
+
 			mJourney.distance = in.readDouble();
 			mJourney.expense = in.readDouble();
-			
+
 			mJourney.topSpeed = in.readFloat();
 			mJourney.avgSpeed = in.readFloat();
 			mJourney.emissions = in.readFloat();
-			
+
 			mJourney.trackedAutomatically = in.readByte() != 0x00;
 			mJourney.validBehaviour = in.readByte() != 0x00;
 			mJourney.manuallyAdded = in.readByte() != 0x00;
 			mJourney.claimedFor = in.readByte() != 0x00;
 			mJourney.isBusiness = in.readByte() != 0x00;
 			mJourney.scoreAdded = in.readByte() != 0x00;
-			
+
 			return mJourney;
 		}
 
@@ -120,7 +117,7 @@ public class DCJourney implements Parcelable
 			return new DCJourney[size];
 		}
 	};
-	
+
 	private double roundTwoDecimals(double f) {
 		double res = (double) (Math.round(f * 100)) / 100;
 		return res;
@@ -130,15 +127,15 @@ public class DCJourney implements Parcelable
 		float res = (float) (Math.round(f * 100)) / 100;
 		return res;
 	}
-	
+
 	public String getCreateDate() {
 		return createDate;
 	}
-	
+
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	
+
 	public String getStartTime() {
 		return startTime;
 	}
@@ -146,15 +143,13 @@ public class DCJourney implements Parcelable
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	
-	public void setStartTime(String date, String time) 
-	{
+
+	public void setStartTime(String date, String time) {
 		this.startTime = date + " " + time;
 		this.createDate = date;
 	}
-	
-	public void setStartTime(long startTime) 
-	{
+
+	public void setStartTime(long startTime) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
 		Date start = new Date(startTime);
@@ -169,11 +164,11 @@ public class DCJourney implements Parcelable
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	
+
 	public void setEndTime(String date, String time) {
 		this.endTime = date + " " + time;
 	}
-	
+
 	public void setEndTime(long endTime) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		Date end = new Date(endTime);
@@ -208,10 +203,10 @@ public class DCJourney implements Parcelable
 		return distance;
 	}
 
-	public void setDistance(double distance) 
-	{
+	public void setDistance(double distance) {
 		this.emissions = 0;
-		this.expense = roundTwoDecimals(distance*DriverConnexApp.getUserPref().getExpensePerMile());
+		this.expense = roundTwoDecimals(distance
+				* DriverConnexApp.getUserPref().getExpensePerMile());
 		this.distance = roundTwoDecimals(distance);
 	}
 
@@ -231,10 +226,8 @@ public class DCJourney implements Parcelable
 		this.expense = expense;
 	}
 
-	public Object getValuesByOrder(int order) 
-	{
-		switch (order) 
-		{
+	public Object getValuesByOrder(int order) {
+		switch (order) {
 		case 0:
 			return getStartTime();
 		case 1:
@@ -251,19 +244,20 @@ public class DCJourney implements Parcelable
 			return "Getting address...";
 		case 7:
 			return roundTwoDecimals(avgSpeed) + " mph";
+			// case 8:
+			// return roundTwoDecimals(topSpeed) + " mph";
+			//
 		case 8:
-			return roundTwoDecimals(topSpeed) + " mph";
-		case 9:
 			return 0;
-		case 10:
-			return roundTwoDecimals(emissions)+ " grams";
+		case 9:
+			return roundTwoDecimals(emissions) + " grams";
 		default:
 			return null;
 		}
 	}
-	
+
 	// Getters and Setters
-	//==============================================
+	// ==============================================
 	public float getEmissions() {
 		return emissions;
 	}
@@ -271,7 +265,7 @@ public class DCJourney implements Parcelable
 	public float getRoundedEmissions() {
 		return (float) roundTwoDecimals(emissions);
 	}
-	
+
 	public void setEmissions(float emissions) {
 		this.emissions = emissions;
 	}
@@ -371,6 +365,5 @@ public class DCJourney implements Parcelable
 	public void setBehaviourScore(String behaviourScore) {
 		this.behaviourScore = behaviourScore;
 	}
-	
-	
+
 }

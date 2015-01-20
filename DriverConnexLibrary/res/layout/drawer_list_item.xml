@@ -3,28 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/menu_item_bg"
-    android:padding="15dp"
-    android:orientation="horizontal" >
-    
-    <TextView 
+    android:orientation="horizontal"
+    android:padding="15dp" >
+
+    <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/icon"
         android:layout_marginLeft="10dp"
-        android:textSize="16sp"
+        android:layout_toRightOf="@+id/icon"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@android:color/black"/>
-    
-    <ImageView 
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <ImageView
         android:id="@+id/icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:scaleType="centerInside"
-        android:src="@drawable/help"/>
+        android:src="@drawable/help" />
 
 </RelativeLayout>

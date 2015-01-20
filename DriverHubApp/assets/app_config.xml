@@ -25,7 +25,7 @@
 
         <!-- Set dashboard of the app -->
 
-        <pagename name="LogicalConnex" />
+        <pagename name="logical" />
 
         <isenable name="true" />
 
@@ -36,10 +36,12 @@
 
     <isorganizationrequired name="yes" />
 
-    <isonlinemodules name="yes" />
+    <isonlinemodules name="no" />
 
     <isverificationrequired name="yes" />
 
     <isfinancedisable name="true" />
+
+    <issharingdisable name="true" />
 
 </config>

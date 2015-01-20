@@ -88,6 +88,9 @@ public class XMLAppConfigParser {
 					AppConfig.setisfinanceDisable(readBool(parser
 							.getAttributeValue(0)));
 
+				} else if (nodeName.contentEquals("issharingdisable")) {
+					AppConfig.setIsSharingDisable(readBool(parser
+							.getAttributeValue(0)));
 				}
 			}
 

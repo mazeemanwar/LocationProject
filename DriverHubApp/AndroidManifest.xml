@@ -50,10 +50,10 @@
  	 to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
-        android:name="com.driverconnex.app.permission.C2D_MESSAGE"
+        android:name="com.driverhub.app.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.driverconnex.app.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.driverhub.app.permission.C2D_MESSAGE" />
 
     <!-- hardware features -->
     <uses-feature
@@ -94,15 +94,6 @@
                 <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
             </intent-filter>
         </receiver>
-
-        <service android:name="com.parse.PushService" />
-
-        <receiver android:name="com.parse.ParseBroadcastReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
         <receiver
             android:name="com.parse.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
@@ -110,7 +101,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="com.driverconnex.app" />
+                <category android:name="com.driverhub.app" />
             </intent-filter>
         </receiver>
 
@@ -201,6 +192,12 @@
         </activity>
         <activity
             android:name="com.driverconnex.basicmodules.HelpActivity"
+            android:label="@string/title_activity_help"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.basicmodules.HelpListActivity"
             android:label="@string/title_activity_help"
             android:parentActivityName="com.driverconnex.app.HomeActivity"
             android:screenOrientation="portrait" >
@@ -438,7 +435,12 @@
             android:parentActivityName="com.driverconnex.app.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
-
+        <activity
+            android:name="com.driverconnex.basicmodules.ServiceViewActivity"
+            android:label="@string/title_activity_book_service"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- Parking Module -->
         <activity
             android:name="com.driverconnex.parking.AddParkingLocationActivity"
@@ -625,8 +627,10 @@
             android:parentActivityName="com.driverconnex.app.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <!-- ======================================================== -->
-            <service android:name="com.parse.PushService" />
+        <!--
+======================================================== 
+JUST UNCOMMENT THIS CODE TO ACTIVE PARSE PUSH SERIVCE
+        <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
             <intent-filter>
@@ -634,7 +638,7 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-  
+        -->
     </application>
 
 </manifest>

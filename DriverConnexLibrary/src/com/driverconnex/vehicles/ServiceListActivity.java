@@ -4,149 +4,162 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
-import com.driverconnex.adapter.ListAdapter;
-import com.driverconnex.adapter.ListAdapterItem;
+import com.driverconnex.adapter.PolicyListAdapter;
+import com.driverconnex.adapter.ServiceListAdapter;
+import com.driverconnex.adapter.ServicesListAdapter;
 import com.driverconnex.app.R;
-import com.driverconnex.data.XMLServiceProviderParser;
+import com.driverconnex.basicmodules.HelpListActivity;
+import com.driverconnex.basicmodules.ServiceViewActivity;
+import com.driverconnex.data.HelpListItem;
+import com.driverconnex.data.ServiceListItem;
+import com.driverconnex.data.ServiceListItems;
+import com.driverconnex.data.XMLModuleConfigParser;
 
 /**
- * Activity for displaying list of services and service providers. 
- * User chooses a type of service and then they choose a provider, which it will take them to the provider's website.
+ * Activity for displaying list of services and service providers. User chooses
+ * a type of service and then they choose a provider, which it will take them to
+ * the provider's website.
+ * 
  * @author Adrian Klimczak
- *
+ * 
  */
 
-public class ServiceListActivity extends Activity 
-{
+public class ServiceListActivity extends Activity {
 	private ListView list;
-	private ListAdapter adapter;
-	private ArrayList<ListAdapterItem> adapterData = new ArrayList<ListAdapterItem>();
+	private ArrayList<ServiceListItem> helpItems = new ArrayList<ServiceListItem>();
+	private ArrayList<String> listItem = new ArrayList<String>();
+	private RelativeLayout loading;
+	ArrayList<ServiceListItems> helpList = new ArrayList<ServiceListItems>();
+	public static final int CATEGORY = 0;
+	public static final int QUESTION = 1;
+	public static final int ANSWER = 2;
+	private int listType = 0;
 
-	private ArrayList<Service> services;
-	private Service service;
-	
-	private boolean displayProviders = false; // Indicates if list of providers should be displayed
-	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_list);
-		
-		// We will get some extras if we launched this activity again, from service list to providers list
-		if (getIntent().getExtras() != null) 
-		{
-			service = (Service) getIntent().getExtras().getSerializable("service");
-			
-			// Indicate that we are in providers list now
-			if(service != null)
-				displayProviders = true;
-		}
-		// Otherwise we are displaying list of services
-		else
-		{
-			// Get services from the file
-			services = XMLServiceProviderParser.getServicesFromXML(this);
-		}
-		
-		adapter = new ListAdapter(ServiceListActivity.this, adapterData);
-		
-		list = (ListView) findViewById(R.id.list);
-		list.setOnItemClickListener(onItemClickListener);
-		list.setAdapter(adapter);
+		setContentView(R.layout.activity_policy);
+		list = (ListView) findViewById(R.id.policylist);
+		loading = (RelativeLayout) findViewById(R.id.loadSpinner);
+		list.setOnItemClickListener(itemClickListener);
+
 	}
-	
+
 	@Override
-	protected void onResume() 
-	{
-		super.onResume();	
-		
-		if(!adapterData.isEmpty())
-			adapterData.clear();
-		
-		// If we are no longer in services list but in providers list
-		if(displayProviders)
-		{
-			for(int i=0; i<service.getProviders().size(); i++)
-			{
-				ListAdapterItem provider = new ListAdapterItem();		
-				provider.title = service.getProviders().get(i).getName();
-				
-				adapterData.add(provider);
-			}
-			
-			adapter.setImageResource(-1);
-		}
-		// If we are in services list
-		else
-		{
-			for(int i=0; i<services.size(); i++)
-			{
-				ListAdapterItem service = new ListAdapterItem();
-				service.title = services.get(i).getName();
-				
-				adapterData.add(service);
-			}
-			
-			adapter.setImageResource(R.drawable.gear_grey_56x56);
-		}
-		
-		adapter.notifyDataSetChanged();
+	protected void onResume() {
+		super.onResume();
+		getActionBar().setTitle("Book a Service");
+
+		// Enable loading bar
+		loading.setVisibility(View.VISIBLE);
+		listItem = new ArrayList<String>();
+
+		getHelpFromAsset();
+		displayAdapter(0);
+
 	}
-	
+
+	/**
+	 * Handles what happens when item from the list is clicked/touched
+	 */
+	// private OnItemClickListener onItemClickListener = new
+	// OnItemClickListener() {
+	// @Override
+	// public void onItemClick(AdapterView<?> parent, View view, int position,
+	// long index) {
+	// {
+	// Intent returnIntent = new Intent();
+	// // returnIntent.putExtra("vehicle", vehicles.get(position));
+	// setResult(RESULT_OK, returnIntent);
+	//
+	// finish();
+	// overridePendingTransition(R.anim.slide_right_main,
+	// R.anim.slide_right_sub);
+	// }
+	// }
+	// };
+
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) 
-	{
-		if (item.getItemId() == android.R.id.home) 
-		{
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
 			finish();
-			
-			if(!displayProviders)	
-				overridePendingTransition(R.anim.null_anim, R.anim.slide_out);	
-			else
-				overridePendingTransition(R.anim.slide_right_main, R.anim.slide_right_sub);
-			
+			overridePendingTransition(R.anim.null_anim, R.anim.slide_out);
 			return true;
 		}
-		
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
-	/**
-	 * On click listener for the items in the list
-	 */
-	private OnItemClickListener onItemClickListener = new OnItemClickListener() 
-	{
+
+	private OnItemClickListener itemClickListener = new OnItemClickListener() {
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,	long id) 
-		{
-			if(!displayProviders)
-			{
-				Intent intent = new Intent(ServiceListActivity.this, ServiceListActivity.class);
-				
-				Bundle extras = new Bundle();
-				
-				extras.putSerializable("service", services.get(position));
-				
-				intent.putExtras(extras);
-				
-				startActivity(intent);
-				overridePendingTransition(R.anim.slide_left_sub, R.anim.slide_left_main);
-			}
-			else
-			{
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(service.getProviders().get(position).getURL()));
-				startActivity(browserIntent);
-			}
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			Bundle bundle = new Bundle();
+			bundle.putInt("index", position);
+			Intent intent = new Intent(ServiceListActivity.this,
+					ServiceViewActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
+			ServiceListActivity.this.overridePendingTransition(R.anim.slide_in,
+					R.anim.null_anim);
 		}
 	};
+
+	private void getHelpFromAsset() {
+		loading.setVisibility(View.GONE);
+		helpList = XMLModuleConfigParser.getServiceItemsFromXML(
+				ServiceListActivity.this, "service.xml");
+
+		for (int i = 0; i < helpList.size(); i++) {
+			ServiceListItem item = new ServiceListItem();
+			// item.setCategory(helpList.get(i).getName());
+			// item.setCategory(true);
+			helpItems.add(item);
+
+			for (int j = 0; j < helpList.get(i).getSubitems().size(); j++) {
+				helpItems.add(helpList.get(i).getSubitems().get(j));
+
+			}
+
+		}
+
+	}
+
+	private void displayAdapter(int index) {
+		System.out.println();
+		if (listType == CATEGORY) {
+			listItem = new ArrayList<String>();
+			for (int i = 0; i < helpList.size(); i++) {
+				String heading = helpList.get(i).getName();
+				listItem.add(heading);
+			}
+
+		} else if (listType == QUESTION) {
+			for (int k = 0; k < helpList.get(index).getSubitems().size(); k++) {
+				String heading = helpList.get(index).getSubitems().get(k)
+						.getPhone();
+				listItem.add(heading);
+
+			}
+		} else if (listType == ANSWER) {
+			for (int k = 0; k < helpList.get(index).getSubitems().size(); k++) {
+				String heading = helpList.get(index).getSubitems().get(k)
+						.getEmail();
+				listItem.add(heading);
+
+			}
+
+		}
+
+		list.setAdapter(new ServicesListAdapter(ServiceListActivity.this,
+				listItem, true));
+
+	}
 }

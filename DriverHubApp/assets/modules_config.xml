@@ -87,7 +87,7 @@
 
                 <item
                     name="Claims"
-                    enabled="true"
+                    enabled="false"
                     image="money.png"/>
             </section>
         </menu>
@@ -95,13 +95,13 @@
 
     <module
         name="KPMG T&amp;S"
-        enabled="true" >
+        enabled="false" >
 
         <menu>
 
             <section
                 name="Travel and Subsistence"
-                enabled="true" >
+                enabled="false" >
 
                 <item
                     name="Add T&amp;S"
@@ -113,13 +113,13 @@
 
     <module
         name="DC Community"
-        enabled="true" >
+        enabled="false" >
 
         <menu>
 
             <section
                 name="Community"
-                enabled="true" >
+                enabled="false" >
 
                 <item
                     name="My Community"

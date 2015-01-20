@@ -61,8 +61,7 @@ public class KPMGFragment extends Fragment {
 		getMessages();
 		LinearLayout tabBar = (LinearLayout) view
 				.findViewById(R.id.tabBar_logical);
-
-		HomeActivity.createTabBar(getActivity(), tabBar);
+		HomeActivity.createTabBar(getActivity(), tabBar, "modules_config.xml");
 
 		return view;
 	}

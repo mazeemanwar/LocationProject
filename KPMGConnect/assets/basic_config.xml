@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+    <menu>
+
+        <section
+            name="General"
+            enabled="true" >
+
+            <item
+                name="DriverConnex"
+                URL="http://driverconnex.com/"
+                enabled="true"
+                image="web.png"/>
+
+            <item
+                name="My Account"
+                enabled="true"
+                image="account_grey_56x56.png"/>
+
+            <item
+                name="Help"
+                enabled="true"
+                image="help.png"/>
+
+            <item
+                name="Log Out"
+                enabled="true"
+                image="logout.png"/>
+        </section>
+
+        <section
+            name=""
+            enabled="true" >
+        </section>
+    </menu>
+
+</config>

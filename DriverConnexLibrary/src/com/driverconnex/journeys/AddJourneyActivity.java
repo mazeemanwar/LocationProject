@@ -1,7 +1,10 @@
 package com.driverconnex.journeys;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -50,6 +53,7 @@ import com.driverconnex.vehicles.VehiclesListActivity;
 public class AddJourneyActivity extends Activity {
 	private EditText descEdit;
 	private static TextView startTimeEdit;
+	
 	// private static TextView startDateEdit;
 	// private static TextView endDateEdit;
 	private static TextView endTimeEdit;
@@ -326,22 +330,23 @@ public class AddJourneyActivity extends Activity {
 						.toString());
 
 		journey.setDescription(descEdit.getText().toString());
-		// journey.setStartTime(startDateEdit.getText().toString(),
-		// startTimeEdit.getText().toString());
-		// journey.setEndTime(endDateEdit.getText().toString(),
-		// endTimeEdit.getText().toString());
+		journey.setStartTime("", startTimeEdit.getText().toString());
+		journey.setEndTime("", endTimeEdit.getText().toString());
 		//
 		// // Convert date to a format used in calculateDuration()
 		// String startDate =
-		// Utilities.convertDateFormat(startDateEdit.getText().toString(),
-		// "dd-MM-yyyy", "yyyy-MM-dd");
-		// String endDate =
-		// Utilities.convertDateFormat(endDateEdit.getText().toString(),
-		// "dd-MM-yyyy", "yyyy-MM-dd");
+		// Utilities.convertDateFormat(startTimeEdit.getText()
+		// .toString(), "dd-MM-yyyy", "yyyy-MM-dd");
+		// String endDate = Utilities.convertDateFormat(endTimeEdit.getText()
+		// .toString(), "dd-MM-yyyy", "yyyy-MM-dd");
+		String startTime = Utilities.getTimeFromDate(startTimeEdit.getText()
+				.toString());
+		String endTime = Utilities.getTimeFromDate(endTimeEdit.getText()
+				.toString());
+		//
+		long diff = Utilities.calculateTimeDuration(startTime, endTime);
+		journey.setDuration(Utilities.calculateTimeDuration(startTime, endTime));
 
-		// journey.setDuration(Utilities.calculateDuration(startDate,
-		// startTimeEdit.getText().toString(),
-		// endDate, endTimeEdit.getText().toString()));
 		journey.setDistance(Double.valueOf(distanceStr));
 		journey.setBusiness(isBusiness);
 
@@ -553,4 +558,5 @@ public class AddJourneyActivity extends Activity {
 
 		return true;
 	}
+
 }

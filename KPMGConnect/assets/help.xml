@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<help>
+
+    <module
+        name="DC Parking"
+        enabled="true" >
+
+        <menu>
+
+            <section
+                name="Data"
+                enabled="true" >
+
+                <item
+                    answer="The App will use minimal amount of your mobile data allowance to function. As with any mobile app, a small amount of mobile data is used to enable certain functionality"
+                    question="Will the app use up my mobile data allowance?"/>
+
+                <item
+                    answer="Personal data when you have been registered for the App we will record your name and email address so that we can create an account. This allows us to identify and keep in touch with you. This also allows you to log in using this account on different devices.
+
+Vehicle data â€“ to use the App you will need to register as least one vehicle. The app will use the vehicle registration number to identify the vehicle and specification and as you use the app all journeys, fuel expenses, servicing and maintenance, incident history will be stored against this vehicle.  Data will be used primarily to enable the functionality of the app. The App provider on an anonymised basis to provide data for research purposes will also use this data."
+                    question="What data is gathered whilst I use the app and why?"/>
+            </section>
+        </menu>
+    </module>
+
+    <module
+        name="DC Parking"
+        enabled="true" >
+
+        <menu>
+
+            <section
+                name="Getting Started"
+                enabled="true" >
+
+                <item
+                    answer="Download the app onto your mobile device and register â€“ you will be guided through a process to set up the app, this will include adding details of your vehicle."
+                    question="What do I need to do to get started with the App?"/>
+
+                <item
+                    answer="We endeavour to support the latest IOS and Android devices."
+                    question="Which mobile devices are supported?"/>
+            </section>
+        </menu>
+    </module>
+
+</help>

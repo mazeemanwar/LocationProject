@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- KPMG App Theme -->
+	<style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="main_background">#FFFFFF</item>    
+        <item name="main_interface">#06368E</item>
+        <item name="bar_background">#06368E</item>
+    </style> 
+    
+</resources>

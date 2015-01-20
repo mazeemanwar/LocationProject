@@ -14,6 +14,6 @@ public final class Manifest {
  	 to match your app's package name + ".permission.C2D_MESSAGE".
     
          */
-        public static final String C2D_MESSAGE="com.driverconnex.app.permission.C2D_MESSAGE";
+        public static final String C2D_MESSAGE="com.driverhub.app.permission.C2D_MESSAGE";
     }
 }

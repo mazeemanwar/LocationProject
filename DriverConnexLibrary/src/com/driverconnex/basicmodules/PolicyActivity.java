@@ -69,26 +69,6 @@ public class PolicyActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long index) {
-			// Checks if this activity is not used for picking a vehicle
-			// if(!vehiclePicker)
-			// {
-			// for (int i = 0; i < parent.getChildCount(); i++)
-			// {
-			// TextView tag = (TextView)
-			// parent.getChildAt(i).findViewById(R.id.defaultTag);
-			// if (i == position)
-			// {
-			// tag.setVisibility(View.VISIBLE);
-			// ParseUser.getCurrentUser().put("userDefaultVehicle",
-			// vehicleObjects.get(posi tion));
-			// ParseUser.getCurrentUser().saveInBackground();
-			// }
-			// else
-			// tag.setVisibility(View.INVISIBLE);
-			// }
-			// }
-			// Otherwise, picks the vehicle and goes back to previous screen
-			// else
 			{
 				Intent returnIntent = new Intent();
 				// returnIntent.putExtra("vehicle", vehicles.get(position));
@@ -100,17 +80,6 @@ public class PolicyActivity extends Activity {
 			}
 		}
 	};
-
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu)
-	// {
-	// if(!vehiclePicker)
-	// {
-	// MenuInflater inflater = getMenuInflater();
-	// inflater.inflate(R.menu.vehicle, menu);
-	// }
-	// return super.onCreateOptionsMenu(menu);
-	// }
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -152,8 +121,8 @@ public class PolicyActivity extends Activity {
 			public void done(ParseObject policyObject, ParseException arg1) {
 				// TODO Auto-generated method stub
 				if (arg1 == null) {
-					// because we have only one policyobject if we have more
-					// then one we have to implment regarding this
+					// because we have only one policy object if we have more
+					// then one we have to implement regarding this
 					policies = new ArrayList<Policy>();
 					for (int i = 0; i < 1; i++) {
 
@@ -166,29 +135,15 @@ public class PolicyActivity extends Activity {
 						System.out.println();
 						list.setAdapter(new PolicyListAdapter(
 								PolicyActivity.this, policies));
-						// list.setOnItemClickListener(onItemClickListener);
 					}
 
 				} else {
-					System.out.println();
 				}
 
 			}
 
 		});
 
-		// for list of oboject we have to do
-		// query.findInBackground(new FindCallback<ParseObject>() {
-		// public void done(List<ParseObject> list, ParseException e) {
-		// if (e == null) {
-		// for (ParseObject object : list) {
-		//
-		// ParseFile image = (ParseFile) object.get("images_column_name");
-		//
-		// }
-		// }
-		// }
-		// });
 	}
 
 }

@@ -5,6 +5,6 @@
     android:background="@color/menu_background"
     android:choiceMode="singleChoice"
     android:divider="@color/menu_divider"
-    android:scrollbars="none"
     android:dividerHeight="1dp"
+    android:scrollbars="none"
     tools:context="com.driverconnex.fragments.NavigationDrawerFragment" />

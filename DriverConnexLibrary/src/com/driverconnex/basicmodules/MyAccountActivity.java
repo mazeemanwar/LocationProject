@@ -31,7 +31,7 @@ import com.parse.ParseUser;
  * Activity for displaying user account information.
  * 
  * @author Adrian Klimczak
- *  @author Muhammad Azeem Anwar
+ * @author Muhammad Azeem Anwar
  * 
  *         NOTE: - userSurname from Parse for some reason started to return
  *         "null". It may be due to changes that Greg did recently in the Parse.
@@ -49,6 +49,7 @@ public class MyAccountActivity extends Activity {
 	private TextView membershipText;
 	private TextView organisationText;
 	private TextView groupText;
+	private TextView appNameText;
 
 	private LinearLayout pictureLayout;
 	private ImageView userPhoto;
@@ -66,12 +67,14 @@ public class MyAccountActivity extends Activity {
 		joinedText = (TextView) findViewById(R.id.joinedText);
 		appVersionText = (TextView) findViewById(R.id.appVersionText);
 		// membershipText = (TextView) findViewById(R.id.membershipText);
+		appNameText = (TextView) findViewById(R.id.applicationNameTxt);
 		organisationText = (TextView) findViewById(R.id.organisationText);
 		groupText = (TextView) findViewById(R.id.groupText);
 
 		pictureLayout = (LinearLayout) findViewById(R.id.pictureLayout);
 		userPhoto = (ImageView) findViewById(R.id.photoEdit);
-
+		// we have to display appName name to lower case. 
+		appNameText.setText(appNameText.getText().toString().toLowerCase());
 		pictureLayout.setOnClickListener(onClickListener);
 
 		// Get user that is currently using this app

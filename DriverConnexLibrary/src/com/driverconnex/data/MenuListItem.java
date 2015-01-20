@@ -2,12 +2,12 @@ package com.driverconnex.data;
 
 /**
  * Individual item for the module section in NavigationDrawer
+ * 
  * @author Yin Lee (SGI)
- *
+ * 
  */
 
-public class MenuListItem 
-{
+public class MenuListItem {
 	private String name;
 	private boolean enabled;
 	private String icon;
@@ -60,7 +60,7 @@ public class MenuListItem
 
 	public String getUrl() {
 		return url;
-	}
+	} 
 
 	public void setUrl(String url) {
 		this.url = url;

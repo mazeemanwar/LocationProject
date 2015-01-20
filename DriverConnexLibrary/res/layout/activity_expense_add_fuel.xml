@@ -56,9 +56,7 @@
                         android:text="@string/expense_personal"
                         android:textColor="?attr/main_interface" />
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +131,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:hint="2014-01-01" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -161,7 +158,6 @@
                     android:hint="£ 0.00"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -189,7 +185,6 @@
                     android:hint="0 Litres"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal" >
-
                 </EditText>
             </LinearLayout>
 
@@ -218,9 +213,7 @@
                     android:hint="0 Miles"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal" />
-
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -258,9 +251,8 @@
                     android:id="@+id/fuelPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/tran_grey"
+                    android:background="@color/menu_divider"
                     android:scaleType="centerInside" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -331,7 +323,6 @@
                         android:layout_weight="7"
                         android:ems="10"
                         android:text="@string/expense_default_vehicle" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -358,7 +349,6 @@
                         android:layout_weight="7"
                         android:hint="£ GBP"
                         android:text="£ GBP" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -385,10 +375,8 @@
                         android:layout_weight="7"
                         android:hint="Yes"
                         android:text="Yes" />
-
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 

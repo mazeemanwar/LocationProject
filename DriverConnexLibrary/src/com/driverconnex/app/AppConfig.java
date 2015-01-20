@@ -17,6 +17,7 @@ public class AppConfig {
 	private static String ISVERIFICATIONREQUIRED = "";
 	private static String ISONLINEMODULEREQUIRED = "";
 	private static Boolean ISFINANCEDISABLE;
+	private static Boolean ISSHARINGDISABLED;
 
 	private static String HOMEPAGENAME;
 	private static String HOMEPAGEURL;
@@ -112,6 +113,14 @@ public class AppConfig {
 
 	public static void setisfinanceDisable(Boolean isDisable) {
 		ISFINANCEDISABLE = isDisable;
+	}
+
+	public static Boolean isSharingDisable() {
+		return ISSHARINGDISABLED;
+	}
+
+	public static void setIsSharingDisable(Boolean isDisable) {
+		ISSHARINGDISABLED = isDisable;
 	}
 
 	// set custom home page values here

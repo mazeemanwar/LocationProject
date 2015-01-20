@@ -4,16 +4,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.xml.sax.Parser;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.Context;
+import android.renderscript.Sampler.Value;
 
 import com.driverconnex.utilities.XMLUtilities;
-import com.parse.Parse;
 
 /**
  * Reads modules_config.xml file and parsers information to ArrayList of service
@@ -25,7 +26,7 @@ import com.parse.Parse;
  */
 
 public class XMLModuleConfigParser {
-	private static final String path = "modules_config.xml";
+	private static String path = "modules_config.xml";
 
 	/**
 	 * Gets menu items from XML file.
@@ -189,11 +190,15 @@ public class XMLModuleConfigParser {
 		}
 	}
 
-	public static ArrayList<Tab> getTabsFromXML(Context context) {
+	public static ArrayList<Tab> getTabsFromXML(Context context, String filePath) {
+
 		ArrayList<Tab> tabs = new ArrayList<Tab>();
 
 		XmlPullParserFactory factory;
 
+		// if (!filePath.equals("")) {
+		path = filePath;
+		// }
 		try {
 			factory = XmlPullParserFactory.newInstance();
 			factory.setNamespaceAware(true);
@@ -213,7 +218,7 @@ public class XMLModuleConfigParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		path = "modules_config.xml";
 		return tabs;
 	}
 
@@ -264,12 +269,11 @@ public class XMLModuleConfigParser {
 			// Look for item entry
 			if (nodeName.contentEquals("item")) {
 				Tab tab = new Tab();
-				
+
 				tab.setName(parser.getAttributeValue(0));
-			
+
 				tab.setIcon(parser.getAttributeValue(1));
 				tab.setPriority(Integer.parseInt(parser.getAttributeValue(2)));
-
 
 				tabs.add(tab);
 			} else
@@ -331,6 +335,345 @@ public class XMLModuleConfigParser {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Reads help nodes from XML file.
+	 * 
+	 * @param parser
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
+
+	public static ArrayList<HelpListItems> getHelpItemsFromXML(Context context,
+			String filePath) {
+		ArrayList<HelpListItems> helpItems = new ArrayList<HelpListItems>();
+		// getMenuFromServer();
+		XmlPullParserFactory factory;
+		path = filePath;
+
+		try {
+			factory = XmlPullParserFactory.newInstance();
+			factory.setNamespaceAware(true);
+			XmlPullParser parser = factory.newPullParser();
+			// Open file
+			InputStream inputStream = context.getAssets().open(path);
+
+			// Set the input for the parser using an InputStreamReader
+			parser.setInput(new InputStreamReader(inputStream));
+
+			// Read nodes
+			readFeedHelp(parser, helpItems);
+
+			path = "modules_config.xml";
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return helpItems;
+	}
+
+	/**
+	 * Reads nodes from XML file.
+	 * 
+	 * @param parser
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
+	private static void readFeedHelp(XmlPullParser parser,
+			ArrayList<HelpListItems> helpItems) throws XmlPullParserException,
+			IOException {
+		int eventType = parser.getEventType();
+
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			// Check if we found a tag
+			if (eventType == XmlPullParser.START_TAG) {
+				// Get name of the tag
+				String nodeName = parser.getName();
+
+				// Read Module
+				if (nodeName.contentEquals("module")) {
+					// Read the content of the module node
+					readHelpEntry(parser, nodeName, helpItems);
+				}
+			}
+
+			eventType = parser.next();
+		}
+	}
+
+	private static void readHelpEntry(XmlPullParser parser, String subtag,
+			ArrayList<HelpListItems> helpItems) throws XmlPullParserException,
+			IOException {
+		parser.require(XmlPullParser.START_TAG, null, subtag);
+
+		// Start reading values of main entry
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.START_TAG) {
+				continue;
+			}
+
+			// I have not found a reason yet why this has to be in order to work
+			// parser.next();
+
+			String nodeName = parser.getName();
+
+			// Read menu entry
+			if (nodeName.contentEquals("menu")) {
+				// Read the content of the menu
+				readQuestionEntry(parser, nodeName, helpItems);
+			} else
+				XMLUtilities.skip(parser);
+		}
+	}
+
+	private static void readQuestionEntry(XmlPullParser parser, String subtag,
+			ArrayList<HelpListItems> helpItems) throws XmlPullParserException,
+			IOException {
+		parser.require(XmlPullParser.START_TAG, null, subtag);
+
+		// Start reading values of main entry
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.START_TAG) {
+				continue;
+			}
+
+			// I have not found a reason yet why this has to be in order to work
+			// parser.next();
+
+			String nodeName = parser.getName();
+
+			// Look for item entry
+			if (nodeName.contentEquals("section")) {
+				// Check if item is enabled
+				if (XMLUtilities.isEnabled(parser)) {
+					HelpListItems items = new HelpListItems();
+					items.setName(parser.getAttributeValue(0));
+					items.setEnabled(true);
+
+					ArrayList<HelpListItem> itemList = new ArrayList<HelpListItem>();
+
+					// Read the content of the menu section
+					readAnswerSectionEntry(parser, nodeName, itemList);
+
+					items.setSubitems(itemList);
+					helpItems.add(items);
+				}
+			} else
+				XMLUtilities.skip(parser);
+		}
+	}
+
+	private static void readAnswerSectionEntry(XmlPullParser parser,
+			String subtag, ArrayList<HelpListItem> itemList)
+			throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, subtag);
+
+		// Start reading values of main entry
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.START_TAG) {
+				continue;
+			}
+
+			// I have not found a reason yet why this has to be in order to work
+			parser.next();
+
+			String nodeName = parser.getName();
+
+			// Read menu entry
+			if (nodeName.contentEquals("item")) {
+				// Check if item is enabled
+				// if (XMLUtilities.isEnabled(parser)) {
+				HelpListItem item = new HelpListItem();
+				item.setName(parser.getAttributeValue(0));
+				// item.setAnswer(parser.getAttributeName(1));
+
+				if (XMLUtilities.getValue(parser, "question") != null)
+					item.setQuestion(XMLUtilities.getValue(parser, "question"));
+				item.setQuestion(true);
+				if (XMLUtilities.getValue(parser, "answer") != null)
+					item.setAnswer(XMLUtilities.getValue(parser, "answer"));
+				item.setAnswer(true);
+				//
+				// item.setClassName(parser.getAttributeValue(0));
+
+				itemList.add(item);
+				// }
+			} else
+				XMLUtilities.skip(parser);
+		}
+	}
+
+	// servies
+	public static ArrayList<ServiceListItems> getServiceItemsFromXML(
+			Context context, String filePath) {
+		ArrayList<ServiceListItems> serviceItems = new ArrayList<ServiceListItems>();
+		// getMenuFromServer();
+		XmlPullParserFactory factory;
+		path = filePath;
+
+		try {
+			factory = XmlPullParserFactory.newInstance();
+			factory.setNamespaceAware(true);
+			XmlPullParser parser = factory.newPullParser();
+			// Open file
+			InputStream inputStream = context.getAssets().open(path);
+
+			// Set the input for the parser using an InputStreamReader
+			parser.setInput(new InputStreamReader(inputStream));
+
+			// Read nodes
+			readFeedService(parser, serviceItems);
+
+			path = "modules_config.xml";
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return serviceItems;
+	}
+
+	/**
+	 * Reads nodes from XML file.
+	 * 
+	 * @param parser
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
+	private static void readFeedService(XmlPullParser parser,
+			ArrayList<ServiceListItems> serviceItems)
+			throws XmlPullParserException, IOException {
+		int eventType = parser.getEventType();
+
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			// Check if we found a tag
+			if (eventType == XmlPullParser.START_TAG) {
+				// Get name of the tag
+				String nodeName = parser.getName();
+
+				// Read Module
+				if (nodeName.contentEquals("module")) {
+					// Read the content of the module node
+					readServiceEntry(parser, nodeName, serviceItems);
+				}
+			}
+
+			eventType = parser.next();
+		}
+	}
+
+	private static void readServiceEntry(XmlPullParser parser, String subtag,
+			ArrayList<ServiceListItems> serviceItems)
+			throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, subtag);
+
+		// Start reading values of main entry
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.START_TAG) {
+				continue;
+			}
+
+			// I have not found a reason yet why this has to be in order to work
+			// parser.next();
+
+			String nodeName = parser.getName();
+
+			// Read menu entry
+			if (nodeName.contentEquals("menu")) {
+				// Read the content of the menu
+				readPhoneEntry(parser, nodeName, serviceItems);
+			} else
+				XMLUtilities.skip(parser);
+		}
+	}
+
+	private static void readPhoneEntry(XmlPullParser parser, String subtag,
+			ArrayList<ServiceListItems> serviceItems)
+			throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, null, subtag);
+
+		// Start reading values of main entry
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.START_TAG) {
+				continue;
+			}
+
+			// I have not found a reason yet why this has to be in order to work
+			// parser.next();
+
+			String nodeName = parser.getName();
+
+			// Look for item entry
+			if (nodeName.contentEquals("section")) {
+				// Check if item is enabled
+				if (XMLUtilities.isEnabled(parser)) {
+					ServiceListItems items = new ServiceListItems();
+					items.setName(parser.getAttributeValue(0));
+					items.setEnabled(true);
+
+					ArrayList<ServiceListItem> itemList = new ArrayList<ServiceListItem>();
+
+					// Read the content of the menu section
+					readEmailEntry(parser, nodeName, itemList);
+
+					items.setSubitems(itemList);
+					serviceItems.add(items);
+				}
+			} else
+				XMLUtilities.skip(parser);
+		}
+	}
+
+	private static void readEmailEntry(XmlPullParser parser, String subtag,
+			ArrayList<ServiceListItem> itemList) throws XmlPullParserException,
+			IOException {
+		parser.require(XmlPullParser.START_TAG, null, subtag);
+
+		// Start reading values of main entry
+		while (parser.next() != XmlPullParser.END_TAG) {
+			if (parser.getEventType() != XmlPullParser.START_TAG) {
+				continue;
+			}
+
+			// I have not found a reason yet why this has to be in order to work
+			parser.next();
+
+			String nodeName = parser.getName();
+
+			// Read menu entry
+			if (nodeName.contentEquals("item")) {
+				// Check if item is enabled
+				// if (XMLUtilities.isEnabled(parser)) {
+				ServiceListItem item = new ServiceListItem();
+				item.setName(parser.getAttributeValue(0));
+				// item.setAnswer(parser.getAttributeName(1));
+
+				if (XMLUtilities.getValue(parser, "phone") != null)
+					item.setPhone(XMLUtilities.getValue(parser, "phone"));
+				// item.setQuestion(true);
+				if (XMLUtilities.getValue(parser, "phonename") != null)
+					item.setPhonename(XMLUtilities
+							.getValue(parser, "phonename"));
+				if (XMLUtilities.getValue(parser, "email") != null)
+					item.setEmail(XMLUtilities.getValue(parser, "email"));
+				// item.setQuestion(true);
+				if (XMLUtilities.getValue(parser, "emailname") != null)
+					item.setEmailname(XMLUtilities
+							.getValue(parser, "emailname"));
+
+				// item.setAnswer(true);
+				//
+				// item.setClassName(parser.getAttributeValue(0));
+
+				itemList.add(item);
+				// }
+			} else
+				XMLUtilities.skip(parser);
+		}
 	}
 
 }

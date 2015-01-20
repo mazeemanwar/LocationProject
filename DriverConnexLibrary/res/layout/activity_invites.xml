@@ -13,6 +13,17 @@
         android:footerDividersEnabled="false" >
     </ListView>
 
+    <TextView
+        style="@style/NormalListTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="Not implement yet.User must be a member of an organisation.Please Login with other user id which have organisation" />
+
     <include layout="@layout/loading_layer" />
 
 </RelativeLayout>

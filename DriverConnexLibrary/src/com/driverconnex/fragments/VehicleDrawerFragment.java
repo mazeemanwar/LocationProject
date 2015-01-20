@@ -100,6 +100,7 @@ public class VehicleDrawerFragment extends Fragment
         
         photoEdit = (RoundedImageView) mDrawerListView.findViewById(R.id.photoEdit);
         
+        
         vehicleLayout.setOnClickListener(onClickListener);
         alertsLayout.setOnClickListener(onClickListener);
         serviceLayout.setOnClickListener(onClickListener);

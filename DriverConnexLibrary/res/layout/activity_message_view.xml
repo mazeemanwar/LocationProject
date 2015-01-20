@@ -11,8 +11,8 @@
         android:id="@+id/msgContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
         android:layout_marginTop="-50dp"
+        android:layout_weight="5"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
 
@@ -43,10 +43,10 @@
                     android:id="@+id/msgMainTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:text="Global Message"
                     android:textColor="?attr/main_interface"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/msgSubTitle"
@@ -68,14 +68,15 @@
                 android:textSize="14sp" />
         </RelativeLayout>
 
-        <TextView android:id="@+id/msgContent"
+        <TextView
+            android:id="@+id/msgContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/msgTop"
             android:maxLines="7"
             android:padding="15dp"
-            android:textSize="14sp"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:textSize="14sp" />
     </RelativeLayout>
 
 </LinearLayout>

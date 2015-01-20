@@ -1,15 +1,11 @@
 package com.driverconnex.vehicles;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driverconnex.app.AppConfig;
-import com.driverconnex.app.DriverConnexApp;
 import com.driverconnex.app.R;
 import com.driverconnex.singletons.DCVehicleSingleton;
 import com.driverconnex.utilities.AssetsUtilities;
@@ -35,6 +30,7 @@ import com.parse.ParseQuery;
  * Activity for displaying information about given vehicle.
  * 
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  * 
  */
 
@@ -93,7 +89,7 @@ public class VehicleDetailsActivity extends Activity {
 		financeHistoryLayout = (LinearLayout) findViewById(R.id.finance_History_layout);
 		if (AppConfig.isfinanceDisable()) {
 			financeHistoryLayout.setVisibility(View.GONE);
-			
+
 		}
 
 		vehicleChecksLayout = (LinearLayout) findViewById(R.id.vehicleChecksLayout);

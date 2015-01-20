@@ -4,17 +4,16 @@
     android:layout_height="match_parent"
     tools:context="${packageName}.${activityClass}" >
 
-	<ListView
-	    android:id="@+id/list"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:divider="@color/header_foreground"
-	    android:dividerHeight="0.4dp"
-	    android:footerDividersEnabled="false"
-	    android:headerDividersEnabled="false" >
-	    
-	</ListView>
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/header_foreground"
+        android:dividerHeight="0.4dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false" >
+    </ListView>
 
-	<include layout="@layout/loading_layer"/>
-	
+    <include layout="@layout/loading_layer" />
+
 </RelativeLayout>

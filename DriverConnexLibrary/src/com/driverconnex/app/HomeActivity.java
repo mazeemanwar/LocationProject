@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.driverconnex.data.HelpListItems;
+import com.driverconnex.data.MenuListItems;
 import com.driverconnex.data.Tab;
 import com.driverconnex.data.XMLModuleConfigParser;
 import com.driverconnex.fragments.DriverConnexFragment;
@@ -152,10 +154,11 @@ public class HomeActivity extends FragmentActivity implements
 	 * screen. It takes a LinearLayout as a parameter which is a layout for the
 	 * tab bar in the layout.xml (look at fragment_driverconnex).
 	 */
-	public static void createTabBar(final Context context, LinearLayout tabBar) {
+	public static void createTabBar(final Context context, LinearLayout tabBar,
+			String path) {
 		// Get tabs from XML file
-		final ArrayList<Tab> tabs = XMLModuleConfigParser
-				.getTabsFromXML(context);
+		final ArrayList<Tab> tabs = XMLModuleConfigParser.getTabsFromXML(
+				context, path);
 
 		int piority = 0;
 		int tabIndex = 0;
@@ -195,13 +198,30 @@ public class HomeActivity extends FragmentActivity implements
 			icon.setImageResource(context.getResources().getIdentifier(
 					tabs.get(tabIndex).getIcon(), "drawable",
 					context.getPackageName()));
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.WRAP_CONTENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
+			lp.setMargins(25, 15, 25, 0);
+			icon.setLayoutParams(lp);
 			imageLayout.addView(icon);
 
-			// Creates title for the tab
 			LinearLayout textLayout = new LinearLayout(context);
 			textLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 			TextView title = new TextView(context);
-			title.setText(tabs.get(tabIndex).getName());
+			String titleText = tabs.get(tabIndex).getName();
+			if (titleText.equals("Track Journey")) {
+				titleText = "Track";
+			} else if (titleText.equals("Park Vehicle")) {
+				titleText = "Park";
+
+			} else if (titleText.equals("Add Expense")) {
+				titleText = "Expense";
+
+			} else if (titleText.equals("Check In")) {
+				titleText = "Check";
+
+			}
+			title.setText(titleText);
 
 			System.out.println("title is " + tabs.get(tabIndex).getName());
 			// Determines screen size and sets size of the title to match the
@@ -224,7 +244,7 @@ public class HomeActivity extends FragmentActivity implements
 					LayoutParams.MATCH_PARENT, 0, 0.60f);
 			LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, 0, 0.30f);
-			titleParams.setMargins(0, 5, 0, 0);
+			titleParams.setMargins(0, 4, 0, 5);
 
 			tab.setOrientation(LinearLayout.VERTICAL);
 			tab.addView(imageLayout, iconParams);
@@ -239,6 +259,16 @@ public class HomeActivity extends FragmentActivity implements
 				public void onClick(View v) {
 					ModulesUtilities moduleUtil = new ModulesUtilities(context);
 
+					// Testing. not implement yet . So should remove.
+					ArrayList<HelpListItems> moduleMenuList = new ArrayList<HelpListItems>();
+					if (tabs.get(tabIndexFinal).getName().equals("Check In")) {
+						// moduleMenuList = XMLModuleConfigParser
+						// .getHelpItemsFromXML(context, "help.xml");
+						// System.out.println("size of help list is "
+						// + moduleMenuList.size());
+						// System.out.println();
+						return;
+					}
 					// Gets the tab's activity
 					Intent intent = new Intent(context, moduleUtil
 							.getModuleClass(tabs.get(tabIndexFinal).getName()));

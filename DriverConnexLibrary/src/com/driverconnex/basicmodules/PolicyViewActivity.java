@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 /**
  * 
  * @author Muhammad Azeem Anwar
@@ -13,22 +14,33 @@ import android.widget.TextView;
  */
 public class PolicyViewActivity extends Activity {
 	TextView policyDetail;
+	String selectedAnswer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_policy_detail);
+
 		policyDetail = (TextView) findViewById(R.id.policyTextView);
+		if (getIntent().getExtras() != null) {
+			selectedAnswer = getIntent().getExtras().getString("answer");
+		}
 	}
 
 	@Override
 	protected void onResume() {
 
 		super.onResume();
-		Bundle bundle = getIntent().getExtras();
+		if (selectedAnswer != null && !selectedAnswer.equals("")) {
+			policyDetail.setText(selectedAnswer);
+			getActionBar().setTitle("Help Detail");
 
-		policyDetail.setText(bundle.getString("policy_detail"));
+		} else {
+			Bundle bundle = getIntent().getExtras();
+			policyDetail.setText(bundle.getString("policy_detail"));
+		}
+
 	}
 
 	@Override

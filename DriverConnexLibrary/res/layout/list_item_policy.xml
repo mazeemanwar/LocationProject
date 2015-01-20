@@ -9,23 +9,29 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/listIcon"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp" >
+        android:paddingTop="10dp"
+        android:weightSum="10" >
+
+        <ImageView
+            android:id="@+id/picview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:src="@drawable/gear_grey_28x28" />
 
         <TextView
             android:id="@+id/listpolicyheading"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="9"
             android:text=""
-            android:textColor="?attr/main_interface"
+            android:textColor="?attr/tutorial_font_color"
             android:textSize="18sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/menu_divider" />
     </LinearLayout>
 
 </RelativeLayout>

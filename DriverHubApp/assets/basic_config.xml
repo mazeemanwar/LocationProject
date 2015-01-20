@@ -15,7 +15,7 @@
 
             <item
                 name="My Account"
-                enabled="true"
+                enabled="false"
                 image="account_grey_56x56.png"/>
 
             <item
@@ -27,6 +27,11 @@
                 name="Log Out"
                 enabled="true"
                 image="logout.png"/>
+        </section>
+
+        <section
+            name=""
+            enabled="true" >
         </section>
     </menu>
 
