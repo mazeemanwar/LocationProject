@@ -1,0 +1,353 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/secondary_background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentTop="true"
+                android:background="@color/menu_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_make"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/makeText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_model"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/modelText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_derivative"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/derivativeText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_cc"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/ccText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_bhp"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/bhpText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_body"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/bodyText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_gearbox"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/gearboxText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_fuel"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/feulText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_ext_urb"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/exturbText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_com_mpg"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/commgpText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_six_month"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/sixmonthrflText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_year_rfl"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/yearrflText"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/normal_edit_item_bg"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    style="@style/ExpenseEditLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="4"
+                    android:text="@string/vehicle_details_title_co2"
+                    android:textColor="?attr/list_heading" />
+
+                <TextView
+                    android:id="@+id/co2Text"
+                    style="@style/ExpenseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="-" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/loading_layer" />
+
+</RelativeLayout>

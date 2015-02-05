@@ -1,0 +1,209 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/secondary_background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/menu_divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3.2"
+                        android:text="@string/vehicle_title_policy_provider"
+                        android:textColor="?attr/list_heading" />
+
+                    <EditText
+                        android:id="@+id/policEditText"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.8"
+                        android:hint="-"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3.2"
+                        android:text="@string/vehicle_title_policy_number"
+                        android:textColor="?attr/list_heading" />
+
+                    <EditText
+                        android:id="@+id/policyNumberEdit"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.8"
+                        android:hint="-"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3.2"
+                        android:text="@string/vehicle_title_contact_number"
+                        android:textColor="?attr/list_heading" />
+
+                    <EditText
+                        android:id="@+id/policyContactNumber"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.8"
+                        android:hint="-"
+                        android:inputType="number"
+                        android:maxLines="1" >
+                    </EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3.2"
+                        android:text="@string/vehicle_title_annual_cost"
+                        android:textColor="?attr/list_heading" />
+
+                    <EditText
+                        android:id="@+id/costEditText"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.8"
+                        android:hint="-"
+                        android:inputType="number"
+                        android:maxLines="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3.2"
+                        android:text="@string/vehicle_title_expiry"
+                        android:textColor="?attr/list_heading" />
+
+                    <TextView
+                        android:id="@+id/dateEdit"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.8"
+                        android:hint="-"
+                        android:inputType="number"
+                        android:maxLines="1" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/menu_divider" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        android:id="@+id/EditText02"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/vehicle_title_breakdown_cover"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/breakdownCoverSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/EditText02"
+                        android:layout_alignParentRight="true"
+                        android:checked="false" />
+                </RelativeLayout>
+            </LinearLayout>
+       
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/loading_layer" />
+
+</RelativeLayout>

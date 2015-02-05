@@ -1,0 +1,48 @@
+  {
+    "Menu Items": {
+      "phone": [
+        {
+          "Section Name": "General",
+          "Enabled": true,
+          "Sub Items": [
+            {
+              "Item Name": "DriverConnex",
+              "Enabled": true,
+              "Image Name": "web.png",
+              "URL": "http://driverconnex.com/"
+            },
+            {
+              "Item Name": "My Account",
+              "Enabled": true,
+              "Image Name": "account_grey_56x56.png"
+            },
+            {
+              "Item Name": "Settings",
+              "Enabled": true,
+              "Image Name": "gear_grey_56x56.png"
+            },
+            {
+              "Item Name": "Help",
+              "Enabled": true,
+              "Image Name": "help.png"
+            },
+            {
+              "Item Name": "Log Out",
+              "Enabled": true,
+              "Image Name": "logout.png"
+            }
+          ]
+        }
+      ]
+    },
+    "Dashboard Items": [
+      {
+        "Title": "Current User",
+        "Subheadings": [
+          {
+            "Title": "Username"
+          }
+        ]
+      }
+    ]
+  }

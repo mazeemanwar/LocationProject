@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.driverconnex.HomeActivity" >
+
+    <item
+        android:id="@+id/locate_incident"
+        android:icon="@drawable/location_white"
+        android:showAsAction="withText|ifRoom"
+        android:title=""/>
+
+</menu>

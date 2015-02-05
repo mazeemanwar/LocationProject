@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<service name="MOT">
+		<item name="Kwik Fit"
+		      URL="http://www.kwik-fit.com" />
+		<item name="Bosch"
+		      URL="http://www.boschcarservice.co.uk" />
+		<item name="Unipart"
+		      URL="http://www.uccc.co.uk" />
+		<item name="Halfords"
+		      URL="http://www.halfordsautocentres.com" />
+		<item name="HiQ"
+		      URL="http://www.hiqonline.co.uk" />
+		<item name="Formula One"
+		      URL="http://www.f1autocentres.co.uk" />
+		<item name="Mr Clutch"
+		      URL="http://www.mrclutch.com" />
+	</service>  
+	
+	<service name ="Tyres">
+		<item name="Black Circles"
+		      URL="http://www.blackcircles.com/tyres" />
+		<item name="National Tyres &amp; Autocare"
+		      URL="http://www.national.co.uk" />
+		<item name="Kwik Fit"
+		      URL="http://www.kwik-fit.com/tyre-search.asp" />
+		<item name="ATS Euromaster"
+		      URL="http://www.atseuromaster.co.uk/" />
+		<item name="ASDA Tyres"
+		      URL="http://www.asdatyres.co.uk/" />
+		<item name="Halfords Autocentres"
+		      URL="http://www.halfordsautocentres.com" />
+	</service> 
+	
+	<service name ="Repairs">
+	</service> 
+</config>

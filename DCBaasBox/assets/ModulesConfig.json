@@ -1,0 +1,283 @@
+{
+    "Modules": [
+      {
+        "Module Name": "DC Vehicles",
+        "Enabled": true,
+        "Priority": 1,
+        "Dashboard Items": [
+          {
+            "Title": "Vehicles",
+            "Subheadings": [
+              {
+                "Title": "Private Vehicles"
+              },
+              {
+                "Title": "Fleet Vehicles"
+              }
+            ]
+          }
+        ],
+        "Menu Items": {
+          "phone": [
+            {
+              "Section Name": "Vehicles",
+              "Enabled": true,
+              "Sub Items": [
+                {
+                  "Item Name": "Vehicles List",
+                  "Enabled": true,
+                  "Image Name": "car.png",
+                  "Storyboard Name": "DC_Vehicles"
+                }
+              ]
+            }
+          ]
+        },
+        "Manager Items": [
+          {
+            "Title": "Vehicles",
+            "Icon": "815-car",
+            "Storyboard Name": "DC_ManagerVehicles",
+            "Enabled": true
+          }
+        ]
+      },
+      {
+        "Module Name": "DC Users",
+        "Enabled": true,
+        "Priority": 6,
+        "Manager Items": [
+          {
+            "Title": "Users",
+            "Storyboard Name": "DC_ManagerUsers",
+            "Icon": "779-users",
+            "Enabled": true
+          }
+        ]
+      },
+      {
+        "Module Name": "DC Mileage",
+        "Enabled": true,
+        "Priority": 1,
+        "Menu Items": {
+          "phone": [
+            {
+              "Section Name": "Journeys",
+              "Enabled": true,
+              "Sub Items": [
+                {
+                  "Item Name": "Track Journey",
+                  "Enabled": true,
+                  "Image Name": "location.png",
+                  "Segue Name": "tracker_Segue"
+                },
+                {
+                  "Item Name": "Add Manually",
+                  "Enabled": true,
+                  "Image Name": "add.png",
+                  "Segue Name": "addJourney_Segue"
+                },
+                {
+                  "Item Name": "Review Journeys",
+                  "Enabled": true,
+                  "Image Name": "review.png",
+                  "Segue Name": "journeys_Segue"
+                }
+              ]
+            }
+          ]
+        },
+        "Tab Bar Items": [
+          {
+            "Icon": "map.png",
+            "Title": "Track Journey",
+            "Segue": "showTracker"
+          }
+        ],
+        "Dashboard Items": [
+          {
+            "Title": "Mileage",
+            "Subheadings": [
+              {
+                "Title": "Journeys Tracked"
+              },
+              {
+                "Title": "Tracked Miles"
+              },
+              {
+                "Title": "Tracked Minutes"
+              },
+              {
+                "Title": "Emissions g/km"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Module Name": "DC Parking",
+        "Enabled": true,
+        "Menu Items": {
+          "phone": [
+            {
+              "Section Name": "Parking",
+              "Enabled": true,
+              "Sub Items": [
+                {
+                  "Item Name": "Park Vehicle",
+                  "Enabled": true,
+                  "Image Name": "car.png",
+                  "Segue Name": "parking_Segue"
+                },
+                {
+                  "Item Name": "Locate Vehicle",
+                  "Enabled": true,
+                  "Image Name": "action_eye_grey.png",
+                  "Segue Name": "findCar_Segue"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "Module Name": "DC Expenses",
+        "Enabled": true,
+        "Priority": "3",
+        "Tab Bar Items": [
+          {
+            "Icon": "money.png",
+            "Title": "New Expense",
+            "Segue": "showExpense"
+          },
+          {
+            "Icon": "gauge.png",
+            "Title": "Add Fuel",
+            "Segue": "fuelShortcut_Segue"
+          }
+        ],
+        "Menu Items": {
+          "phone": [
+            {
+              "Section Name": "Expenses",
+              "Enabled": true,
+              "Sub Items": [
+                {
+                  "Item Name": "Add Fuel",
+                  "Enabled": true,
+                  "Image Name": "credit_card.png",
+                  "Segue Name": "addFuel_Segue"
+                },
+                {
+                  "Item Name": "Add Expense",
+                  "Enabled": true,
+                  "Image Name": "add.png",
+                  "Segue Name": "newExpense_Segue"
+                },
+                {
+                  "Item Name": "Review",
+                  "Enabled": true,
+                  "Image Name": "review.png",
+                  "Segue Name": "viewExpenses_Segue"
+                }
+              ]
+            }
+          ]
+        },
+        "Dashboard Items": [
+          {
+            "Title": "Expenses",
+            "Subheadings": [
+              {
+                "Title": "Expenses Claimed"
+              },
+              {
+                "Title": "Total Amount"
+              },
+              {
+                "Title": "Total Claimed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Module Name": "DC Community",
+        "Enabled": true,
+        "Menu Items": {
+          "phone": [
+            {
+              "Section Name": "Community",
+              "Enabled": true,
+              "Sub Items": [
+                {
+                  "Item Name": "My Community",
+                  "Enabled": true,
+                  "Image Name": "top_list_grey_28x22.png",
+                  "Segue Name": "parking_Segue"
+                },
+                {
+                  "Item Name": "Friend Requests",
+                  "Enabled": true,
+                  "Image Name": "plus_circle_grey_28x28.png",
+                  "Segue Name": "findCar_Segue"
+                },
+                {
+                  "Item Name": "Share App",
+                  "Enabled": true,
+                  "Image Name": "user_group_grey_29x20.png",
+                  "Segue Name": "findCar_Segue"
+                }
+              ]
+            }
+          ]
+        }
+      },     
+      {
+        "Module Name": "DC Incidents",
+        "Enabled": true,
+        "Priority": 6,
+        "Menu Items": {
+          "phone": [
+            {
+              "Section Name": "Incidents",
+              "Enabled": true,
+              "Sub Items": [
+                {
+                  "Item Name": "Accidents",
+                  "Enabled": true,
+                  "Image Name": "flag_grey.png",
+                  "Segue Name": "incidents_Segue"
+                },
+                {
+                  "Item Name": "Breakdown",
+                  "Enabled": true,
+                  "Image Name": "wrench_grey_56x56.png",
+                  "Segue Name": "breakdown_Segue"
+                },
+                {
+                  "Item Name": "Incident Reports",
+                  "Enabled": true,
+                  "Image Name": "warning_grey_56x52.png",
+                  "Segue Name": "incidents_Segue"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "Module Name": "DC Tracking",
+        "Enabled": true,
+        "Priority": 1,
+        "Manager Items": [
+          {
+            "Title": "Tracking",
+            "Icon": "701-location",
+            "Storyboard Name": "DC_ManagerTracking",
+            "Enabled": true
+          }
+        ]
+      }
+    ]
+  }

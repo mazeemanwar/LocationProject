@@ -1,0 +1,15 @@
+<!-- App config file
+Each app can have its own config file
+appid and clientkey comes from the Parse. Each app has its own values. -->
+
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<main>
+	    <appid name="6FwjOIXtikwPPHQ4EcJEFmBpumFwb4lrWaRBNAva" />
+	    <clientkey name="BtPFwzHXtKYeAAhFs1Tn0t7ToH6SjwELAf98Wv8p" />
+	</main>  
+	
+	<appearance>
+	    <dashboard name="DriverConnex" />
+	</appearance>
+</config>

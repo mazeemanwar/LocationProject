@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/main_interface"
+    tools:context="${packageName}.${activityClass}" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Below Average"
+            android:textColor="?attr/behaviour_score_font_color"
+            android:textSize="30sp" 
+            android:visibility="invisible"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="290dp"
+            android:layout_height="290dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="65dp" >
+			
+            
+            
+            <ImageView
+                android:id="@+id/backgroundImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+               
+                
+                android:src="@drawable/journey_score_overlay" />
+
+            	    <RelativeLayout
+            	        android:layout_width="wrap_content"
+            	        android:layout_height="wrap_content"
+            	        android:layout_centerHorizontal="true"
+            	        android:layout_centerVertical="true"
+            	        android:gravity="center_horizontal" >
+
+            	        <TextView
+            	            android:id="@+id/scoreTextView"
+            	            android:layout_width="wrap_content"
+            	            android:layout_height="wrap_content"
+            	            android:gravity="center_horizontal"
+            	            android:text="1020"
+            	            android:textColor="?attr/main_interface"
+            	            android:textSize="38sp" />
+<RelativeLayout
+            	        android:layout_width="wrap_content"
+            	        android:layout_height="wrap_content"
+            	        android:layout_centerHorizontal="true"
+            	        android:layout_centerVertical="true"
+            	        android:layout_below="@+id/scoreTextView"
+            	        android:gravity="center_horizontal" >
+            	        <TextView
+            	            android:id="@+id/pointsTextView"
+            	            android:layout_width="wrap_content"
+            	            android:layout_height="wrap_content"
+            	            
+            	            android:gravity="center_horizontal"
+            	            android:hint="Points"
+            	            android:textColor="@color/tran_grey"
+            	            android:textSize="20sp" />
+					</RelativeLayout>
+					
+            	    </RelativeLayout>
+
+            	    <ImageView
+            	        android:id="@+id/dotOrangeImage"
+            	        android:layout_width="wrap_content"
+            	        android:layout_height="wrap_content"
+            	        android:layout_alignParentTop="true"
+            	        android:layout_centerHorizontal="true"
+            	        android:src="@drawable/dot_orange" />
+
+            	    <ImageView
+            	        android:id="@+id/dotGreenImage"
+            	        android:layout_width="wrap_content"
+            	        android:layout_height="wrap_content"
+            	        android:layout_alignParentLeft="true"
+            	        android:layout_alignParentTop="true"
+            	        android:src="@drawable/dot_green" />
+
+            	    <ImageView
+            	        android:id="@+id/dotBlueImage"
+            	        android:layout_width="wrap_content"
+            	        android:layout_height="wrap_content"
+            	        android:layout_alignParentLeft="true"
+            	        android:layout_alignParentTop="true"
+            	        android:src="@drawable/dot_blue" />
+
+        </RelativeLayout>
+        
+        
+    </RelativeLayout>
+
+</RelativeLayout>

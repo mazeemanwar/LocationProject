@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="110dp"
+        android:layout_height="140dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/vehicle_default" />
+
+    <TextView
+        android:id="@+id/defaultTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pic"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_toRightOf="@+id/pic"
+        android:text="(Default Vehicle)"
+        android:textColor="@color/header_foreground"
+        android:textSize="12sp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/infoBtn"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:padding="20dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/info_btn_bg" />
+
+    <LinearLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/pic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/pic"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/modelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RENAULT MODUS"
+            android:textColor="?attr/main_interface"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/derivativeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EXPRESION 16V"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/regNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="AJ54ZBR"
+            android:textColor="@color/header_foreground"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/alertsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 Alerts"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>
