@@ -25,13 +25,13 @@
 
         <!-- Set dashboard of the app -->
 
-        <pagename name="KMPG" />
+        <pagename name="KPMG" />
 
         <isenable name="true" />
 
         <image name="web.png" />
 
-        <url name="http://www.google.com" />
+        <url name="http://www.driverconnex.com/" />
     </homepage>
 
     <isorganizationrequired name="yes" />

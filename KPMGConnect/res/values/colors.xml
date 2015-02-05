@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- These colors should be exactly the same as defined in attrs file -->
+    <color name="main_interface">#06368E</color>
+    <color name="login_background">#06368E</color>
+    <color name="main_background">#FFFFFF</color>
+
+</resources>

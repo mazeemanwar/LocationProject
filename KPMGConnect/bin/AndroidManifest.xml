@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kpmgdriverconnect.app"
+    package="com.kpmgconnect.app"
     android:versionCode="22"
     android:versionName="1.0" >
 
@@ -328,6 +328,13 @@
         <activity
             android:name="com.driverconnex.expenses.AddTravelSubsistenceActivity"
             android:label="@string/title_activity_travel_subsistence"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- DC Claims Module -->
+        <activity
+            android:name="com.driverconnex.expenses.ClaimsActivity"
+            android:label="@string/title_activity_claims"
             android:parentActivityName="com.driverconnex.app.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
