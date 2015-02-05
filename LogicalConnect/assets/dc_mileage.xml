@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+    <menu>
+
+        <section
+            name="Journeys"
+            enabled="true" >
+
+            <item
+                name="Track Journey"
+                enabled="true"
+                image="location.png"/>
+
+            <item
+                name="Add Manually"
+                enabled="true"
+                image="add.png"/>
+
+            <item
+                name="Review Journeys"
+                enabled="true"
+                image="review.png"/>
+        </section>
+    </menu>
+
+    <tabBar>
+
+        <item
+            name="Owned"
+            icon="account_white_56x56.png"
+            priority="1"/>
+
+        <item
+            name="Company"
+            icon="users_white_56x50.png"
+            priority="2"/>
+
+        <item
+            name="Pool"
+            icon="user_group_white_56x50.png"
+            priority="3"/>
+    </tabBar>
+
+</config>

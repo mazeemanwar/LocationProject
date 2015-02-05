@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+    <menu>
+
+        <section
+            name="Parking"
+            enabled="true" >
+
+            <item
+                name="Park Vehicle"
+                enabled="true"
+                image="car_grey_56x50.png"/>
+
+            <item
+                name="Locate Vehicle"
+                enabled="true"
+                image="action_eye_grey.png"/>
+        </section>
+    </menu>
+
+</config>
