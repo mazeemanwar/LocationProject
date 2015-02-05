@@ -19,15 +19,15 @@
             android:layout_height="wrap_content"
             android:text="Global Message"
             android:textColor="?attr/main_interface"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/listMainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome to driverConnex"
-            android:textColor="?attr/main_interface"
-            android:textSize="14sp" />
+            android:textColor="@color/grey_medium"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <ImageView

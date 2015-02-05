@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import com.driverconnex.basicmodules.InvitesActivity;
 import com.driverconnex.data.DatabaseHelper;
 import com.driverconnex.data.Organisation;
+import com.driverconnex.singletons.DCMessageSingleton;
 import com.driverconnex.vehicles.AddVehicleActivity;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -70,6 +71,8 @@ public class LoginActivity extends Activity {
 
 		// Checks if user is logged in
 		if (DriverConnexApp.getUserPref().isLogin()) {
+			DCMessageSingleton.getDCModuleSingleton(LoginActivity.this)
+					.getSerMessage();
 			appLoginProces();
 		} else {
 			// We are back to Login screen so make these things visible and hide

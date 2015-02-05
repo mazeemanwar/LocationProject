@@ -6,5 +6,5 @@
         android:id="@+id/locate_incident"
         android:showAsAction="withText|ifRoom"
         android:title=""
-        android:icon="@drawable/location_white_28x28"/> 
+        android:icon="@drawable/location_white"/> 
 </menu>

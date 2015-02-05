@@ -37,12 +37,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="40dp" >
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:baselineAlignBottom="false"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/overlay_circle" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -57,7 +51,14 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/vehicle_default" />
                     </RelativeLayout>
-                </RelativeLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:baselineAlignBottom="false"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/overlay_circle" />
+                    
+                    </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/relativeLayout1"
@@ -75,7 +76,8 @@
                         android:layout_alignParentLeft="true"
                         android:text="VAUXHALL INSIGNIA"
                         android:textColor="?attr/main_interface"
-                        android:textSize="20sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </RelativeLayout>
 
                 <TextView
@@ -85,8 +87,8 @@
                     android:layout_below="@+id/relativeLayout1"
                     android:layout_centerHorizontal="true"
                     android:text="FH10ABX"
-                    android:textColor="@color/menu_header_foreground"
-                    android:textSize="17sp" />
+                    android:textColor="@color/grey_medium"
+                    android:textSize="14sp" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -110,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="1 Vehicle Alerts"
                     android:textColor="@android:color/holo_red_light"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -135,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/vehicle_support"
                     android:textColor="@color/header_foreground"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

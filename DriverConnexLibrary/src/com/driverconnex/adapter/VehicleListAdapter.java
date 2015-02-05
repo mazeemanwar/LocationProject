@@ -57,7 +57,7 @@ public class VehicleListAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return 0;
+		return position;
 	}
 
 	@Override
@@ -126,12 +126,11 @@ public class VehicleListAdapter extends BaseAdapter {
 				holder.pic.setImageBitmap(bmp);
 			}
 			if (fromActivity) {
-				
-			
-			holder.tag.setVisibility(View.GONE);
-			holder.alerts.setVisibility(View.GONE);
-			holder.btn.setVisibility(View.GONE);
-			holder.derivative.setVisibility(View.GONE);
+
+				holder.tag.setVisibility(View.GONE);
+				holder.alerts.setVisibility(View.GONE);
+				holder.btn.setVisibility(View.GONE);
+				holder.derivative.setVisibility(View.GONE);
 			}
 			row.setTag(holder);
 		} else {

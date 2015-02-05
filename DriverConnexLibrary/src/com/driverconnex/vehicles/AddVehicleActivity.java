@@ -93,7 +93,7 @@ public class AddVehicleActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.action_add, menu);
+		inflater.inflate(R.menu.action_save, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -111,7 +111,7 @@ public class AddVehicleActivity extends Activity {
 			overridePendingTransition(R.anim.slide_right_main,
 					R.anim.slide_right_sub);
 			return true;
-		} else if (item.getItemId() == R.id.action_add) {
+		} else if (item.getItemId() == R.id.action_save) {
 			if (regNumberEdit.getText().toString().isEmpty()) {
 				// Display dialogue to inform user that he can't add existing
 				// vehicle

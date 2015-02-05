@@ -39,6 +39,7 @@ import com.parse.ParseUser;
  * 
  * @author Yin Lee (SGI)
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  */
 public class ReviewJourneysActivity extends Activity {
 	private ArrayList<DCJourney> data = new ArrayList<DCJourney>();
@@ -46,11 +47,11 @@ public class ReviewJourneysActivity extends Activity {
 
 	private ListView list;
 	private ListJourneyAdapter adapter;
-	private RelativeLayout bottomActionBar;
-	private ImageButton exportBtn;
-	private ImageButton deleteBtn;
+	// private RelativeLayout bottomActionBar;
+	// private ImageButton exportBtn;
+	// private ImageButton deleteBtn;
 
-	private boolean isEditMode = false;
+	private boolean isEditMode = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +59,13 @@ public class ReviewJourneysActivity extends Activity {
 		setContentView(R.layout.activity_journey_review);
 
 		list = (ListView) findViewById(R.id.list);
-		bottomActionBar = (RelativeLayout) findViewById(R.id.bottomActionBar);
-		exportBtn = (ImageButton) findViewById(R.id.exportBtn);
-		deleteBtn = (ImageButton) findViewById(R.id.deleteBtn);
-
-		exportBtn.setOnClickListener(onClickListener);
-		deleteBtn.setOnClickListener(onClickListener);
+		// bottomActionBar = (RelativeLayout)
+		// findViewById(R.id.bottomActionBar);
+		// exportBtn = (ImageButton) findViewById(R.id.exportBtn);
+		// deleteBtn = (ImageButton) findViewById(R.id.deleteBtn);
+		//
+		// exportBtn.setOnClickListener(onClickListener);
+		// deleteBtn.setOnClickListener(onClickListener);
 
 		View divider = new View(this);
 		divider.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
@@ -72,6 +74,7 @@ public class ReviewJourneysActivity extends Activity {
 		adapter = new ListJourneyAdapter(this, data, separatorsSet);
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(onitemClickListener);
+
 	}
 
 	@Override
@@ -84,7 +87,7 @@ public class ReviewJourneysActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.action_edit, menu);
+		inflater.inflate(R.menu.action_export, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -94,25 +97,28 @@ public class ReviewJourneysActivity extends Activity {
 			finish();
 			overridePendingTransition(R.anim.null_anim, R.anim.slide_out);
 			return true;
-		} else if (item.getItemId() == R.id.action_edit) {
-			Animation anim = null;
+		}
 
-			// If bottom action bar is not shown, then show it, otherwise hide
-			// it
-			if (!bottomActionBar.isShown()) {
-				bottomActionBar.setVisibility(View.VISIBLE);
-				anim = AnimationUtils.loadAnimation(this,
-						R.anim.bottom_actionbar_show);
-				isEditMode = true;
-			} else {
-				bottomActionBar.setVisibility(View.INVISIBLE);
-				anim = AnimationUtils.loadAnimation(this,
-						R.anim.bottom_actionbar_hide);
-				isEditMode = false;
-			}
-
-			bottomActionBar.startAnimation(anim);
-		} else if (item.getItemId() == R.id.action_export) {
+		// else if (item.getItemId() == R.id.action_export) {
+		// Animation anim = null;
+		//
+		// // If bottom action bar is not shown, then show it, otherwise hide
+		// // it
+		// if (!bottomActionBar.isShown()) {
+		// bottomActionBar.setVisibility(View.VISIBLE);
+		// anim = AnimationUtils.loadAnimation(this,
+		// R.anim.bottom_actionbar_show);
+		// isEditMode = true;
+		// } else {
+		// bottomActionBar.setVisibility(View.INVISIBLE);
+		// anim = AnimationUtils.loadAnimation(this,
+		// R.anim.bottom_actionbar_hide);
+		// isEditMode = false;
+		// }
+		//
+		// bottomActionBar.startAnimation(anim);
+		// }
+		else if (item.getItemId() == R.id.action_export) {
 			exportToCSVFile();
 		}
 
@@ -123,6 +129,9 @@ public class ReviewJourneysActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+
+			System.out.println(view);
+
 			if (isEditMode) {
 				if (!view.isActivated())
 					data.get(position).setSelected(true);
@@ -145,59 +154,59 @@ public class ReviewJourneysActivity extends Activity {
 	private OnClickListener onClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			if (v == exportBtn) {
-				exportToCSVFile();
-			} else if (v == deleteBtn) {
-				new AlertDialog.Builder(ReviewJourneysActivity.this)
-						.setTitle("Delete Journeys")
-						.setMessage(
-								getResources().getString(
-										R.string.journey_delete_warning))
-						.setPositiveButton(android.R.string.ok,
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// Stores journey IDs that we need in
-										// order to delete journey points and
-										// behaviour points
-										ArrayList<Long> journeyIDs = new ArrayList<Long>();
-
-										JourneyDataSource dataSource = new JourneyDataSource(
-												ReviewJourneysActivity.this);
-										dataSource.open();
-
-										// Deletes selected journeys
-										for (int i = 0; i < data.size(); i++) {
-											if (data.get(i).isSelected()) {
-												journeyIDs.add(data.get(i)
-														.getId());
-												dataSource.deleteJourney(data
-														.get(i).getId());
-											}
-										}
-
-										dataSource.close();
-
-										// Journeys are deleted, now delete in
-										// background all journey points and
-										// behaviour points associated with
-										// deleted journeys
-										new deleteJourneysTask(
-												ReviewJourneysActivity.this)
-												.execute(journeyIDs);
-
-										// Refreshes the list of journeys
-										getJourneys();
-									}
-								})
-						.setNegativeButton(android.R.string.cancel,
-								new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-									}
-								}).show();
-			}
+			// if (v == exportBtn) {
+			// exportToCSVFile();
+			// } else if (v == deleteBtn) {
+			// new AlertDialog.Builder(ReviewJourneysActivity.this)
+			// .setTitle("Delete Journeys")
+			// .setMessage(
+			// getResources().getString(
+			// R.string.journey_delete_warning))
+			// .setPositiveButton(android.R.string.ok,
+			// new DialogInterface.OnClickListener() {
+			// public void onClick(DialogInterface dialog,
+			// int which) {
+			// // Stores journey IDs that we need in
+			// // order to delete journey points and
+			// // behaviour points
+			// ArrayList<Long> journeyIDs = new ArrayList<Long>();
+			//
+			// JourneyDataSource dataSource = new JourneyDataSource(
+			// ReviewJourneysActivity.this);
+			// dataSource.open();
+			//
+			// // Deletes selected journeys
+			// for (int i = 0; i < data.size(); i++) {
+			// if (data.get(i).isSelected()) {
+			// journeyIDs.add(data.get(i)
+			// .getId());
+			// dataSource.deleteJourney(data
+			// .get(i).getId());
+			// }
+			// }
+			//
+			// dataSource.close();
+			//
+			// // Journeys are deleted, now delete in
+			// // background all journey points and
+			// // behaviour points associated with
+			// // deleted journeys
+			// new deleteJourneysTask(
+			// ReviewJourneysActivity.this)
+			// .execute(journeyIDs);
+			//
+			// // Refreshes the list of journeys
+			// getJourneys();
+			// }
+			// })
+			// .setNegativeButton(android.R.string.cancel,
+			// new DialogInterface.OnClickListener() {
+			// @Override
+			// public void onClick(DialogInterface dialog,
+			// int which) {
+			// }
+			// }).show();
+			// }
 		}
 	};
 

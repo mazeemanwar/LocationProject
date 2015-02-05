@@ -70,7 +70,7 @@ public class MessageListAdapter extends BaseAdapter {
 
 		} else {
 
-			title.setTypeface(null, Typeface.BOLD);
+			title.setTypeface(null, Typeface.NORMAL);
 			subtitle.setTypeface(null, Typeface.BOLD);
 
 		}

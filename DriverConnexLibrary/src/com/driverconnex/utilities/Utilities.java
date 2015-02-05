@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import android.app.Activity;
@@ -105,6 +106,31 @@ public class Utilities {
 			return true;
 
 		return false;
+	}
+
+	/**
+	 * Converts date string from given format to given format with universal
+	 * time format
+	 * 
+	 * @param fromFormat
+	 *            - i.e "dd-MM-yyyy"
+	 * @param toFormat
+	 *            - i.e "yyyy-MM-dd"
+	 * @return
+	 */
+	public static String convertDateFormatUni(String date, String fromFormat,
+			String toFormat) {
+		SimpleDateFormat format = new SimpleDateFormat(fromFormat,
+				Locale.ENGLISH);
+		Calendar calendar = Calendar.getInstance();
+
+		try {
+			Date d = format.parse(date);
+			calendar.setTime(d);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return DateFormat.format(toFormat, calendar.getTime()).toString();
 	}
 
 	/**

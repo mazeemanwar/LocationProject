@@ -3,8 +3,8 @@ package com.driverconnex.vehicles;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -23,14 +23,14 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.driverconnex.app.HomeActivity;
 import com.driverconnex.adapter.VehicleListAdapter;
+import com.driverconnex.app.DriverConnexApp;
+import com.driverconnex.app.HomeActivity;
 import com.driverconnex.app.R;
 import com.driverconnex.data.Tab;
 import com.driverconnex.data.XMLModuleConfigParser;
 import com.driverconnex.journeys.AddJourneyActivity;
 import com.driverconnex.journeys.JourneyDetailsActivity;
-import com.driverconnex.utilities.ModulesUtilities;
 import com.driverconnex.utilities.ParseUtilities;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -60,9 +60,9 @@ public class VehiclesListActivity extends Activity {
 	private ArrayList<ParseObject> vehicleObjects = new ArrayList<ParseObject>();
 
 	private boolean vehiclePicker = false;
-	private Boolean fromActivity = false;
+	private Boolean addJournyActivity = false;
 	private boolean isPoolPressed = false;
-	private String fromJourney = "";
+	private String journeyDetail = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,22 +76,25 @@ public class VehiclesListActivity extends Activity {
 
 		if (getIntent().getExtras() != null) {
 			vehiclePicker = getIntent().getExtras().getBoolean("vehiclePicker");
-			fromActivity = getIntent().getExtras().getBoolean("fromActivity");
-			fromJourney = getIntent().getExtras().getString("key");
+			journeyDetail = getIntent().getExtras().getString("key");
+
+			addJournyActivity = getIntent().getExtras().getBoolean(
+					"fromActivity");
+			// comes from journey detail
 
 		}
 
-		if (fromJourney != null && fromJourney.equals("journeyActivity")) {
-			fromActivity = true;
+		if (journeyDetail != null
+				&& journeyDetail.equals("journeyDetailActivity")) {
+			// fromActivity = true;
 
 		}
 		// if user comes add journey activity subtitle should be disabled
-		if (!vehiclePicker && !fromActivity)
+		if (!vehiclePicker && !addJournyActivity)
 			getActionBar().setSubtitle("Tap to select a default vehicle");
 		//
 		LinearLayout tabBar = (LinearLayout) findViewById(R.id.vehicle_tabBar);
 		System.out.println(tabBar);
-		//
 
 		createTabBar(VehiclesListActivity.this, tabBar, "dc_mileage.xml");
 	}
@@ -129,8 +132,10 @@ public class VehiclesListActivity extends Activity {
 						ParseUser.getCurrentUser().saveInBackground();
 						// here we can set the behaviour of on press if user
 						// comes from add journey.
-						if (fromActivity) {
+						if (addJournyActivity) {
 							Intent returnIntent = new Intent();
+							DriverConnexApp.getUserPref().setDefaultVehicleReg(
+									vehicles.get(position).getRegistration());
 							returnIntent.putExtra("vehicleReg",
 									vehicles.get(position).getRegistration());
 							setResult(RESULT_OK, returnIntent);
@@ -139,6 +144,20 @@ public class VehiclesListActivity extends Activity {
 							overridePendingTransition(R.anim.slide_right_main,
 									R.anim.slide_right_sub);
 
+						} else if (journeyDetail
+								.equals("journeyDetailActivity")) {
+							DriverConnexApp.getUserPref().setDefaultVehicleReg(
+									vehicles.get(position).getRegistration());
+							Intent intent = new Intent(
+									VehiclesListActivity.this,
+									JourneyDetailsActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+
+							// finish();
+
+							overridePendingTransition(R.anim.null_anim,
+									R.anim.slide_out);
 						}
 					} else
 						tag.setVisibility(View.INVISIBLE);
@@ -163,8 +182,8 @@ public class VehiclesListActivity extends Activity {
 			MenuInflater inflater = getMenuInflater();
 			// if user comes add journey add vehicle button should disable
 
-			if (!fromActivity) {
-				inflater.inflate(R.menu.vehicle, menu);
+			if (!addJournyActivity) {
+				inflater.inflate(R.menu.action_save, menu);
 
 			}
 			// inflater.inflate(R.menu.vehicle, menu);
@@ -184,7 +203,7 @@ public class VehiclesListActivity extends Activity {
 				// Instead let it launch intent to be 100 % sure that it will
 				// take user to HomeActivity.
 				// if user comes add journey activity should return that screen
-				if (fromActivity) {
+				if (addJournyActivity) {
 					Intent intent = new Intent(VehiclesListActivity.this,
 							AddJourneyActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -195,7 +214,7 @@ public class VehiclesListActivity extends Activity {
 					overridePendingTransition(R.anim.null_anim,
 							R.anim.slide_out);
 
-				} else if (fromJourney.equals("journeyActivity")) {
+				} else if (journeyDetail.equals("journeyDetailActivity")) {
 					Intent intent = new Intent(VehiclesListActivity.this,
 							JourneyDetailsActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -225,7 +244,7 @@ public class VehiclesListActivity extends Activity {
 			}
 
 			return true;
-		} else if (item.getItemId() == R.id.action_plus) {
+		} else if (item.getItemId() == R.id.action_save) {
 			Intent intent = new Intent(VehiclesListActivity.this,
 					AddVehicleActivity.class);
 			startActivity(intent);
@@ -282,7 +301,7 @@ public class VehiclesListActivity extends Activity {
 
 					// Set adapter
 					adapter = new VehicleListAdapter(VehiclesListActivity.this,
-							vehicles, vehiclePicker, fromActivity);
+							vehicles, vehiclePicker, addJournyActivity);
 					list.setAdapter(adapter);
 				} else {
 					Log.e("Get Vehicle", e.getMessage());
@@ -342,7 +361,8 @@ public class VehiclesListActivity extends Activity {
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
-			lp.setMargins(25, 15, 25, 0);
+			// lp.setMargins(25, 15, 25, 0);
+			lp.setMargins(15, 10, 15, 0);
 			icon.setLayoutParams(lp);
 			imageLayout.addView(icon);
 
@@ -373,7 +393,7 @@ public class VehiclesListActivity extends Activity {
 					LayoutParams.MATCH_PARENT, 0, 0.60f);
 			LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, 0, 0.30f);
-			titleParams.setMargins(0, 5, 0, 0);
+			titleParams.setMargins(0, 3, 0, 3);
 
 			tab.setOrientation(LinearLayout.VERTICAL);
 			tab.addView(imageLayout, iconParams);
@@ -481,7 +501,7 @@ public class VehiclesListActivity extends Activity {
 
 					// Set adapter
 					adapter = new VehicleListAdapter(VehiclesListActivity.this,
-							vehicles, vehiclePicker, fromActivity);
+							vehicles, vehiclePicker, addJournyActivity);
 					list.setAdapter(adapter);
 
 				} else {

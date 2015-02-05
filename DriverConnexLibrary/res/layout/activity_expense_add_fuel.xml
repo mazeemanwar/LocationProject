@@ -251,7 +251,7 @@
                     android:id="@+id/fuelPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/menu_divider"
+                    android:background="@color/grey_light"
                     android:scaleType="centerInside" />
             </LinearLayout>
 
@@ -296,7 +296,8 @@
                         style="@style/ExpenseEditText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7" />
+                        android:layout_weight="7"
+                        android:inputType="textCapSentences" />
                 </LinearLayout>
 
                 <LinearLayout

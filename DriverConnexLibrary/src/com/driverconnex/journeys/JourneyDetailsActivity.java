@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.driverconnex.app.DriverConnexApp;
 import com.driverconnex.app.HomeActivity;
 import com.driverconnex.app.R;
 import com.driverconnex.expenses.AddFuelActivity;
@@ -40,6 +41,7 @@ import com.parse.ParseUser;
  * 
  * @author Yin Lee(SGI)
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  * 
  */
 
@@ -54,8 +56,9 @@ public class JourneyDetailsActivity extends Activity {
 	private ImageButton delete, save;
 	private Button businessBtn;
 	private Button personalBtn;
-	private Button behaviourBtn;
+	// private Button behaviourBtn;
 	private final int REQUEST_VEHICLE_CODE = 300;
+	private ArrayList<DCJourney> data = new ArrayList<DCJourney>();
 
 	private DCJourney journey;
 	private ArrayList<DCJourneyPoint> points;
@@ -68,13 +71,14 @@ public class JourneyDetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_journey_details);
 
+		System.out.println(savedInstanceState);
 		delete = (ImageButton) findViewById(R.id.deleteBtn);
 		save = (ImageButton) findViewById(R.id.saveBtn);
 		descEdit = (EditText) findViewById(R.id.descEdit);
 		regText = (TextView) findViewById(R.id.regTxt);
 		businessBtn = (Button) findViewById(R.id.businessBtn);
 		personalBtn = (Button) findViewById(R.id.personalBtn);
-		behaviourBtn = (Button) findViewById(R.id.behaviourBtn);
+		// behaviourBtn = (Button) findViewById(R.id.behaviourBtn);
 
 		descEdit.setOnClickListener(onClickListener);
 		regText.setOnClickListener(onClickListener);
@@ -82,19 +86,60 @@ public class JourneyDetailsActivity extends Activity {
 		save.setOnClickListener(onClickListener);
 		businessBtn.setOnClickListener(onClickListener);
 		personalBtn.setOnClickListener(onClickListener);
-		behaviourBtn.setOnClickListener(onClickListener);
+		// behaviourBtn.setOnClickListener(onClickListener);
 
 		descEdit.setOnEditorActionListener(onEditorActionListener);
 
-		behaviourBtn.setEnabled(false);
-
+		// behaviourBtn.setEnabled(false);
+		// behaviourBtn.setVisibility(View.GONE);
 		init();
+	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		System.err.println();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		regText.setText(DriverConnexApp.getUserPref().getDefaultVehicleReg());
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+
+		final TextView textBox = (TextView) findViewById(R.id.startAddrTxt);
+		CharSequence userText = textBox.getText();
+		outState.putCharSequence("savedText", userText);
+		System.out.println(outState);
+
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		System.out.println(savedInstanceState);
+		super.onRestoreInstanceState(savedInstanceState);
+		System.out.println();
+		final TextView textBox = (TextView) findViewById(R.id.startAddrTxt);
+
+		CharSequence userText = savedInstanceState.getCharSequence("savedText");
+
+		textBox.setText(userText);
+
 	}
 
 	private void init() {
 		if (getIntent().getExtras() != null) {
 			setRegVehilce();
 			journey = getIntent().getExtras().getParcelable("journey");
+
 			isModify = getIntent().getExtras().getBoolean("modify", false);
 
 			getActionBar().setDisplayHomeAsUpEnabled(isModify);
@@ -203,7 +248,123 @@ public class JourneyDetailsActivity extends Activity {
 								+ " grams");
 				}
 			}
+		} else {
+
+			getJourney();
+			setRegVehilce();
+			// journey = getIntent().getExtras().getParcelable("journey");
+
+			isModify = true;
+
+			getActionBar().setDisplayHomeAsUpEnabled(isModify);
+			getActionBar().setHomeButtonEnabled(isModify);
+
+			// Gets journey points
+			JourneyDataSource dataSource = new JourneyDataSource(
+					JourneyDetailsActivity.this);
+			dataSource.open();
+			points = dataSource.getJourneyPoints(journey.getId());
+			dataSource.close();
+
+			// Check if user is modifying existing journey
+			if (isModify) {
+				if (journey.getDescription() != null)
+					descEdit.setText(journey.getDescription().toString());
+
+				isBusiness = journey.isBusiness();
+
+				// Initialise business buttons
+				if (isBusiness) {
+					// Deselect personal option
+					personalBtn.setBackgroundDrawable(null);
+					personalBtn.setTextColor(getResources().getColor(
+							R.color.main_interface));
+
+					// Select business option
+					businessBtn.setBackgroundResource(R.color.main_interface);
+					businessBtn.setTextColor(getResources().getColor(
+							R.color.white));
+				} else {
+					// Deselect business option
+					businessBtn.setBackgroundDrawable(null);
+					businessBtn.setTextColor(getResources().getColor(
+							R.color.main_interface));
+
+					// Select personal option
+					personalBtn.setBackgroundResource(R.color.main_interface);
+					personalBtn.setTextColor(getResources().getColor(
+							R.color.white));
+				}
+			}
+
+			for (int i = 0; i < txtIds.length; i++) {
+				TextView txt = (TextView) findViewById(txtIds[i]);
+
+				if (txtIds[i] == R.id.endAddrTxt)
+					new GetAddressTask().execute(points);
+				if (journey.getValuesByOrder(i) != null)
+					txt.setText(journey.getValuesByOrder(i).toString());
+			}
+
+			// If score has not been calculate it will calculate it
+			if (!journey.isScoreAdded())
+				new calculateBehaviourTask().execute();
+
+			// If emissions have not been yet calculated it will calculate them.
+			if (journey.getEmissions() <= 0) {
+				// Get default vehicle of the user
+				ParseObject vehicle = ParseUser.getCurrentUser()
+						.getParseObject("userDefaultVehicle");
+
+				// Fetch vehicle attributes
+				vehicle.fetchInBackground(new GetCallback<ParseObject>() {
+					@Override
+					public void done(ParseObject object,
+							com.parse.ParseException e) {
+						if (e == null) {
+							double emissionDistance = Double.valueOf(journey
+									.getDistance());
+
+							// Work out the journey emissions
+							// Get the emissions per kilometer for the user's
+							// current vehicle
+							int gkm = (Integer) object
+									.getNumber("vehicleEmissions");
+							// Convert the km to miles
+							float gm = gkm * 0.621f;
+							// Multiply this by the number of miles travelled
+							float netEmissions = (float) (gm * emissionDistance);
+							// Add 15% to get the final reading
+							float grossEmissions = netEmissions
+									+ ((netEmissions / 100) * 15);
+
+							// Set journey's emissions
+							journey.setEmissions(grossEmissions);
+
+							for (int i = 0; i < txtIds.length; i++) {
+								TextView txt = (TextView) findViewById(txtIds[i]);
+
+								if (txtIds[i] == R.id.emissionTxt)
+									txt.setText(""
+											+ journey.getRoundedEmissions()
+											+ " grams");
+							}
+						} else
+							Log.e("fetch default vehicle: ", e.getMessage());
+					}
+				});
+			} else {
+				for (int i = 0; i < txtIds.length; i++) {
+					TextView txt = (TextView) findViewById(txtIds[i]);
+
+					if (txtIds[i] == R.id.emissionTxt)
+						txt.setText("" + journey.getRoundedEmissions()
+								+ " grams");
+				}
+			}
+
 		}
+		regText.setText(DriverConnexApp.getUserPref().getDefaultVehicleReg());
 	}
 
 	private OnClickListener onClickListener = new OnClickListener() {
@@ -290,17 +451,19 @@ public class JourneyDetailsActivity extends Activity {
 					overridePendingTransition(R.anim.slide_right_main,
 							R.anim.slide_right_sub);
 				}
-			} else if (v == behaviourBtn) {
-				Intent intent = new Intent(JourneyDetailsActivity.this,
-						BehaviourScoreActivity.class);
-				intent.putExtra("score", journey.getBehaviourScore());
-				startActivity(intent);
-				overridePendingTransition(R.anim.slide_in, R.anim.null_anim);
-			} else if (v == regText) {
+			}
+			// else if (v == behaviourBtn) {
+			// Intent intent = new Intent(JourneyDetailsActivity.this,
+			// BehaviourScoreActivity.class);
+			// intent.putExtra("score", journey.getBehaviourScore());
+			// startActivity(intent);
+			// overridePendingTransition(R.anim.slide_in, R.anim.null_anim);
+			// }
+			else if (v == regText) {
 				Intent intent = new Intent(JourneyDetailsActivity.this,
 						VehiclesListActivity.class);
 
-				intent.putExtra("key", "journeyActivity");
+				intent.putExtra("key", "journeyDetailActivity");
 				startActivity(intent);
 				JourneyDetailsActivity.this.overridePendingTransition(
 						R.anim.slide_in, R.anim.null_anim);
@@ -488,7 +651,7 @@ public class JourneyDetailsActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Boolean results) {
-			behaviourBtn.setEnabled(journey.isValidBehaviour());
+			// behaviourBtn.setEnabled(journey.isValidBehaviour());
 			super.onPostExecute(results);
 		}
 	}
@@ -539,5 +702,32 @@ public class JourneyDetailsActivity extends Activity {
 
 		});
 
+	}
+
+	private void getJourney() {
+		JourneyDataSource dataSource = new JourneyDataSource(
+				JourneyDetailsActivity.this);
+		dataSource.open();
+		ArrayList<DCJourney> journeys = dataSource.getAllJourneys();
+		dataSource.close();
+
+		String d = "";
+
+		for (int i = 0; i < journeys.size(); i++) {
+			// Journey is created when user starts tracking, but it should be
+			// hidden until it's confirmed
+			// to be saved. Such journey doesn't have createDate. So skip this
+			// one.
+			if (journeys.get(i).getCreateDate() != null) {
+				if (!journeys.get(i).getCreateDate().equals(d)) {
+					data.add(journeys.get(i));
+					journey = journeys.get(0);
+					// separatorsSet.add(data.size() - 1);
+					d = journeys.get(i).getCreateDate();
+				}
+
+				data.add(journeys.get(i));
+			}
+		}
 	}
 }

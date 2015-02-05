@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="?android:selectableItemBackground"
-            android:padding="8dp"
+            android:padding="13dp"
             android:scaleType="centerInside"
             android:src="@drawable/camera_white" />
 
@@ -28,40 +28,39 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="?android:selectableItemBackground"
-            android:padding="8dp"
+            android:padding="13dp"
             android:scaleType="centerInside"
             android:src="@drawable/folder_white" />
     </RelativeLayout>
 
-<RelativeLayout
-    android:layout_width="140dp"
-    android:layout_height="140dp"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true" >
-
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
 
-        <com.driverconnex.ui.RoundedImageView
-            android:id="@+id/photoEdit"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
+
+            <com.driverconnex.ui.RoundedImageView
+                android:id="@+id/photoEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAlignBottom="false"
+                android:scaleType="centerCrop"
+                android:src="@drawable/vehicle_default" />
+        </RelativeLayout>
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:baselineAlignBottom="false"
             android:scaleType="centerCrop"
-            android:src="@drawable/vehicle_default" />
+            android:src="@drawable/overlay_circle" />
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:baselineAlignBottom="false"
-        android:scaleType="centerCrop"
-        android:src="@drawable/overlay_circle" />
-
-</RelativeLayout>
-
-<include layout="@layout/loading_layer" />
+    <include layout="@layout/loading_layer" />
 
 </RelativeLayout>

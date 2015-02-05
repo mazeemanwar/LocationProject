@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/gear_white_28x28"
+        android:icon="@drawable/gear_white_56x56"
         android:showAsAction="always"
         android:title="">
         <menu>

@@ -108,6 +108,7 @@
                         android:layout_weight="7"
                         android:hint="-"
                         android:imeOptions="actionDone"
+                        android:inputType="textCapSentences"
                         android:singleLine="true" />
                 </LinearLayout>
                 <!--

@@ -4,6 +4,8 @@
     <color name="menu_header_foreground">#6C6C6C</color>
     <color name="header_foreground">#6C6C6C</color>
     <color name="menu_divider">#776C6C6C</color>
+    <color name="grey_medium">#BDBDBD</color>
+    <color name="grey_light">#E6E6E6</color>
     <color name="menu_pressed_bg">#8F8F8F</color>
     <color name="delete_red">#FF0F00</color>
 
@@ -23,7 +25,7 @@
     <!-- Should be de same as list_heading declared in attrs file -->
     <color name="list_heading">#007aff</color>
     <color name="black">#000000</color>
-    <color name ="purple">#640C39</color>
+    <color name="purple">#640C39</color>
     <color name="black_transparent">#66000000</color>
     <color name="white">#FFFFFF</color>
     <color name="main_blue">#279ADC</color>

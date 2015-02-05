@@ -38,6 +38,7 @@ import com.driverconnex.data.XMLBasicConfigParser;
 import com.driverconnex.data.XMLMenuConfigParser;
 import com.driverconnex.data.XMLModuleConfigParser;
 import com.driverconnex.incidents.IncidentActivity;
+import com.driverconnex.singletons.DCModuleSingleton;
 import com.driverconnex.singletons.TrackJourneySingleton;
 import com.driverconnex.utilities.ModulesUtilities;
 import com.parse.FindCallback;
@@ -113,7 +114,7 @@ public class NavigationDrawerFragment extends Fragment {
 				.getDefaultSharedPreferences(getActivity());
 
 		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
-
+		System.out.println(savedInstanceState);
 		if (savedInstanceState != null) {
 			mCurrentSelectedPosition = savedInstanceState
 					.getInt(STATE_SELECTED_POSITION);
@@ -151,64 +152,25 @@ public class NavigationDrawerFragment extends Fragment {
 		menuOptions = new ArrayList<MenuListItem>();
 
 		try {
-
-			// TESTING CODE . THESE WILL NEED TO PURIFY AFTER ON FIRST LAUNCH
 			// Module Menu List
 			// ---------------------------------------
 			if (AppConfig.getIsOnlineModuleRequired() != null
 					&& AppConfig.getIsOnlineModuleRequired().equals("yes")) {
-				getMenuFromServer();
+				DCModuleSingleton.getDCModuleSingleton(getActivity())
+						.getServerModule();
+				disPlayMenu();
 			} else {
 				moduleMenuList = XMLModuleConfigParser
 						.getMenuItemsFromXML(getActivity());
 				disPlayMenu();
 			}
-			// Convert both header and items into MenuItem for menu list
-			// for (int i = 0; i < moduleMenuList.size(); i++) {
-			//
-			// MenuListItem item = new MenuListItem();
-			// item.setHeader(true);
-			// item.setName(moduleMenuList.get(i).getName());
-			// item.setEnabled(moduleMenuList.get(i).isEnabled());
-			// menuOptions.add(item);
-			//
-			// for (int j = 0; j < moduleMenuList.get(i).getSubitems().size();
-			// j++)
-			// menuOptions.add(moduleMenuList.get(i).getSubitems().get(j));
-			// }
-			// ---------------------------------------
-
-			// Basic Menu List
-			// ---------------------------------------
-			// basicMenuList = XMLMenuConfigParser.getBasicMenuItemsFromXML(
-			// getActivity(), "");
-
-			// Convert both header and items into MenuItem for menu list
-			// for (int i = 0; i < basicMenuList.size(); i++) {
-			// MenuListItem item = new MenuListItem();
-			// item.setHeader(true);
-			// item.setName(basicMenuList.get(i).getName());
-			// item.setEnabled(basicMenuList.get(i).isEnabled());
-			//
-			// menuOptions.add(item);
-			// for (int j = 0; j < basicMenuList.get(i).getSubitems().size();
-			// j++) {
-			//
-			// Log.d("BASICMENU", basicMenuList.get(i).getSubitems()
-			// .get(j).toString());
-			//
-			// menuOptions.add(basicMenuList.get(i).getSubitems().get(j));
-			// }
-			//
-			// }
-			// ---------------------------------------
 
 		} catch (Exception e) {
 			getActivity().finish();
 		}
 
-		mDrawerListView.setAdapter(new NavigationDrawerAdapter(getActivity(),
-				menuOptions));
+		// mDrawerListView.setAdapter(new NavigationDrawerAdapter(getActivity(),
+		// menuOptions));
 
 		return mDrawerListView;
 	}
@@ -443,143 +405,10 @@ public class NavigationDrawerFragment extends Fragment {
 		void onNavigationDrawerItemSelected(int position);
 	}
 
-	// module from server
-	final static HashMap<Integer, String> moduleMap = new HashMap<Integer, String>();
-
-	// FOR TESTING ONLY THIS FUNCTION SHOULD BE FOR MENU DISPLAYING AND TABBAR
-	private void getMenuFromServer() {
-		ParseObject userOrganisation = null;
-		ParseUser user = ParseUser.getCurrentUser();
-		userOrganisation = user.getParseObject("userOrganisation");
-		// check if online menu required
-		if (AppConfig.getIsOnlineModuleRequired().equals("yes")) {
-
-			// make a query on role table
-			ParseQuery<ParseRole> query = ParseRole.getQuery();
-			query.whereExists("roleModule");
-			query.include("roleModule");
-
-			ParseObject organisation = ParseObject
-					.createWithoutData("DCOrganisation", userOrganisation
-							.getObjectId().toString());
-
-			query.whereEqualTo("roleOrganisation",
-
-			organisation);
-			query.findInBackground(new FindCallback<ParseRole>() {
-
-				@Override
-				public void done(List<ParseRole> results, ParseException e) {
-					// TODO Auto-generated method stub
-					if (e == null) {
-						for (int i = 0; i < results.size(); i++) {
-							String moduleNameFromParse = results.get(i)
-									.getParseObject("roleModule")
-									.getString("moduleName");
-							Integer modulePriorityFromParse = results.get(i)
-									.getParseObject("roleModule")
-									.getInt("modulePriority");
-							moduleMap.put(modulePriorityFromParse,
-									moduleNameFromParse);
-
-						}
-						sortedModuleList();
-					} else {
-						System.out.println("something going wrong");
-					}
-
-				}
-			});
-
-		}
-	}
-
-	// make sorted menu list
-
-	private void sortedModuleList() {
-		moduleFromServer.clear();
-
-		Map<Integer, String> map = new TreeMap<Integer, String>(moduleMap);
-		Set set2 = map.entrySet();
-		Iterator iterator2 = set2.iterator();
-		while (iterator2.hasNext()) {
-			Map.Entry me2 = (Map.Entry) iterator2.next();
-
-			moduleFromServer.add(me2.getValue().toString());
-		}
-
-		for (int i = 0; i < moduleFromServer.size(); i++) {
-		}
-		for (int i = 0; i < moduleFromServer.size(); i++) {
-			ArrayList<MenuListItem> itemList = new ArrayList<MenuListItem>();
-			MenuListItems items = new MenuListItems();
-			String moduleName = moduleFromServer.get(i);
-			ArrayList<MenuListItems> tempList = null;
-			String path = "";
-			if (moduleName.equals("DC Mileage")) {
-				path = "dc_mileage.xml";
-			} else if (moduleName.equals("DC Parking")) {
-				path = "dc_parking.xml";
-			} else if (moduleName.equals("DC Expenses")) {
-
-				path = "dc_expense.xml";
-
-			} else if (moduleName.equals("DC Claims User")) {
-				path = "dc_claims.xml";
-			} else if (moduleName.equals("DC Incidents User")) {
-
-				path = "dc_incident.xml";
-
-			} else if (moduleName.equals("DC Policy")) {
-
-				path = "dc_policy.xml";
-
-			}
-			if (!path.equals("")) {
-				tempList = XMLMenuConfigParser.getBasicMenuItemsFromXML(
-						getActivity(), path);
-				// items = new MenuListItems();
-				for (int j = 0; j < tempList.size(); j++) {
-					String name = tempList.get(j).getName();
-					items.setName(name);
-					items.setEnabled(tempList.get(j).isEnabled());
-					Boolean bool = tempList.get(j).isEnabled();
-					System.out.println(bool);
-					ArrayList<MenuListItem> temp = tempList.get(j)
-							.getSubitems();
-					for (int k = 0; k < temp.size(); k++) {
-						MenuListItem item = new MenuListItem();
-						item.setName(temp.get(k).getName());
-						item.setEnabled(temp.get(k).isEnabled());
-						if ((temp.get(k).getIcon() != null)
-								|| (!temp.get(k).getIcon().equals(""))) {
-							item.setIcon(temp.get(k).getIcon());
-						}
-						if ((temp.get(k).getUrl() != null)) {
-							item.setUrl(temp.get(k).getUrl());
-						}
-						item.setClassName(temp.get(k).getClassName());
-						itemList.add(item);
-					}
-				}
-
-				items.setSubitems(itemList);
-
-			}
-			System.out.println();
-			if (!path.equals("")) {
-				path = "";
-
-				moduleMenuList.add(items);
-			}
-
-		}
-
-		disPlayMenu();
-	}
-
 	private void disPlayMenu() {
 		menuOptions = new ArrayList<MenuListItem>();
+		moduleMenuList = DCModuleSingleton.getDCModuleSingleton(getActivity())
+				.getServerModule();
 
 		try {
 

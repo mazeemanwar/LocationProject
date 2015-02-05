@@ -15,9 +15,7 @@ import com.parse.ParseQuery;
 /**
  * 
  * @author Yin Lee (SGI)
- * @author Muhammad Azeem Anwar NOTE: I haven't seen this activity in the
- *         action. I assume that it was created for the KPMGConnect app. Adrian
- *         Klimczak.
+ * @author Muhammad Azeem Anwar
  */
 
 public class MessageViewActivity extends Activity {
@@ -30,10 +28,10 @@ public class MessageViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_message_view);
 
-		mainTitle = (TextView) findViewById(R.id.msgMainTitle);
-		subTitle = (TextView) findViewById(R.id.msgSubTitle);
+		mainTitle = (TextView) findViewById(R.id.titleView);
+		date = (TextView) findViewById(R.id.dateView);
 		content = (TextView) findViewById(R.id.msgContent);
-		date = (TextView) findViewById(R.id.msgDate);
+		// date = (TextView) findViewById(R.id.msgDate);
 		content.setMovementMethod(new ScrollingMovementMethod());
 	}
 
@@ -44,9 +42,12 @@ public class MessageViewActivity extends Activity {
 
 		Bundle bundle = getIntent().getExtras();
 
-		mainTitle.setText(bundle.getString("main_title"));
-		subTitle.setText(bundle.getString("sub_title"));
-		content.setText(bundle.getString("body"));
+		String title = bundle.getString("title");
+		String datedd = bundle.getString("date");
+		String body = bundle.getString("body");
+		System.out.println(title + "" + body + "" + date);
+		mainTitle.setText(bundle.getString("title"));
+		content.setText(body);
 		date.setText(bundle.getString("date"));
 		msgObjectId = bundle.getString("id");
 		updateMessageStatus();
@@ -69,14 +70,14 @@ public class MessageViewActivity extends Activity {
 
 		// Retrieve the object by id
 		query.getInBackground(msgObjectId, new GetCallback<ParseObject>() {
-			public void done(ParseObject gameScore, ParseException e) {
+			public void done(ParseObject messageObj, ParseException e) {
 				if (e == null) {
 					// Now let's update it with some new data. In this case,
 					// only cheatMode and score
 					// will get sent to the Parse Cloud. playerName hasn't
 					// changed.
-					gameScore.put("messageRead", true);
-					gameScore.saveInBackground();
+					messageObj.put("messageRead", true);
+					messageObj.saveInBackground();
 				}
 			}
 		});

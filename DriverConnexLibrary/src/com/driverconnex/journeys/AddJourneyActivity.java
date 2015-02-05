@@ -37,6 +37,7 @@ import android.widget.TimePicker;
 
 import com.driverconnex.adapter.ListAdapter;
 import com.driverconnex.adapter.ListAdapterItem;
+import com.driverconnex.app.DriverConnexApp;
 import com.driverconnex.app.R;
 import com.driverconnex.utilities.LocationUtilities;
 import com.driverconnex.utilities.Utilities;
@@ -53,7 +54,7 @@ import com.driverconnex.vehicles.VehiclesListActivity;
 public class AddJourneyActivity extends Activity {
 	private EditText descEdit;
 	private static TextView startTimeEdit;
-	
+
 	// private static TextView startDateEdit;
 	// private static TextView endDateEdit;
 	private static TextView endTimeEdit;
@@ -124,6 +125,19 @@ public class AddJourneyActivity extends Activity {
 		// Calendar.getInstance().getTime()));
 		// endDateEdit.setHint((String) DateFormat.format("dd-MM-yyyy",
 		// Calendar.getInstance().getTime()));
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		System.out.println(getIntent());
+		vehilceEdit.setText(DriverConnexApp.getUserPref()
+				.getDefaultVehicleReg());
+		if (getIntent().getExtras() != null) {
+			vehilceEdit.setText("helo");
+
+		}
 	}
 
 	@Override

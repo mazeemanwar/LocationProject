@@ -20,85 +20,78 @@ import com.driverconnex.utilities.LocationUtilities;
 
 /**
  * Activity for adding a new location point.
+ * 
  * @author modified by Adrian Klimczak
- *
+ * 
  */
 
-public class AddLocationActivity extends Activity 
-{
+public class AddLocationActivity extends Activity {
 	private ListView list;
 	private ArrayList<DCJourneyPoint> points;
 	private ArrayList<ListAdapterItem> adapterData = new ArrayList<ListAdapterItem>();
 	private ListAdapter adapter;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
 
 		list = (ListView) findViewById(R.id.list);
 		points = new ArrayList<DCJourneyPoint>();
-		
-		if (getIntent().getExtras() != null) 
-		{
+
+		if (getIntent().getExtras() != null) {
 			points = getIntent().getExtras().getParcelableArrayList("points");
 
-			for(int i=0; i<points.size(); i++)
-			{
+			for (int i = 0; i < points.size(); i++) {
 				ListAdapterItem point = new ListAdapterItem();
 				point.title = points.get(i).getPostalCode();
 				point.subtitle = points.get(i).getLocality();
 				adapterData.add(point);
 			}
 		}
-		
-		adapter = new ListAdapter(AddLocationActivity.this, adapterData, R.drawable.location);
+
+		adapter = new ListAdapter(AddLocationActivity.this, adapterData,
+				R.drawable.location);
 		list.setAdapter(adapter);
-		
+
 		(new GetAddressTask(this)).execute(points);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) 
-	{
-		if (item.getItemId() == android.R.id.home) 
-		{
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
 			Intent returnIntent = new Intent();
 			returnIntent.putExtra("points", points);
 			setResult(RESULT_OK, returnIntent);
 			finish();
-			overridePendingTransition(R.anim.slide_right_main,	R.anim.slide_right_sub);
+			overridePendingTransition(R.anim.slide_right_main,
+					R.anim.slide_right_sub);
 			return true;
-		}
-		else if (item.getItemId() == R.id.action_plus) 
-		{
-			Intent intent = new Intent(AddLocationActivity.this, AddLocationMapActivity.class);
+		} else if (item.getItemId() == R.id.action_save) {
+			Intent intent = new Intent(AddLocationActivity.this,
+					AddLocationMapActivity.class);
 			startActivityForResult(intent, 200);
-			overridePendingTransition(R.anim.slide_left_sub, R.anim.slide_left_main);
+			overridePendingTransition(R.anim.slide_left_sub,
+					R.anim.slide_left_main);
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
-	{
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// Check which request we're responding to
-		if (requestCode == 200) 
-		{
+		if (requestCode == 200) {
 			// Make sure the request was successful
-			if (resultCode == RESULT_OK) 
-			{
+			if (resultCode == RESULT_OK) {
 				DCJourneyPoint point = data.getParcelableExtra("point");
-				if (point != null) 
-				{
+				if (point != null) {
 					points.add(point);
-					
+
 					ListAdapterItem adapterPoint = new ListAdapterItem();
 					adapterPoint.title = point.getPostalCode();
 					adapterPoint.subtitle = point.getLocality();
 					adapterData.add(adapterPoint);
-					
+
 					adapter.notifyDataSetChanged();
 					(new GetAddressTask(this)).execute(points);
 				}
@@ -106,62 +99,58 @@ public class AddLocationActivity extends Activity
 		}
 	}
 
-	private class GetAddressTask extends AsyncTask<ArrayList<DCJourneyPoint>, Void, ArrayList<DCJourneyPoint>> 
-	{
+	private class GetAddressTask
+			extends
+			AsyncTask<ArrayList<DCJourneyPoint>, Void, ArrayList<DCJourneyPoint>> {
 		Context mContext;
 
-		public GetAddressTask(Context context) 
-		{
+		public GetAddressTask(Context context) {
 			super();
 			mContext = context;
 		}
 
 		@Override
-		protected ArrayList<DCJourneyPoint> doInBackground(ArrayList<DCJourneyPoint>... points) 
-		{
-			for (int i = 0; i < points[0].size(); i++) 
-			{
-				Address address = LocationUtilities.getAddressFromPoint(AddLocationActivity.this, points[0].get(i));
-				
-				if(!points[0].get(i).isHasAddress())
-				{
-					if (address != null) 
-					{
-						points[0].get(i).setLocality(address.getLocality());//getAddressLine(0));//getThoroughfare());//getLocality());
+		protected ArrayList<DCJourneyPoint> doInBackground(
+				ArrayList<DCJourneyPoint>... points) {
+			for (int i = 0; i < points[0].size(); i++) {
+				Address address = LocationUtilities.getAddressFromPoint(
+						AddLocationActivity.this, points[0].get(i));
+
+				if (!points[0].get(i).isHasAddress()) {
+					if (address != null) {
+						points[0].get(i).setLocality(address.getLocality());// getAddressLine(0));//getThoroughfare());//getLocality());
 						points[0].get(i).setPostalCode(address.getPostalCode());
-					}
-					else 
-					{
+					} else {
 						points[0].get(i).setLocality("");
-						points[0].get(i).setPostalCode("Error getting address.");
+						points[0].get(i)
+								.setPostalCode("Error getting address.");
 					}
-					
-					if(adapterData != null)
-					{
-						adapterData.get(i).title = points[0].get(i).getPostalCode();
-						adapterData.get(i).subtitle =  points[0].get(i).getLocality();
+
+					if (adapterData != null) {
+						adapterData.get(i).title = points[0].get(i)
+								.getPostalCode();
+						adapterData.get(i).subtitle = points[0].get(i)
+								.getLocality();
 					}
-					
+
 					points[0].get(i).setHasAddress(true);
 				}
 			}
-			
+
 			return points[0];
 		}
 
 		@Override
-		protected void onPostExecute(ArrayList<DCJourneyPoint> points) 
-		{
+		protected void onPostExecute(ArrayList<DCJourneyPoint> points) {
 			super.onPostExecute(points);
 			adapter.notifyDataSetChanged();
 		}
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) 
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.vehicle, menu);
+		inflater.inflate(R.menu.action_save, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 }

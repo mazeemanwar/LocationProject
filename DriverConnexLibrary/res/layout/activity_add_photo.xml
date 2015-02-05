@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="?android:selectableItemBackground"
-            android:padding="8dp"
+            android:padding="13dp"
             android:scaleType="centerInside"
             android:src="@drawable/camera_white" />
 
@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="?android:selectableItemBackground"
-            android:padding="8dp"
+            android:padding="13dp"
             android:scaleType="centerInside"
             android:src="@drawable/folder_white" />
     </RelativeLayout>

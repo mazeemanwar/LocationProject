@@ -275,6 +275,7 @@ public class Preferences {
 			return new Gson().fromJson(breakDownKey, Organisation.class);
 
 	}
+
 	// public ArrayList<ArrayList<String>> getBreakDown() {
 	// ArrayList<ArrayList<String>> myList = new ArrayList<ArrayList<String>>();
 	// try {
@@ -291,4 +292,21 @@ public class Preferences {
 	//
 	// }
 	//
+	/**
+	 * Gets Vehicle Registration locally .
+	 * 
+	 * @return
+	 */
+	public String getDefaultVehicleReg() {
+		return userPreferences.getString("vehicle_reg", "");
+	}
+
+	/**
+	 * Set Default Vehicle Registration locally
+	 * 
+	 * @param savingsScale
+	 */
+	public void setDefaultVehicleReg(String reg) {
+		userPreferences.edit().putString("vehicle_reg", reg).apply();
+	}
 }

@@ -7,111 +7,106 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/vehicle_title_miles_per_galon"
-                android:textColor="@color/header_foreground" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentTop="true"
-                android:background="@color/menu_divider" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/normal_edit_item_bg"
-                android:orientation="horizontal"
-                android:weightSum="10" >
+                android:orientation="vertical" >
 
                 <TextView
-                    style="@style/ExpenseEditLabel"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="3.2"
-                    android:text="@string/vehicle_mpg_quoted"
-                    android:textColor="?attr/list_heading" />
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/vehicle_title_miles_per_galon"
+                    android:textColor="@color/header_foreground" />
 
-                <TextView
-                    android:id="@+id/quotedText"
-                    style="@style/ExpenseEditText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6.8"
-                    android:hint="-" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/normal_edit_item_bg"
-                android:orientation="horizontal"
-                android:weightSum="10" >
-
-                <TextView
-                    style="@style/ExpenseEditLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="3.2"
-                    android:text="@string/vehicle_mpg_known"
-                    android:textColor="?attr/list_heading" />
-
-                <TextView
-                    android:id="@+id/knownText"
-                    style="@style/ExpenseEditText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6.8"
-                    android:hint="-"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/normal_edit_item_bg"
-                android:orientation="horizontal" >
-
-                <EditText
-                    android:id="@+id/mpgEdit"
-                    style="@style/ExpenseEditText"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/menu_divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3.2"
+                        android:text="@string/vehicle_mpg_quoted"
+                        android:textColor="?attr/list_heading" />
+
+                    <TextView
+                        android:id="@+id/quotedText"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.8"
+                        android:hint="-" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="10" >
+
+                    <TextView
+                        style="@style/ExpenseEditLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="3.2"
+                        android:text="@string/vehicle_mpg_known"
+                        android:textColor="?attr/list_heading" />
+
+                    <TextView
+                        android:id="@+id/knownText"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.8"
+                        android:hint="-" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:hint="@string/vehicle_mpg_hint"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:maxLines="1" />
+                    android:background="@drawable/normal_edit_item_bg"
+                    android:orientation="horizontal" >
 
+                    <EditText
+                        android:id="@+id/mpgEdit"
+                        style="@style/ExpenseEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:hint="@string/vehicle_mpg_hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1" />
+                </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
-    
-    	</LinearLayout>
-    	
     </ScrollView>
-    
-    <include layout="@layout/loading_layer"/>
-    
+
+    <include layout="@layout/loading_layer" />
+
 </RelativeLayout>

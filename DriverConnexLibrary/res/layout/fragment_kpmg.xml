@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="1dp"
-        android:layout_weight="0.70"
+        android:layout_weight="0.60"
         android:adjustViewBounds="true"
         android:background="?attr/main_interface"
         android:orientation="vertical" >
@@ -20,8 +20,8 @@
         <ImageView
             android:id="@+id/homeLogo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
             android:adjustViewBounds="true"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="1dp"
-        android:layout_weight="1.09"
+        android:layout_weight="1.22"
         android:adjustViewBounds="true"
         android:orientation="vertical" >
 
@@ -41,7 +41,7 @@
             android:id="@+id/homeList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="?attr/main_interface"
+            android:divider="@color/grey_light"
             android:dividerHeight="0.8dp"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false" >
@@ -53,14 +53,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="1dp"
-        android:layout_weight="0.22"
+        android:layout_weight="0.19"
         android:adjustViewBounds="true"
         android:orientation="vertical" >
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/menu_divider" />
+	        <View
+	            android:layout_width="match_parent"
+	            android:layout_height="1dp"
+	            android:background="@color/menu_divider" />
 
         <LinearLayout
             android:id="@+id/tabBar_logical"

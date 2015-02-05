@@ -157,25 +157,24 @@
                     android:hint="£ 0.00"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal" />
-
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingBottom="20dp" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="8dp"
                 android:text="RECEIPT PHOTO"
                 android:textColor="@color/header_foreground" />
-            
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -186,21 +185,19 @@
                 android:id="@+id/photoEdit"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_gravity="center"
                 android:background="@drawable/normal_edit_item_bg"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
 
                 <ImageView
                     android:id="@+id/photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/tran_grey"
+                    android:background="@color/grey_light"
                     android:scaleType="centerInside" />
-
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -246,7 +243,8 @@
                     style="@style/ExpenseEditText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7" />
+                    android:layout_weight="7"
+                    android:inputType="textCapSentences" />
             </LinearLayout>
 
             <LinearLayout
@@ -298,9 +296,7 @@
                     android:layout_weight="7"
                     android:text="Yes" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
 </ScrollView>

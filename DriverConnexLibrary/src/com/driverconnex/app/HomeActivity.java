@@ -28,6 +28,7 @@ import com.driverconnex.fragments.DriverConnexFragment;
 import com.driverconnex.fragments.KPMGFragment;
 import com.driverconnex.fragments.NavigationDrawerFragment;
 import com.driverconnex.fragments.VehicleDrawerFragment;
+import com.driverconnex.singletons.DCVehilceDataSingleton;
 import com.driverconnex.utilities.ModulesUtilities;
 
 /**
@@ -87,6 +88,7 @@ public class HomeActivity extends FragmentActivity implements
 
 	@Override
 	public void onResume() {
+
 		super.onResume();
 		vehicleDrawerFragment.refresh();
 	}
@@ -201,7 +203,10 @@ public class HomeActivity extends FragmentActivity implements
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
-			lp.setMargins(25, 15, 25, 0);
+			// lp.setMargins(0, 20, 0, 0);
+			// lp.setMargins(25, 15, 25, 0);
+			lp.setMargins(15, 10, 15, 0);
+
 			icon.setLayoutParams(lp);
 			imageLayout.addView(icon);
 
@@ -244,7 +249,7 @@ public class HomeActivity extends FragmentActivity implements
 					LayoutParams.MATCH_PARENT, 0, 0.60f);
 			LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, 0, 0.30f);
-			titleParams.setMargins(0, 4, 0, 5);
+			titleParams.setMargins(0, 2, 0, 6);
 
 			tab.setOrientation(LinearLayout.VERTICAL);
 			tab.addView(imageLayout, iconParams);

@@ -3,6 +3,7 @@ package com.driverconnex.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,8 +86,11 @@ public class PolicyListAdapter extends BaseAdapter {
 		} else {
 			TextView policyTitle = (TextView) row
 					.findViewById(R.id.listpolicyheading);
+			ImageView pic = (ImageView) row.findViewById(R.id.picview);
+			pic.setVisibility(View.GONE);
 
 			policyTitle.setText(helpList.get(position));
+			policyTitle.setTypeface(null, Typeface.BOLD);
 		}
 
 		return row;

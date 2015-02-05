@@ -22,7 +22,8 @@
         android:layout_marginTop="20dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:text="Not implement yet.User must be a member of an organisation.Please Login with other user id which have organisation" />
+        android:text="User must be a member of an organisation.Please Login with a user id which have organisation."
+        android:textSize="18dp" />
 
     <include layout="@layout/loading_layer" />
 

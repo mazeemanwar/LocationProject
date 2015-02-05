@@ -3,8 +3,7 @@
 
     <item
         android:id="@+id/action_plus"
-        android:icon="@drawable/action_plus_white"
         android:showAsAction="always"
-        android:title="@string/action_plus"/>
+        android:title="@string/action_add"/>
 
 </menu>

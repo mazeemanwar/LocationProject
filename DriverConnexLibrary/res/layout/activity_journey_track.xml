@@ -46,14 +46,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="3dp"
                     android:text="0.0"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/main_interface" />
 
                 <TextView
                     style="@style/RecordValueText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/track_record_distance_unit"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/main_interface" />
             </LinearLayout>
 
             <TextView
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/track_record_title_2"
-                android:textColor="@color/purple" />
+                android:textColor="@color/main_interface" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/journey_tracking_share"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/main_interface" />
             </LinearLayout>
 
             <Switch
@@ -100,21 +100,30 @@
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
-            <Chronometer
-                android:id="@+id/durationValue"
-                style="@style/RecordValueText"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:format="s%"
-                android:textColor="@color/purple" />
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="vertical" >
 
-            <TextView
-                style="@style/RecordTitleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/track_record_title_3"
-                android:textColor="@color/purple" />
+                <Chronometer
+                    android:id="@+id/durationValue"
+                    style="@style/RecordValueText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="2dp"
+                    android:format="s%"
+                    android:textColor="@color/main_interface" />
+
+                <TextView
+                    style="@style/RecordTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/track_record_title_3"
+                    android:textColor="@color/main_interface" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -135,7 +144,7 @@
             android:background="?android:selectableItemBackground"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:src="@drawable/bin_white_42x56" />
+            android:src="@drawable/action_save_white_56x56" />
 
         <ImageButton
             android:id="@+id/playBtn"

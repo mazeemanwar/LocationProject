@@ -308,7 +308,8 @@ public class VehicleChecksListActivity extends Activity
 				intent.putExtras(extras);
 				
 				startActivityForResult(intent, 100);
-				overridePendingTransition(R.anim.slide_left_sub, R.anim.slide_left_main);
+				overridePendingTransition(R.anim.slide_left_sub,
+						R.anim.slide_left_main);
 			}
 		}
 	};

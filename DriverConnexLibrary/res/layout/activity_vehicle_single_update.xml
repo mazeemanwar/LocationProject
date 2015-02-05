@@ -42,7 +42,7 @@
                     android:gravity="center"
                     android:hint="@string/vehicle_enter_mileage"
                     android:imeOptions="actionDone"
-                    android:inputType="number"
+                  android:inputType="numberDecimal"
                     android:maxLines="1" 
           			/>
 

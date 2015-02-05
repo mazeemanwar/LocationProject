@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.driverconnex.adapter.MessageListAdapter;
@@ -21,6 +21,7 @@ import com.driverconnex.app.HomeActivity;
 import com.driverconnex.app.R;
 import com.driverconnex.basicmodules.MessageViewActivity;
 import com.driverconnex.data.Message;
+import com.driverconnex.singletons.DCMessageSingleton;
 import com.driverconnex.utilities.ThemeUtilities;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -39,6 +40,7 @@ import com.parse.ParseUser;
 public class KPMGFragment extends Fragment {
 	private ListView msgList;
 	private ArrayList<Message> messages;
+	private ArrayList<ParseObject> parseObjList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,6 @@ public class KPMGFragment extends Fragment {
 				.getMainInterfaceColor(getActivity()));
 		msgList.addFooterView(divider, null, false);
 		msgList.setOnItemClickListener(itemClickListener);
-		getMessages();
 		LinearLayout tabBar = (LinearLayout) view
 				.findViewById(R.id.tabBar_logical);
 		HomeActivity.createTabBar(getActivity(), tabBar, "modules_config.xml");
@@ -73,7 +74,7 @@ public class KPMGFragment extends Fragment {
 			Message msg = messages.get(position);
 			Bundle bundle = new Bundle();
 			bundle.putString("main_title", msg.getTitle());
-			bundle.putString("sub_title", msg.getSubject());
+			bundle.putString("title", msg.getSubject());
 			bundle.putString("date", msg.getCreateDate().toString());
 			bundle.putString("body", msg.getBody());
 			bundle.putString("date", msg.getCreateDate());
@@ -90,47 +91,105 @@ public class KPMGFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		// getMessages();
+		getMessageFromLocal();
 	}
 
 	private void getMessages() {
+
+		// if (messages == null) {
 		messages = new ArrayList<Message>();
 
+		// }
 		ParseUser user = ParseUser.getCurrentUser();
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("DCMessage");
 
 		query.whereEqualTo("messageRecipient", user);
 		query.whereDoesNotExist("messageDeleted");
-		query.findInBackground(new FindCallback<ParseObject>() {
-			public void done(List<ParseObject> msglist, ParseException e) {
-				if (e == null) {
-					Log.i("Message", "Get messages successfully.");
-					for (int i = 0; i < msglist.size(); i++) {
-						Message message = new Message();
-						message.setId(msglist.get(i).getString("objectId"));
-						message.setBody(msglist.get(i).getString("messageBody"));
-						message.setCreateDate(String.valueOf(msglist.get(i)
-								.getCreatedAt()));
+		List<ParseObject> objects;
+		try {
+			objects = query.find();
+			ParseObject.unpinAllInBackground("localMessage", objects);
+			ParseObject.pinAllInBackground("localMessage", objects);
 
-						message.setGlobal(msglist.get(i).getBoolean(
-								"messageGlobal"));
-						message.setTitle(msglist.get(i).getString(
-								"messageTitle"));
-						message.setSubject(msglist.get(i).getString(
-								"messageSubject"));
-						message.setMessageObjectId(msglist.get(i).getObjectId()
-								.toString());
-						message.setRead(msglist.get(i)
-								.getBoolean("messageRead"));
-						messages.add(message);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // Online ParseQuery results
 
-						msgList.setAdapter(new MessageListAdapter(
-								getActivity(), messages));
+		ParseQuery<ParseObject> query2 = ParseQuery.getQuery("DCMessage");
+		query2.orderByAscending("messageSendDate").fromLocalDatastore()
+				.findInBackground(new FindCallback<ParseObject>() {
+
+					@Override
+					public void done(List<ParseObject> msglist, ParseException e) {
+						if (e == null) {
+							Log.i("Message", "Get messages successfully.");
+							for (int i = 0; i < msglist.size(); i++) {
+								Message message = new Message();
+								message.setId(msglist.get(i).getString(
+										"objectId"));
+								message.setBody(msglist.get(i).getString(
+										"messageBody"));
+								message.setCreateDate(String.valueOf(msglist
+										.get(i).getCreatedAt()));
+								String date = String.valueOf(msglist.get(i)
+										.getCreatedAt());
+								System.out.println(date);
+								message.setGlobal(msglist.get(i).getBoolean(
+										"messageGlobal"));
+								message.setTitle(msglist.get(i).getString(
+										"messageTitle"));
+								message.setSubject(msglist.get(i).getString(
+										"messageSubject"));
+								message.setMessageObjectId(msglist.get(i)
+										.getObjectId().toString());
+								message.setRead(msglist.get(i).getBoolean(
+										"messageRead"));
+								// ParseObject messageObj = new
+								// ParseObject("DCMessage");
+								// messageObj = msglist.get(i);
+								// messageObj.pinInBackground();
+								messages.add(message);
+
+							}
+							msgList.setAdapter(new MessageListAdapter(
+									getActivity(), messages));
+
+						} else {
+							Log.d("score", "Error: " + e.getMessage());
+						}
 					}
-				} else
-					Log.i("Message", "Failure with error!");
-			}
-		});
+				});
+
+		// query.findInBackground(new FindCallback<ParseObject>() {
+		// public void done(List<ParseObject> msglist, ParseException e) {
+		// if (e == null) {
+		//
+		// Log.i("Message", "Get messages successfully.");
+		// for (int i = 0; i < msglist.size(); i++) {
+		// ParseObject messageObj = new ParseObject("DCMessage");
+		// messageObj = msglist.get(i);
+		// messageObj.pinInBackground();
+		//
+		// }
+		//
+		// } else {
+		// Log.d("score", "Error: " + e.getMessage());
+		// }
+		// }
+		// });
+
+	}
+
+	private void getMessageFromLocal() {
+
+		messages = new ArrayList<Message>();
+		messages = DCMessageSingleton.getDCModuleSingleton(getActivity())
+				.getSerMessage();
+		msgList.setAdapter(new MessageListAdapter(getActivity(), messages));
+
 	}
 
 }

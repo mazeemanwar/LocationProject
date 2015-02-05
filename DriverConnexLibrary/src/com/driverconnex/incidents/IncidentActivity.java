@@ -95,7 +95,7 @@ public class IncidentActivity extends Activity {
 					+ "\n\n• Ask drivers to switch off their engines and stop smoking"
 					+ "\n\n• Do not move injured people from their vehicles unless "
 					+ "they are in immediate danger from fire or explosion"
-					+ "\n\n• Do not remove a motorcyclistâ€™s helmet unless it is essential to do so"
+					+ "\n\n• Do not remove a motorcyclst's helmet unless it is essential to do so"
 					+ "\n\n• Be prepared to give first aid"
 					+ "\n\n• Stay at the scene until emergency services arrive"
 					+ "\n\n• Do not admit fault, apportioning blame after a car accident is for others to decide"
