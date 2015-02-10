@@ -26,7 +26,9 @@ import com.driverconnex.app.DriverConnexApp;
 import com.driverconnex.app.HomeActivity;
 import com.driverconnex.app.R;
 import com.driverconnex.singletons.DCScoreSingleton;
+import com.driverconnex.singletons.DCVehilceDataSingleton;
 import com.driverconnex.utilities.LocationUtilities;
+import com.driverconnex.vehicles.DCVehicle;
 import com.driverconnex.vehicles.VehiclesListActivity;
 
 /**
@@ -55,6 +57,7 @@ public class JourneyDetailsActivity extends Activity {
 
 	private DCJourney journey;
 	private ArrayList<DCJourneyPoint> points;
+	private ArrayList<DCVehicle> vehiclesList = new ArrayList<DCVehicle>();
 
 	private boolean isModify = false;
 	private boolean isBusiness = true;
@@ -192,6 +195,52 @@ public class JourneyDetailsActivity extends Activity {
 			// If emissions have not been yet calculated it will calculate them.
 			if (journey.getEmissions() <= 0) {
 				// Get default vehicle of the user
+				vehiclesList = DCVehilceDataSingleton.getDCModuleSingleton(
+						JourneyDetailsActivity.this).getVehilesList();
+				double emissionDistance = Double.valueOf(journey.getDistance());
+
+				if (vehiclesList != null && vehiclesList.size() > 0) {
+
+					for (int i = 0; i < vehiclesList.size(); i++) {
+						String defaultVehilceId = DriverConnexApp.getUserPref()
+								.getDefaultVehicleReg();
+
+						if (defaultVehilceId != null
+								&& !defaultVehilceId.equals("")) {
+							if (defaultVehilceId.equals(vehiclesList.get(i)
+									.getRegistration())) {
+								String s = vehiclesList.get(i).getCo2Value();
+								System.out.println(vehiclesList.get(i)
+										.getCo2Value());
+								int gkm = Integer.valueOf(vehiclesList.get(i)
+										.getCo2Value());
+
+								// Convert the km to miles
+								float gm = gkm * 0.621f;
+								// Multiply this by the number of miles
+								// travelled
+								float netEmissions = (float) (gm * emissionDistance);
+								// Add 15% to get the final reading
+								float grossEmissions = netEmissions
+										+ ((netEmissions / 100) * 15);
+
+								// Set journey's emissions
+								journey.setEmissions(grossEmissions);
+
+								for (int j = 0; j < txtIds.length; j++) {
+									TextView txt = (TextView) findViewById(txtIds[j]);
+
+									if (txtIds[j] == R.id.emissionTxt)
+										txt.setText(""
+												+ journey.getRoundedEmissions()
+												+ " grams");
+								}
+
+							}
+						}
+					}
+				}
+				//
 				// ParseObject vehicle = ParseUser.getCurrentUser()
 				// .getParseObject("userDefaultVehicle");
 				//
@@ -354,6 +403,7 @@ public class JourneyDetailsActivity extends Activity {
 						txt.setText("" + journey.getRoundedEmissions()
 								+ " grams");
 				}
+
 			}
 
 		}

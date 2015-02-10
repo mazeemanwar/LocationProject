@@ -8,10 +8,10 @@
             enabled="true" >
 
             <item
-                name="DriverConnex"
-                URL="http://driverconnex.com/"
+                name="Skoda"
+                URL="http://www.skoda.co.uk"
                 enabled="true"
-                image="web.png"/>
+                image="web56.png"/>
 
             <item
                 name="My Account"
@@ -21,12 +21,12 @@
             <item
                 name="Help"
                 enabled="true"
-                image="help.png"/>
+                image="help_menu.png"/>
 
             <item
                 name="Log Out"
                 enabled="true"
-                image="logout.png"/>
+                image="logout_menu.png"/>
         </section>
 
         <section
@@ -35,4 +35,4 @@
         </section>
     </menu>
 
-</config>
+</config>	

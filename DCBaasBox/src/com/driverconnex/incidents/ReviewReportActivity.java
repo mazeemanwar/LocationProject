@@ -24,7 +24,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baasbox.android.BaasUser;
+import com.driverconnex.adapter.ListAdapterItem;
 import com.driverconnex.app.R;
+import com.driverconnex.data.PhotoObject;
+import com.driverconnex.data.Witness;
+import com.driverconnex.journeys.JourneyDataSource;
+import com.driverconnex.journeys.JourneyDetailsActivity;
 import com.driverconnex.utilities.AssetsUtilities;
 import com.driverconnex.utilities.LocationUtilities;
 import com.driverconnex.utilities.Utilities;
@@ -59,7 +64,8 @@ public class ReviewReportActivity extends Activity {
 
 	private DCIncident incident;
 	private IncidentLocation mIncident;
-
+	private ArrayList<PhotoObject> data = new ArrayList<PhotoObject>();
+	private ArrayList<Witness> witnessData = new ArrayList<Witness>();
 	private boolean photosAttached = false;
 
 	private ArrayList<File> photoFiles = new ArrayList<File>();
@@ -91,7 +97,10 @@ public class ReviewReportActivity extends Activity {
 		if (getIntent().getExtras() != null) {
 			Bundle extras = getIntent().getExtras();
 			// mIncident = (IncidentLocation) extras.getSerializable("report");
-			// reportPosition = extras.getInt("reportPosition");
+			reportPosition = extras.getInt("reportPosition");
+			mIncident = (IncidentLocation) extras.getSerializable("report");
+			long id = mIncident.getId();
+			System.out.println(id);
 			lat = extras.getString("lat");
 			log = extras.getString("log");
 			description = extras.getString("des");
@@ -132,7 +141,7 @@ public class ReviewReportActivity extends Activity {
 		// else
 		// videoBtn.setText("No Video Attached");
 		// }
-
+		getIncidentPhoto();
 		// getIncidentByParse();
 	}
 
@@ -152,7 +161,7 @@ public class ReviewReportActivity extends Activity {
 
 			return true;
 		} else if (item.getItemId() == R.id.action_export) {
-			// exportFiles();
+			exportFiles();
 		} else if (item.getItemId() == R.id.action_delete) {
 			new AlertDialog.Builder(ReviewReportActivity.this)
 					.setTitle("Delete Report")
@@ -162,6 +171,19 @@ public class ReviewReportActivity extends Activity {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									// deleteReport();
+									long journeyId = mIncident.getId();
+
+									// Deletes journey
+									IncidentDataSource dataSource = new IncidentDataSource(
+											ReviewReportActivity.this);
+									dataSource.open();
+									dataSource.deleteIncidentReport(mIncident);
+									dataSource.close();
+									Intent intent = new Intent(
+											ReviewReportActivity.this,
+											ReportListActivity.class);
+									startActivity(intent);
+
 								}
 							})
 					.setNegativeButton(android.R.string.cancel,
@@ -185,15 +207,18 @@ public class ReviewReportActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			if (v == photoBtn) {
-				// if (photosAttached) {
-				// Intent intent = new Intent(ReviewReportActivity.this,
-				// IncidentPhotosActivity.class);
-				// intent.putExtra("review", true);
-				// intent.putExtra("incidentId", incident.getId());
-				// startActivity(intent);
-				// overridePendingTransition(R.anim.slide_left_sub,
-				// R.anim.slide_left_main);
-				// }
+				if (photosAttached) {
+					Intent intent = new Intent(ReviewReportActivity.this,
+							IncidentPhotosActivity.class);
+					intent.putExtra("review", true);
+					long id = mIncident.getId();
+					intent.putExtra("incidentId", id);
+					startActivity(intent);
+					overridePendingTransition(R.anim.slide_left_sub,
+							R.anim.slide_left_main);
+					System.out.println();
+
+				}
 			} else if (v == videoBtn) {
 				// if (incident.isVideoAttached()) {
 				// Intent intent = new Intent(ReviewReportActivity.this,
@@ -203,10 +228,10 @@ public class ReviewReportActivity extends Activity {
 				// overridePendingTransition(R.anim.slide_left_sub,
 				// R.anim.slide_left_main);
 				// }
-				// } else if (v == witnessesBtn) {
-				// Intent intent = new Intent(ReviewReportActivity.this,
-				// WitnessesListActivity.class);
-				//
+			} else if (v == witnessesBtn) {
+				Intent intent = new Intent(ReviewReportActivity.this,
+						WitnessesListActivity.class);
+
 				// if (!incident.getWitnesses().isEmpty()) {
 				// ArrayList<Map<String, String>> witnessesMap =
 				// (ArrayList<Map<String, String>>) incident
@@ -219,23 +244,81 @@ public class ReviewReportActivity extends Activity {
 				// witness[0] = (witnessesMap.get(i).get("witnessName"));
 				// witness[1] = (witnessesMap.get(i).get("witnessNumber"));
 				// witness[2] = (witnessesMap.get(i).get("witnessEmail"));
-				// witness[3] = (witnessesMap.get(i)
-				// .get("witnessStatement"));
+				// witness[3] = (witnessesMap.get(i) .get("witnessStatement"));
 				//
 				// witnesses.add(witness);
 				// }
 				//
-				// intent.putExtra("witnesses", witnesses);
-				// intent.putExtra("incident", incident);
-				// intent.putExtra("review", true);
-				//
-				// startActivity(intent);
-				// overridePendingTransition(R.anim.slide_left_sub,
-				// R.anim.slide_left_main);
-				// }
+				if (!witnessData.isEmpty()) {
+					// ArrayList<Map<String, String>> witnessesMap =
+					// (ArrayList<Map<String, String>>) incident
+					// .getWitnesses();
+					ArrayList<String[]> witnesses = new ArrayList<String[]>();
+
+					// Convert map to suit needs of adapter
+					for (int i = 0; i < witnessData.size(); i++) {
+						String[] witness = new String[4];
+						witness[0] = (witnessData.get(i).getName());
+						witness[1] = (witnessData.get(i).getPhoneNo());
+						witness[2] = (witnessData.get(i).getEmail());
+						witness[3] = (witnessData.get(i).getStatement());
+
+						witnesses.add(witness);
+					}
+
+					intent.putExtra("witnesses", witnesses);
+					intent.putExtra("incident", mIncident);
+					intent.putExtra("review", true);
+
+					startActivity(intent);
+					overridePendingTransition(R.anim.slide_left_sub,
+							R.anim.slide_left_main);
+				}
 			}
 		}
 	};
+
+	private void getIncidentPhoto() {
+
+		IncidentDataSource mDataSource = new IncidentDataSource(
+				ReviewReportActivity.this);
+		mDataSource.open();
+		long idd = mIncident.getId();
+		System.out.println(idd);
+		data = mDataSource.getIncidentPhoto(mIncident.getId());
+		witnessData = mDataSource.getIncidentWitnesess(mIncident.getId());
+
+		mDataSource.close();
+		System.out.println(data);
+		photoBtn.setText(data.size() + " Photos");
+
+		witnessesBtn.setText(witnessData.size() + " Witnesses");
+		if (data.size() != 0)
+			photosAttached = true;
+		else
+			photosAttached = false;
+
+		for (int i = 0; i < witnessData.size(); i++) {
+			String name = witnessData.get(i).getName();
+			String email = witnessData.get(i).getEmail();
+		}
+
+		if ((mIncident.getVideoByteData() != null)
+				&& (mIncident.getVideoByteData().length > 0)) {
+			videoBtn.setText("Video Attached");
+
+		} else {
+			videoBtn.setText("No Video Attached");
+
+		}
+		// for (int i = 0; i < data.size(); i++) {
+		//
+		// byte[] test = data.get(i).getVideoByte();
+		// System.out.println();
+		//
+		// }
+
+	}
 
 	/**
 	 * Get incident from the Parse database to get the rest of the details
@@ -315,21 +398,35 @@ public class ReviewReportActivity extends Activity {
 
 		StringBuilder witnessesBuilder = new StringBuilder();
 		witnessesBuilder.append(witnessString);
-		if (incident != null) {
+		// if (incident != null) {
+		//
+		// for (int i = 0; i < incident.getWitnesses().size(); i++) {
+		// objectString = ""
+		// + incident.getWitnesses().get(i).get("witnessName")
+		// + ","
+		// + incident.getWitnesses().get(i).get("witnessEmail")
+		// + ","
+		// + incident.getWitnesses().get(i).get("witnessNumber")
+		// + ","
+		// + incident.getWitnesses().get(i)
+		// .get("witnessStatement") + "," + "\n";
+		//
+		// witnessesBuilder.append(objectString);
+		// }
+		// }
+		if (!witnessData.isEmpty()) {
 
-			for (int i = 0; i < incident.getWitnesses().size(); i++) {
-				objectString = ""
-						+ incident.getWitnesses().get(i).get("witnessName")
-						+ ","
-						+ incident.getWitnesses().get(i).get("witnessEmail")
-						+ ","
-						+ incident.getWitnesses().get(i).get("witnessNumber")
-						+ ","
-						+ incident.getWitnesses().get(i)
-								.get("witnessStatement") + "," + "\n";
+			// Convert map to suit needs of adapter
+			for (int i = 0; i < witnessData.size(); i++) {
+				objectString = "" + witnessData.get(i).getName() + ","
+						+ witnessData.get(i).getEmail() + ","
+						+ witnessData.get(i).getPhoneNo() + ","
+						+ witnessData.get(i).getStatement() + "," + "\n";
 
 				witnessesBuilder.append(objectString);
+
 			}
+
 		}
 		// -------------------------------------------------
 
@@ -373,7 +470,7 @@ public class ReviewReportActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
-		finishSendingEmail(reportFile, witnessesFile);
+		// finishSendingEmail(reportFile, witnessesFile);
 
 		// -------------------------------------------------
 
@@ -393,7 +490,7 @@ public class ReviewReportActivity extends Activity {
 		// @Override
 		// public void done(List<ParseObject> parsePhotos,
 		// ParseException e) {
-		// ArrayList<byte[]> bytes = new ArrayList<byte[]>();
+		ArrayList<byte[]> bytes = new ArrayList<byte[]>();
 		//
 		// for (int i = 0; i < parsePhotos.size(); i++) {
 		// // Get photo from the parse
@@ -407,10 +504,16 @@ public class ReviewReportActivity extends Activity {
 		// }
 		// }
 		//
-		// photoFiles = AssetsUtilities
-		// .saveIncidentPhoto(
-		// ReviewReportActivity.this,
-		// bytes);
+		for (int i = 0; i < data.size(); i++) {
+
+			byte[] photoByte = data.get(i).getPhotoByte();
+
+			bytes.add(photoByte);
+		}
+
+		photoFiles = AssetsUtilities.saveIncidentPhoto(
+				ReviewReportActivity.this, bytes);
+
 		//
 		// // Video
 		// ParseFile parseVideo = (ParseFile) parseIncident
@@ -425,11 +528,14 @@ public class ReviewReportActivity extends Activity {
 		// ParseException e) {
 		// if (e == null) {
 		// // Save file
-		// videoFile = AssetsUtilities
-		// .saveIncidentVideo(
-		// ReviewReportActivity.this,
-		// data);
-		//
+		if ((mIncident.getVideoByteData() != null)
+				&& (mIncident.getVideoByteData().length > 0)) {
+
+			videoFile = AssetsUtilities.saveIncidentVideo(
+					ReviewReportActivity.this, mIncident.getVideoByteData());
+		}//
+		finishSendingEmail(reportFile, witnessesFile);
+
 		// finishSendingEmail(
 		// reportFile,
 		// witnessesFile);
@@ -459,7 +565,7 @@ public class ReviewReportActivity extends Activity {
 		paths.add(reportFile.getAbsolutePath());
 
 		// Attach witnesses CSV file if the are any
-		if (!incident.getWitnesses().isEmpty())
+		if (!witnessData.isEmpty())
 			paths.add(witnessesFile.getAbsolutePath());
 
 		// Attach photo files if the are any

@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/locate_incident"
-        android:icon="@drawable/location_white"
+        android:icon="@drawable/ic_100"
         android:showAsAction="withText|ifRoom"
         android:title=""/>
 

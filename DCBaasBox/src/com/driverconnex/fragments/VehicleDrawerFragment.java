@@ -1,6 +1,7 @@
 package com.driverconnex.fragments;
 
 import java.util.ArrayList;
+import java.util.logging.StreamHandler;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -286,6 +287,16 @@ public class VehicleDrawerFragment extends Fragment {
 	 * Refreshes vehicle drawer fragment.
 	 */
 	public void refresh() {
+//		BaasFile.streamImage("75ebf7b1-54bb-4d98-927c-ad1f24563343", new BaasHandler<byte[]>() {
+//
+//			@Override
+//			public void handle(BaasResult<byte[]> arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			
+//		});
 		// BaasFile.stream("75ebf7b1-54bb-4d98-927c-ad1f24563343",
 		// new DataStreamHandler<R>() {
 		//

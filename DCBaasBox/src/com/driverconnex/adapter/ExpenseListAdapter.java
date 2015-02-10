@@ -98,7 +98,7 @@ public class ExpenseListAdapter extends BaseAdapter
                     	holder.subTitle.setText("€ " + String.valueOf(mData.get(position).getSpend()));
                     
                     holder.icon = (ImageView) convertView.findViewById(R.id.listIcon);
-                    holder.icon.setImageResource(R.drawable.money_grey_56x46);
+                    holder.icon.setImageResource(R.drawable.ic_188);
 
                     holder.infoBtn.setOnClickListener(new OnClickListener() 
         			{

@@ -16,6 +16,15 @@ public class IncidentLocation implements Serializable {
 	private double longitude;
 	private String descriptioin;
 	private String vehicleReg;
+	private byte[] videoByteData;
+
+	public byte[] getVideoByteData() {
+		return videoByteData;
+	}
+
+	public void setVideoByteData(byte[] videoByteData) {
+		this.videoByteData = videoByteData;
+	}
 
 	public String getVehicleReg() {
 		return vehicleReg;

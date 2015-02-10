@@ -211,6 +211,18 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.driverconnex.vehicles.AlertsActivity"
+            android:label="@string/title_activity_alerts"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.driverconnex.vehicles.AlertViewActivity"
+            android:label="@string/title_activity_alerts"
+            android:parentActivityName="com.driverconnex.app.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.driverconnex.basicmodules.MyAccountActivity"
             android:label="@string/title_activity_my_account"
             android:parentActivityName="com.driverconnex.app.HomeActivity"

@@ -29,6 +29,7 @@ import com.driverconnex.fragments.NavigationDrawerFragment;
 import com.driverconnex.fragments.VehicleDrawerFragment;
 import com.driverconnex.singletons.DCVehilceDataSingleton;
 import com.driverconnex.utilities.ModulesUtilities;
+import com.driverconnex.vehicles.AlertsActivity;
 
 /**
  * Home activity of the app.
@@ -203,9 +204,9 @@ public class HomeActivity extends FragmentActivity implements
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
-			lp.setMargins(25, 15, 25, 0);
-			// for small resolutino
-			// lp.setMargins(15, 10, 15, 0);
+			// lp.setMargins(0, 10, 0, 0);
+			// // for small resolutino
+			lp.setMargins(0, 5, 0, 0);
 
 			icon.setLayoutParams(lp);
 			imageLayout.addView(icon);
@@ -266,23 +267,35 @@ public class HomeActivity extends FragmentActivity implements
 
 					// Testing. not implement yet . So should remove.
 					ArrayList<HelpListItems> moduleMenuList = new ArrayList<HelpListItems>();
+
+					String s = tabs.get(tabIndexFinal).getName();
+					System.out.println(s);
 					if (tabs.get(tabIndexFinal).getName().equals("Alerts")) {
 						// moduleMenuList = XMLModuleConfigParser
 						// .getHelpItemsFromXML(context, "help.xml");
 						// System.out.println("size of help list is "
 						// + moduleMenuList.size());
 						// System.out.println();
-						return;
-					}
-					// Gets the tab's activity
-					Intent intent = new Intent(context, moduleUtil
-							.getModuleClass(tabs.get(tabIndexFinal).getName()));
+						Intent alertActiviy = new Intent(context,
+								AlertsActivity.class);
+						alertActiviy.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						context.startActivity(alertActiviy);
+						((Activity) context).overridePendingTransition(
+								R.anim.slide_in, R.anim.null_anim);
 
-					// Starts the activity
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					context.startActivity(intent);
-					((Activity) context).overridePendingTransition(
-							R.anim.slide_in, R.anim.null_anim);
+						return;
+					} else {
+						// Gets the tab's activity
+						Intent intent = new Intent(context, moduleUtil
+								.getModuleClass(tabs.get(tabIndexFinal)
+										.getName()));
+
+						// Starts the activity
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						context.startActivity(intent);
+						((Activity) context).overridePendingTransition(
+								R.anim.slide_in, R.anim.null_anim);
+					}
 				}
 			});
 			// set for equal space

@@ -116,7 +116,6 @@ public class Utilities {
 	 * @return
 	 */
 
-
 	public static String convertDateToBAServerFormat(String dateText) {
 		String str = dateText.replace("-", "/");
 		String formatedDate = "";
@@ -209,6 +208,35 @@ public class Utilities {
 		}
 
 		return DateFormat.format(toFormat, calendar.getTime()).toString();
+	}
+
+	/**
+	 * Extracts time from given date
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static long getTimeFromString(String date, String date2) {
+		if (date != null) {
+			SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+			long Mins = 0;
+			try {
+				Date Date1 = format.parse(date);
+				Date Date2 = format.parse(date2);
+				long mills = Date2.getTime() - Date1.getTime();
+				int Hours = (int) (mills / (1000 * 60 * 60));
+				int s = (int) (mills / (1000 * 60));
+				System.out.println(s);
+				Mins = s;
+				System.out.println(Mins);
+			} catch (ParseException e) {
+
+			}
+
+			return Mins;
+		}
+
+		return 0;
 	}
 
 	/**

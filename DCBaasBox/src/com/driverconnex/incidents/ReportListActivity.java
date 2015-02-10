@@ -33,6 +33,7 @@ import com.parse.ParseUser;
  * the Parse database.
  * 
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  * 
  */
 
@@ -118,10 +119,12 @@ public class ReportListActivity extends Activity {
 			intent.putExtra("veh", currentIncident.getVehicleReg());
 			intent.putExtra("des", currentIncident.getDescriptioin());
 			intent.putExtra("date", currentIncident.getDate());
+			intent.putExtra("report", currentIncident);
+			intent.putExtra("reportPosition", position);
+
 			startActivity(intent);
-			// intent.putExtra("report", currentIncident);
+
 			// // Pass position of the clicked item
-			// intent.putExtra("reportPosition", position);
 			// startActivityForResult(intent, REQUEST_REPORT_POSITION);
 			overridePendingTransition(R.anim.slide_left_sub,
 					R.anim.slide_left_main);

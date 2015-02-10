@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/retailers_number"
-        android:icon="@drawable/phone_white"
+        android:icon="@drawable/ic_287"
         android:showAsAction="withText|ifRoom"
         android:title=""/>
 

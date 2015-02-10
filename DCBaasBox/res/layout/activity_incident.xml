@@ -31,7 +31,7 @@
             android:background="?android:selectableItemBackground"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:src="@drawable/phone_white" />
+            android:src="@drawable/ic_287" />
 
         <Button
             android:id="@+id/reportButton"

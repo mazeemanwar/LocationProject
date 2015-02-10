@@ -39,9 +39,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="?android:selectableItemBackground"
-            android:padding="13dp"
+          
             android:scaleType="centerInside"
-            android:src="@drawable/camera_white" />
+            android:src="@drawable/ic_243" />
 
         <ImageButton
             android:id="@+id/albumsBtn"
@@ -49,9 +49,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="?android:selectableItemBackground"
-            android:padding="13dp"
             android:scaleType="centerInside"
-            android:src="@drawable/folder_white" />
+            android:src="@drawable/ic_162" />
     </RelativeLayout>
 
     <include layout="@layout/loading_layer" />

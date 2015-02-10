@@ -1,6 +1,8 @@
 package com.driverconnex.utilities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +40,74 @@ public class BaasboxUtilities {
 		if ((vehicle.getString("vehicleCover") == null)
 				|| (vehicle.getString("vehicleTaxDate").equals("")))
 			alerts++;
+		if ((vehicle.getString("vehicleLastCheckDate") == null)
+				|| (vehicle.getString("vehicleLastCheckDate").equals("")))
+			alerts++;
 
 		return alerts;
+	}
+
+	/**
+	 * Takes a vehicle in form of BaasBox and returns number of alerts it has
+	 * including vechilce checks . ther getNumberofAlerts will not count the
+	 * vehicle checks
+	 * 
+	 * @param vehicle
+	 * @return
+	 */
+	public static ArrayList<String> getNumberOfAllAlerts(
+
+	DCVehicle vehicle) {
+		ArrayList<String> tempArray = new ArrayList<String>();
+
+		int alerts = 0;
+		String insurance = vehicle.getInsurance();
+		String mot = vehicle.getDateMOT();
+		String check = vehicle.getLastCheckDate();
+		String tax = vehicle.getRoadtax();
+		if (mot == null || mot.equals("")) {
+
+		}
+		if (mot == null || mot.equals("")) {
+
+			tempArray.add("MOT Alert");
+		}
+
+		if (insurance == null || insurance.equals("")) {
+			tempArray.add("Insurance Alert");
+		}
+		if (tax == null || tax.equals("")) {
+			tempArray.add("TAX Alert");
+		}
+		if (check == null || check.equals("")) {
+			tempArray.add("Vehicle Check Alert");
+		}
+
+		// if (vehicle.getLong("vehicleOdometer") == 0)
+		// alerts++;
+		//
+		// if ((vehicle.getString("vehicleMOTDate") == null)
+		// || (vehicle.getString("vehicleMOTDate").equals("")))
+		// map.put(vehicle.getString("vehicleRegistration"), "MOT Alert");
+		// alerts++;
+		// if ((vehicle.getString("vehicleTaxDate") == null)
+		// || (vehicle.getString("vehicleTaxDate").equals("")))
+		// map.put(vehicle.getString("vehicleRegistration"), "TAX Alert");
+		//
+		// alerts++;
+		// if ((vehicle.getString("vehicleCover") == null)
+		// || (vehicle.getString("vehicleCover").equals("")))
+		// map.put(vehicle.getString("vehicleRegistration"), "Insurance Alert");
+		//
+		// alerts++;
+		//
+		// if ((vehicle.getString("vehicleLastCheckDate") == null)
+		// || (vehicle.getString("vehicleLastCheckDate").equals("")))
+		// map.put(vehicle.getString("vehicleRegistration"),
+		// "Vehicle Check Alert");
+		//
+		// alerts++;
+		return tempArray;
 	}
 
 	/**
@@ -131,6 +199,13 @@ public class BaasboxUtilities {
 						.getString("vehicleMOTDate"));
 				vehicle.setDateMOT(d);
 			}
+			if (vehicleParse.getString("vehicleLastCheckDate") != null) {
+
+				Date d = Utilities.convertDate(vehicleParse
+						.getString("vehicleLastCheckDate"));
+				vehicle.setLastCheckDAte(d);
+			}
+
 			if (vehicleParse.getString("vehicleServiceDate") != null) {
 
 				vehicle.setService(Utilities.convertDate(vehicleParse

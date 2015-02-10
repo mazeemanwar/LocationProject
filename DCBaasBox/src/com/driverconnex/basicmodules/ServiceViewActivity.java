@@ -46,6 +46,7 @@ public class ServiceViewActivity extends Activity {
 	private ArrayList<ServiceListItem> helpItems = new ArrayList<ServiceListItem>();
 	private ArrayList<ServiceListItem> listItem = new ArrayList<ServiceListItem>();
 	private RelativeLayout loading;
+	private RelativeLayout bottomBar;
 	ArrayList<ServiceListItems> helpList = new ArrayList<ServiceListItems>();
 	private int listIndex;
 	private boolean isEmail = false;
@@ -62,6 +63,9 @@ public class ServiceViewActivity extends Activity {
 		setContentView(R.layout.activity_policy);
 		list = (ListView) findViewById(R.id.policylist);
 		loading = (RelativeLayout) findViewById(R.id.loadSpinner);
+		bottomBar = (RelativeLayout) findViewById(R.id.bottom_bar);
+		bottomBar.setVisibility(View.GONE);
+
 		list.setOnItemClickListener(itemClickListener);
 		if (getIntent().getExtras() != null) {
 			listIndex = getIntent().getExtras().getInt("index");

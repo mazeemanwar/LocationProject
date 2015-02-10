@@ -33,6 +33,7 @@ import com.driverconnex.utilities.Utilities;
  * 
  * @author Yin Lee (SGI)
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  * 
  */
 
@@ -149,9 +150,9 @@ public class ReviewExpensesActivity extends Activity {
 		public void onClick(View v) {
 			if (v == otherExpensesBtn) {
 				otherExpensesIcon.setImageDrawable((getResources()
-						.getDrawable(R.drawable.money_white_56x46)));
+						.getDrawable(R.drawable.ic_188)));
 				fuelExpensesIcon.setImageDrawable(getResources().getDrawable(
-						R.drawable.car_grey_56x50));
+						R.drawable.ic_177));
 
 				otherExpensesText.setTextColor(getResources().getColor(
 						R.color.white));

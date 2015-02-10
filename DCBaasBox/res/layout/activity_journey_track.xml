@@ -131,7 +131,7 @@
             android:background="?android:selectableItemBackground"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:src="@drawable/bin_white_42x56" />
+            android:src="@drawable/ic_223" />
 
         <ImageButton
             android:id="@+id/playBtn"

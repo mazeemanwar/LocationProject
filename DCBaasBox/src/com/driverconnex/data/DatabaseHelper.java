@@ -63,11 +63,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String JOURNEY_POINT_TABLE = "journey_point";
 	public static final String JOURNEY_POINT_ID = "journey_point_id";
 	public static final String JOURNEY_POINT_JOURNEY_ID = "journey_point_journey_id";
-	public static final String INCIDENT_CREATE_DATE = "incident_create_date";
-	public static final String INCIDENT_START_TIME = "incident_start_time";
-
 	public static final String JOURNEY_POINT_LATITUDE = "journey_point_latitude";
 	public static final String JOURNEY_POINT_LONGITUDE = "journey_point_longitude";
+	// DCPhoto table
+
+	public static final String PHOTO_TABLE = "photo";
+	public static final String PHOTO_ID = "photo_id";
+	public static final String INCIDENT_PHOTO_INCIDENT_ID = "incident_photo_incident_id";
+	public static final String PHOTO_BYTE = "photo_byte";
+
+	// DCWitness table
+	public static final String WITNESS_TABLE = "witness";
+	public static final String WITNESS_ID = "witness_id";
+	public static final String INCIDENT_WITNESS_INCIDENT_ID = "incident_witness_incident_id";
+	public static final String WITNESS_NAME = "witness_name";
+	public static final String WITNESS_PHONE = "witness_phone";
+	public static final String WITNESS_EMAIL = "witness_email";
+	public static final String WITNESS_STATEMENT = "witness_statement";
+
 	// DCIncident table
 
 	public static final String INCIDENT_TABLE = "incident";
@@ -78,9 +91,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String INCIDENT_LATITUDE = "incident_latitude";
 	public static final String INCIDENT_LONGITUDE = "incident_longitude";
 	public static final String INCIDENT_DESC = "incident_description";
+	public static final String INCIDENT_VIDEO = "incident_video";
 
-	// public static final String JOURNEY_POINT_JOURNEY_ID =
-	// "journey_point_journey_id";
 	public static final String INCIDENT_POINT_LATITUDE = "incident_point_latitude";
 	public static final String INCIDENT_POINT_LONGITUDE = "incident_point_longitude";
 	public static final String INCIDENT_VEHICLE = "incident_vehicle";
@@ -146,12 +158,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				+ JOURNEY_POINT_LONGITUDE + " DOUBLE, " + "FOREIGN KEY ("
 				+ JOURNEY_POINT_JOURNEY_ID + ") REFERENCES " + JOURNEY_TABLE
 				+ " (" + JOURNEY_ID + "));");
+
+		// Create DCPhote table
+		db.execSQL("CREATE TABLE " + PHOTO_TABLE + " (" + PHOTO_ID
+				+ " INTEGER PRIMARY KEY, " + INCIDENT_PHOTO_INCIDENT_ID
+				+ " INTEGER, " + PHOTO_BYTE + " BLOB , " + "FOREIGN KEY ("
+				+ INCIDENT_PHOTO_INCIDENT_ID + ") REFERENCES " + INCIDENT_TABLE
+				+ " (" + INCIDENT_ID + "));");
+
+		// Create DCwitness table
+		db.execSQL("CREATE TABLE " + WITNESS_TABLE + " (" + WITNESS_ID
+				+ " INTEGER PRIMARY KEY, " + INCIDENT_WITNESS_INCIDENT_ID
+				+ " INTEGER, " + WITNESS_NAME + " TEXT , " + WITNESS_PHONE
+				+ " TEXT , " + WITNESS_EMAIL + " TEXT , " + WITNESS_STATEMENT
+				+ " TEXT , " + "FOREIGN KEY (" + INCIDENT_WITNESS_INCIDENT_ID
+				+ ") REFERENCES " + WITNESS_TABLE + " (" + INCIDENT_ID + "));");
+
 		// Create DCIncident table
 		db.execSQL("CREATE TABLE " + INCIDENT_TABLE + " (" + INCIDENT_ID
 				+ " INTEGER PRIMARY KEY, " + INCIDENT_GDATE + " TEXT, "
 				+ INCIDENT_VEHICLE_REG + " TEXT, " + INCIDENT_DESC + " TEXT, "
 				+ INCIDENT_LATITUDE + " DOUBLE, " + INCIDENT_LONGITUDE
-				+ " DOUBLE)");
+				+ " DOUBLE, " + INCIDENT_VIDEO + " BLOB )");
 		// Create DCBehaviour table
 		db.execSQL("CREATE TABLE " + BEHAVIOUR_TABLE + " (" + BEHAVIOUR_ID
 				+ " INTEGER PRIMARY KEY, " + BEHAVIOUR_JOURNEY_ID

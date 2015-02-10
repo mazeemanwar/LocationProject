@@ -33,12 +33,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.driverconnex.app.R;
+import com.driverconnex.data.PhotoObject;
+import com.driverconnex.data.Witness;
 import com.driverconnex.journeys.AddLocationMapActivity;
 import com.driverconnex.journeys.DCJourneyPoint;
 import com.driverconnex.utilities.AssetsUtilities;
 import com.driverconnex.utilities.Utilities;
 import com.driverconnex.vehicles.DCVehicle;
 import com.driverconnex.vehicles.VehiclesListActivity;
+import com.google.android.gms.internal.fo;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -53,6 +56,7 @@ import com.parse.SaveCallback;
  * Activity for reporting incident.
  * 
  * @author Adrian Klimczak
+ * @author Muhammad Azeem Anwar
  * 
  */
 
@@ -81,6 +85,8 @@ public class ReportActivity extends Activity {
 	private ArrayList<Uri> photoUri;
 	private Uri videoUri;
 	private ArrayList<String[]> witnesses;
+	private ArrayList<PhotoObject> photoList;
+	private ArrayList<Witness> witnessList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -265,7 +271,47 @@ public class ReportActivity extends Activity {
 		// if (locationPoint != null) {
 		report.setLatitude(locationPoint.getLat());
 		report.setLongitude(locationPoint.getLng());
+		if (videoUri != null) {
+			byte[] videoByte = AssetsUtilities.getBytesFromVideo(
+					ReportActivity.this, videoUri);
+			report.setVideoByteData(videoByte);
+		}
+
 		System.out.println(locationPoint.getLng());
+
+		photoList = new ArrayList<PhotoObject>();
+		if (photoUri != null) {
+
+			for (int i = 0; i < photoUri.size(); i++) {
+				PhotoObject mPhote = new PhotoObject();
+				// String path = photoUri.get(i).getPath();
+				byte[] photoByte = AssetsUtilities.getBytesFromImage(
+						ReportActivity.this, photoUri.get(i));
+				mPhote.setPhotoByte(photoByte);
+				photoList.add(mPhote);
+				// System.out.println(path);
+
+			}
+			// set value for witness
+		}
+		witnessList = new ArrayList<Witness>();
+		if (witnesses != null) {
+
+			for (int i = 0; i < witnesses.size(); i++) {
+				Witness witness = new Witness();
+				String name = witnesses.get(i)[0];
+				String number = witnesses.get(i)[1];
+				String email = witnesses.get(i)[2];
+				String statement = witnesses.get(i)[3];
+				witness.setName(name);
+				witness.setPhoneNo(number);
+				witness.setEmail(email);
+				witness.setStatement(statement);
+				witnessList.add(witness);
+				System.out.println(email);
+
+			}
+		}
 		return report;
 		// }
 	}
@@ -590,7 +636,8 @@ public class ReportActivity extends Activity {
 			// Open database
 			dataSource.open();
 			// Insert incident location into database
-			dataSource.createIncidentReport(incidentLocation);
+			dataSource.createIncidentReport(incidentLocation, photoList,
+					witnessList);
 			// Close database
 			dataSource.close();
 

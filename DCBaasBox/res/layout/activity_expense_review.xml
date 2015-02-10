@@ -48,7 +48,7 @@
                     android:layout_weight="1.3"
                     android:paddingTop="5dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/money_white_56x46" />
+                    android:src="@drawable/ic_188" />
 
                 <TextView
                     android:id="@+id/otherExpensesText"

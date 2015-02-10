@@ -28,17 +28,17 @@
 
         <item
             name="Owned"
-            icon="account_white_56x56.png"
+            icon="account_white_28x28.png"
             priority="1"/>
 
         <item
             name="Company"
-            icon="users_white_56x50.png"
+            icon="users_white_28x24.png"
             priority="2"/>
 
         <item
             name="Pool"
-            icon="user_group_white_56x50.png"
+            icon="user_group_white_28x24.png"
             priority="3"/>
     </tabBar>
 

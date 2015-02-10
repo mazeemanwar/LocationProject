@@ -8,18 +8,20 @@
         <menu>
 
             <section
-                name="Data"
+                name="Vehicles"
                 enabled="true" >
 
                 <item
-                    answer="The App will use minimal amount of your mobile data allowance to function. As with any mobile app, a small amount of mobile data is used to enable certain functionality"
-                    question="Will the app use up my mobile data allowance?"/>
+                    answer="Within the vehicle menu you can add your vehicle â€“ you will be asked to enter your vehicle registration number, the current mileage on your vehicle and your expected annual mileage. You can also details of your MOT due date, road tax renewal date, service history and insurance details; in each case you will get automated alerts when it is time for you to take action on any of these items."
+                    question="How do I add my vehicle?"/>
 
                 <item
-                    answer="Personal data when you have been registered for the App we will record your name and email address so that we can create an account. This allows us to identify and keep in touch with you. This also allows you to log in using this account on different devices.
+                    answer="Within the vehicle menu of the app you can add more vehicles at any time; within this menu you can then select a vehicle as your â€œdefault vehicleâ€ i.e. the one you are currently using against which DriverConnex will log all your journeys and fuel expenditure."
+                    question="What if I routinely use more than one vehicle?"/>
 
-Vehicle data â€“ to use the App you will need to register as least one vehicle. The app will use the vehicle registration number to identify the vehicle and specification and as you use the app all journeys, fuel expenses, servicing and maintenance, incident history will be stored against this vehicle.  Data will be used primarily to enable the functionality of the app. The App provider on an anonymised basis to provide data for research purposes will also use this data."
-                    question="What data is gathered whilst I use the app and why?"/>
+                <item
+                    answer="You can delete a vehicle and replace with a new vehicle at any time using the options button on the vehicle information screen"
+                    question="What happens if I sell my car, or no longer have access to a particular vehicle? "/>
             </section>
         </menu>
     </module>
@@ -31,7 +33,131 @@ Vehicle data â€“ to use the App you will need to register as least one vehi
         <menu>
 
             <section
-                name="Getting Started"
+                name="Journeys"
+                enabled="true" >
+
+                <item
+                    answer="The app uses a fusion of different methods to track your journey, including GPS and Wifi, through this approach it minimises the occasions where tracked journey is either incomplete or inaccurate. If however, when you review a tracked journey there is an issue, you still have the ability to manually add the journey."
+                    question="How does the app track my journeys?"/>
+
+                <item
+                    answer="Within the journey review section, you can view tracked journeys and edit them as required. You have the ability to view the journeyâ€™s route plotted on a map to check the accuracy."
+                    question="How can I check that the app has tracked my journey accurately?"/>
+
+                <item
+                    answer="This feature is only available on certain devices (Android devices and iPhone 5S onwards). Automatic tracking can be enabled from the app options menu in the deviceâ€™s settings screen.
+To enable automatic tracking on an Android device please ensure bluetooth is enabled and your device is paired with your vehicle. You can then select the vehicleâ€™s bluetooth device from the vehicle information screen. The next time your device pairs with this vehicle, the journey tracker will be launched.
+Please note that when using automatic journey tracking on devices running iOS, there may be occasions where the tracking is not immediately started."
+                    question="How do I set up the app to track my journeys automatically?"/>
+
+                <item
+                    answer="Journeys can be manually added from main menu, you have the ability to selected visited locations by dropping pins on a map. The app will automatically create a route and calculate your mileage for this journey."
+                    question="How can I manually add a journey?
+"/>
+
+                <item
+                    answer="Yes. You can review, edit and export your journey data at any time as a CSV file to an email address via the export button.
+"
+                    question="Can I export my journey data?"/>
+
+                <item
+                    answer="Driver Connect will run in the background of your device whilst you use other functions (phone calls, listening to music etc.); the app will also continue to work even if your phone goes into screen lock mode.
+
+"
+                    question="Can I use other features of the device while tracking a journey?"/>
+            </section>
+        </menu>
+    </module>
+
+    <module
+        name="DC Parking"
+        enabled="true" >
+
+        <menu>
+
+            <section
+                name="Expenses"
+                enabled="true" >
+
+                <item
+                    answer="If you need to keep a record of your daily expenses for any reason you can use this feature of the app to keep a digital log, removing the necessity to keep all those paper receipts."
+                    question="What can I use the expenses feature for?"/>
+
+                <item
+                    answer="The expenses menu can be used to add any expenses you have incurred. You have the ability to record the type of expense, the amount and other details. You also have the ability to attach an image of the receipt so you can discard the paper copy."
+                    question="How do I add an expense?"/>
+
+                <item
+                    answer="Yes. You can review, edit and export your expense data at any time as a CSV file to an email address using the export button.
+"
+                    question="Can I export my expenses?"/>
+
+                <item
+                    answer="Yes. There is a separate section within the expenses area for fuel where you can quickly input all your purchased fuel. If you can occasionally fill up with a full tank Driver Connect can calculate and record your actual MPG (and CO2 emissions); when you do this select the â€œFull tankâ€ option on the â€œAdd Fuelâ€ form."
+                    question="Can I record my fuel purchases?"/>
+            </section>
+        </menu>
+    </module>
+
+    <module
+        name="DC Parking"
+        enabled="true" >
+
+        <menu>
+
+            <section
+                name="Incidents"
+                enabled="true" >
+
+                <item
+                    answer="The incident section the app contains guidelines on what to do at the scene of a breakdown, access to emergency services contact numbers and a feature to identify your current location."
+                    question="How can the app help me if I have a breakdown?"/>
+
+                <item
+                    answer="The incident section the app contains guidelines on what to do at the scene of an accident, access to emergency services contact numbers and a feature to enable you to locate and log your current position. "
+                    question="How can the app help me if I have an accident?"/>
+
+                <item
+                    answer="To create an accident report, you need to select â€œReportâ€ at the bottom of the accident guidance page. You will be presented with a form that you can complete, attaching photos, videos and witness statements. This digital accident report can then be saved and exported via your email.
+"
+                    question="How do I use the app to create an accident report?"/>
+
+                <item
+                    answer="To exchange insurance detail, you must need to select the mail icon at the bottom of the accident guidance page. This automatically create an email using your insurance details attached to your current vehicle."
+                    question="How can I use the app to exchange insurance details?"/>
+            </section>
+        </menu>
+    </module>
+
+    <module
+        name="DC Parking"
+        enabled="true" >
+
+        <menu>
+
+            <section
+                name="Legal"
+                enabled="true" >
+
+                <item
+                    answer="Text to be inserted."
+                    question="Terms and conditions"/>
+
+                <item
+                    answer="Text to be inserted."
+                    question="Privacy policy"/>
+            </section>
+        </menu>
+    </module>
+
+    <module
+        name="DC Parking"
+        enabled="true" >
+
+        <menu>
+
+            <section
+                name="Support &amp; feedback"
                 enabled="true" >
 
                 <item
@@ -39,8 +165,22 @@ Vehicle data â€“ to use the App you will need to register as least one vehi
                     question="What do I need to do to get started with the App?"/>
 
                 <item
-                    answer="We endeavour to support the latest IOS and Android devices."
+                    answer="You can install the app on any of the following devices: 
+Android smartphones with version 4.0 and upwards  Ice Cream, Jelly Bean &amp; Kit Kat
+iPhone 4/4S/5/S/6 operating iOS7 onwards."
                     question="Which mobile devices are supported?"/>
+
+                <item
+                    answer="Please email support@driver-connect.co.uk"
+                    question="Where can I get more help, or report a bug?"/>
+
+                <item
+                    answer="Please email support@driver-connect.co.uk"
+                    question="Where can provide feedback on the app?"/>
+
+                <item
+                    answer="Your device will use more battery power to track your location, therefore we recommend always charging your device using an in-car charger whilst tracking a journey.  &lt;/"
+                    question="Will the app drain my battery?"/>
             </section>
         </menu>
     </module>

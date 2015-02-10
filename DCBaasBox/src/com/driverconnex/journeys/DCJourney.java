@@ -244,8 +244,7 @@ public class DCJourney implements Parcelable {
 		case 7:
 
 			String speed = String.valueOf(roundTwoDecimals(avgSpeed));
-			speed = speed.substring(0, speed.lastIndexOf(".") );
-			System.out.println(speed);
+			speed = speed.substring(0, speed.lastIndexOf("."));
 
 			return speed + " mph";
 			// case 8:

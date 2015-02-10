@@ -3,7 +3,7 @@
     <item
         android:id="@+id/action_map"
         android:showAsAction="always"
-        android:icon="@drawable/action_map_white"
+        android:icon="@drawable/ic_214"
         android:title="@string/action_map"/>
 
 </menu>

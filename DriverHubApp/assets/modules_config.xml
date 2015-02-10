@@ -27,12 +27,12 @@
                 <item
                     name="Add Manually"
                     enabled="true"
-                    image="add.png"/>
+                    image="add_menu.png"/>
 
                 <item
                     name="Review Journeys"
                     enabled="true"
-                    image="review.png"/>
+                    image="review_menu.png"/>
             </section>
         </menu>
     </module>
@@ -55,7 +55,7 @@
                 <item
                     name="Locate Vehicle"
                     enabled="true"
-                    image="action_eye_grey.png"/>
+                    image="locate_vehilce.png"/>
             </section>
         </menu>
     </module>
@@ -73,17 +73,17 @@
                 <item
                     name="Add Fuel"
                     enabled="true"
-                    image="credit_card.png"/>
+                    image="gauge_grey_56x56.png"/>
 
                 <item
                     name="Add Expense"
                     enabled="true"
-                    image="add.png"/>
+                    image="add_menu.png"/>
 
                 <item
                     name="Review"
                     enabled="true"
-                    image="review.png"/>
+                    image="review_menu.png"/>
 
                 <item
                     name="Claims"
@@ -176,22 +176,22 @@
 
         <item
             name="Track Journey"
-            icon="map_white_56x48.png"
+            icon="ic_214.png"
             priority="1"/>
 
         <item
             name="Park Vehicle"
-            icon="car_white_56x50.png"
+            icon="ic_177.png"
             priority="2"/>
 
         <item
             name="Add Expense"
-            icon="gauge_white_56x56.png"
+            icon="ic_156.png"
             priority="3"/>
 
         <item
-            name="Check In"
-            icon="chat_bubbles_white_56x48.png"
+            name="Alerts"
+            icon="ic_204.png"
             priority="4"/>
     </tabBar>
 

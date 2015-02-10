@@ -187,7 +187,7 @@ public class AssetsUtilities
 		} else {
 			return null;
 		}
-
+ 
 		if (!toDir.exists()) {
 			if (!toDir.mkdirs()) {
 				Log.d("DriverConnex", "Failed to create directory!");

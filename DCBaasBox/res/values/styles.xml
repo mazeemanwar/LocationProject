@@ -23,6 +23,7 @@
     <style name="MyActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">?attr/bar_background</item>
         <item name="android:displayOptions">showTitle</item>
+        
         <item name="android:homeAsUpIndicator">@drawable/arrow_back_white</item>
         <item name="android:subtitleTextStyle">@style/SubtitleTextStyle</item>
     </style>

@@ -342,17 +342,24 @@ public class AddJourneyActivity extends Activity {
 		// // Convert date to a format used in calculateDuration()
 		// String startDate =
 		// Utilities.convertDateFormat(startTimeEdit.getText()
-		// .toString(), "dd-MM-yyyy", "yyyy-MM-dd");
+		// .toString(), "dd-MM-yyyy", "yyyxy-MM-dd");
 		// String endDate = Utilities.convertDateFormat(endTimeEdit.getText()
 		// .toString(), "dd-MM-yyyy", "yyyy-MM-dd");
-		String startTime = Utilities.getTimeFromDate(startTimeEdit.getText()
-				.toString());
-		String endTime = Utilities.getTimeFromDate(endTimeEdit.getText()
-				.toString());
+		String s = startTimeEdit.getText().toString();
+		String e = endTimeEdit.getText().toString();
+		System.out.println(e);
+		// String startTime =
+		// Utilities.getTimeFromString(startTimeEdit.getText()
+		// .toString());
+		// String endTime = Utilities.getTimeFromString(endTimeEdit.getText()
+		// .toString());
 		//
-		long diff = Utilities.calculateTimeDuration(startTime, endTime);
-		journey.setDuration(Utilities.calculateTimeDuration(startTime, endTime));
+		long diff = Utilities.getTimeFromString(startTimeEdit.getText()
+				.toString(), endTimeEdit.getText().toString());
 
+		journey.setDuration(diff);
+
+		System.out.println(diff);
 		journey.setDistance(Double.valueOf(distanceStr));
 		journey.setBusiness(isBusiness);
 

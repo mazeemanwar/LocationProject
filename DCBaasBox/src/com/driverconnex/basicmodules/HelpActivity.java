@@ -29,6 +29,8 @@ public class HelpActivity extends Activity {
 	private ArrayList<HelpListItem> helpItems = new ArrayList<HelpListItem>();
 	private ArrayList<String> listItem = new ArrayList<String>();
 	private RelativeLayout loading;
+	private RelativeLayout bottomBar;
+
 	ArrayList<HelpListItems> helpList = new ArrayList<HelpListItems>();
 	public static final int CATEGORY = 0;
 	public static final int QUESTION = 1;
@@ -41,6 +43,9 @@ public class HelpActivity extends Activity {
 		setContentView(R.layout.activity_policy);
 		list = (ListView) findViewById(R.id.policylist);
 		loading = (RelativeLayout) findViewById(R.id.loadSpinner);
+		bottomBar = (RelativeLayout) findViewById(R.id.bottom_bar);
+		bottomBar.setVisibility(View.GONE);
+
 		list.setOnItemClickListener(itemClickListener);
 
 	}

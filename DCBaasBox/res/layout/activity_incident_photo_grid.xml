@@ -28,7 +28,7 @@
             android:background="?android:selectableItemBackground"
             android:padding="13dp"
             android:scaleType="centerInside"
-            android:src="@drawable/camera_white" />
+            android:src="@drawable/ic_243" />
     </RelativeLayout>
 
     <include layout="@layout/loading_layer"/>

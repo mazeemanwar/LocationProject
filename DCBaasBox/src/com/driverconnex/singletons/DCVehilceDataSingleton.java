@@ -1,6 +1,7 @@
 package com.driverconnex.singletons;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
@@ -35,6 +36,8 @@ public class DCVehilceDataSingleton {
 	private static ArrayList<DCVehicle> vehiclesList = new ArrayList<DCVehicle>();
 	private static LocationClient locationClient = null;
 	private static Location myLocation = null;
+	private static HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+	private static int totalAlerts = 0;
 
 	// SingletonExample prevents any other class from instantiating
 
@@ -65,7 +68,7 @@ public class DCVehilceDataSingleton {
 
 		System.out.println("with out creating object");
 		getVehicleList();
-
+		getTotalAlerts();
 		return vehiclesList;
 
 	}
@@ -96,8 +99,26 @@ public class DCVehilceDataSingleton {
 				} else {
 				}
 			}
+
 		});
 
+	}
+
+	public static HashMap<String, ArrayList<String>> getTotalAlerts() {
+		if (vehiclesList.size() > 0) {
+			ArrayList<String> tempArray = new ArrayList<String>();
+			totalAlerts = 0;
+			for (int i = 0; i < vehiclesList.size(); i++) {
+				tempArray = new ArrayList<String>();
+
+				tempArray = BaasboxUtilities.getNumberOfAllAlerts(vehiclesList
+						.get(i));
+				map.put(vehiclesList.get(i).getRegistration(), tempArray);
+			}
+			totalAlerts = map.size();
+			System.out.println(totalAlerts);
+		}
+		return map;
 	}
 
 	public static void getCurrentLocation(Context context) {

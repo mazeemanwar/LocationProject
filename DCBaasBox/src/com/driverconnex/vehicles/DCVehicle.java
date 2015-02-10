@@ -32,6 +32,7 @@ public class DCVehicle implements Serializable {
 	private String taxBand;
 
 	private String dateMOT;
+	private String checkDate;
 	private String dateRoadtax;
 	private String service;
 	private String registration;
@@ -40,7 +41,6 @@ public class DCVehicle implements Serializable {
 	private String bhp;
 	private String tempInsuranceDate;
 	private String vehicleCover;
-	
 
 	public String getVehicleCover() {
 		return vehicleCover;
@@ -194,6 +194,17 @@ public class DCVehicle implements Serializable {
 		if (mOT != null) {
 			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 			this.dateMOT = format.format(mOT);
+		}
+	}
+
+	public String getLastCheckDate() {
+		return checkDate;
+	}
+
+	public void setLastCheckDAte(Date checkDate) {
+		if (checkDate != null) {
+			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+			this.checkDate = format.format(checkDate);
 		}
 	}
 

@@ -1,19 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/main_background"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context="${packageName}.${activityClass}" >
 
     <ListView
         android:id="@+id/policylist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="9.77"
         android:divider="?attr/main_interface"
         android:dividerHeight="0.8dp"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false" >
     </ListView>
 
+    <RelativeLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight=".25"
+        android:background="@color/black" >
+
+        <ImageView
+            android:id="@+id/listIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/warning_white_56x52" />
+    </RelativeLayout>
+
     <include layout="@layout/loading_layer" />
 
-</RelativeLayout>
+</LinearLayout>
