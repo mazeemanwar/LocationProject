@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<module name="DC Vehicles"
+         	enabled="true"/>
+	<module name="DC Users"
+       		enabled="true"/>
+	<module name="DC Mileage"
+    		enabled="true">
+       		<menu>
+       		    <section name="Journeys"
+         		         enabled="true">
+         		         <item name="Track Journey"
+         		               enabled="true"
+         		               image="location.png"/>
+         		         <item name="Add Manually"
+         		               enabled="true"
+         		               image="add.png"/>
+         		         <item name="Review Journeys"
+         		               enabled="true"
+         		               image="review.png"/>
+         		</section>
+         	</menu>    
+    </module>
+    <module name="DC Parking"
+       		enabled="true">
+       		<menu>
+  		    	<section name="Parking"
+                   	 	 enabled="true">
+   		             	 <item name="Park Vehicle"
+         	             	   enabled="true"
+       	                       image="car_grey_56x50.png"/>
+    		         	 <item name="Locate Vehicle"
+       	                  	   enabled="true"
+   		                       image="action_eye_grey.png"/>
+       	    	</section>
+       		</menu>    
+    </module>
+    <module name="DC Expense"
+      		enabled="true">
+      		<menu>
+       		    <section name="Expenses"
+       		             enabled="true">
+       		             <item name="Add Fuel"
+       		                   enabled="true"
+       		                   image="credit_card.png"/>
+       		             <item name="Add Expense"
+      		                   enabled="true"
+       		                   image="add.png"/>
+       		             <item name="Review"
+       		                   enabled="true"
+       		                   image="review.png"/>
+       		             <item name="Claims"
+       		                   enabled="true"
+       		                   image="money.png"/>	            
+       		    </section>
+       		</menu>    
+    </module>
+    <module name="KPMG T&amp;S"
+      		enabled="true">
+      		<menu>
+       		    <section name="Travel and Subsistence"
+       		             enabled="true">
+       		             <item name="Add T&amp;S"
+       		                   enabled="true"
+       		                   image="kmpg_tiny.png"/>         
+       		    </section>
+       		</menu>    
+    </module>  
+	<module name="DC Community"
+       		enabled="true">
+       		<menu>
+       		    <section name="Community"
+       		             enabled="true">
+       		             <item name="My Community"
+       		                   enabled="true"
+       		                   image="top_list_grey_28x22.png"/>
+       		             <item name="Friend Requests"
+       		                   enabled="true"
+       		                   image="plus_circle_grey_28x28.png"/>
+       		             <item name="Share App"
+       		                   enabled="true"
+       		                   image="user_group_grey_29x20.png"/>
+       		    </section>
+       		</menu>    
+    </module>   
+    <module name="DC Incidents"
+       		enabled="true">
+       		<menu>
+       		    <section name="Incidents"
+       		             enabled="true">
+       		             <item name="Accidents"
+       		                   enabled="true"
+       		                   image="flag_grey.png"/>
+       		             <item name="Breakdown"
+       		                   enabled="true"
+       		                   image="wrench_grey_56x56.png"/>
+       		             <item name="Incident Reports"
+       		                   enabled="true"
+       		                   image="warning_grey_56x52.png"/>
+       		    </section>
+       		</menu>    
+    </module>
+    <module name="DC Tracking"
+       		enabled="true"> 
+    </module> 
+    
+	<tabBar>
+	    <item name="Track Journey"
+	          priority="1"
+	          icon="map_grey_56x48.png"/>
+	 	<item name="Park Vehicle"
+	          priority="2"
+	          icon="car_grey_56x50.png"/>
+	 	<item name="Add Fuel"
+	          priority="3"
+	          icon="gauge_grey_56x56.png"/>
+	 	<item name="Notifications" 
+	          priority="4"
+	          icon="chat_bubbles_grey_56x48.png"/>
+	</tabBar>
+	
+</config>

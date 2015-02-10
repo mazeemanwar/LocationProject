@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+    <menu>
+
+        <section
+            name="Journeys"
+            enabled="true" >
+
+            <item
+                name="Track Journey"
+                enabled="true"
+                image="location.png"/>
+
+            <item
+                name="Add Manually"
+                enabled="true"
+                image="add.png"/>
+
+            <item
+                name="Review Journeys"
+                enabled="true"
+                image="review.png"/>
+        </section>
+    </menu>
+
+    <tabBar>
+
+        <item
+            name="Track Journey"
+            icon="map_grey_56x48.png"
+            priority="1"/>
+
+        <item
+            name="Park Vehicle"
+            icon="car_grey_56x50.png"
+            priority="2"/>
+
+        <item
+            name="Add Fuel"
+            icon="gauge_grey_56x56.png"
+            priority="3"/>
+
+        <item
+            name="Notifications"
+            icon="chat_bubbles_grey_56x48.png"
+            priority="4"/>
+    </tabBar>
+
+</config>

@@ -2939,7 +2939,7 @@ containing a value of this type.
         public static final int AppBaseTheme=0x7f05009c;
         /**  Each app can have its own custom theme colours by changing these values
  Default colors of the app !
- KPMG App Theme 
+ Logical App Theme 
          */
         public static final int AppTheme=0x7f050090;
         /**  This theme is applied to the application 
