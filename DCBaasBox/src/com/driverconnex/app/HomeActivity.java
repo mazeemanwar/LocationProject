@@ -206,7 +206,7 @@ public class HomeActivity extends FragmentActivity implements
 					LinearLayout.LayoutParams.WRAP_CONTENT);
 			// lp.setMargins(0, 10, 0, 0);
 			// // for small resolutino
-			lp.setMargins(0, 5, 0, 0);
+			lp.setMargins(0, 3, 0, 0);
 
 			icon.setLayoutParams(lp);
 			imageLayout.addView(icon);
